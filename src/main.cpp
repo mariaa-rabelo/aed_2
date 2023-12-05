@@ -1,6 +1,8 @@
-#include <iostream>
+#include "Application.h"
 
 int main(){
-    std::cout << "hey :)"<<std::endl;
+    Application application;
+    application.run();
+
     return 0;
 }
