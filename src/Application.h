@@ -7,11 +7,12 @@
 
 #include "FileReader.h"
 #include "Graph.h"
+#include "Airport.h"
 
 
 class Application {
 private:
-    Graph graph;
+    Graph<Airport> g_airport;
 
 public:
     Application();

@@ -5,7 +5,8 @@
 
 #include "FileReader.h"
 
-FileReader::FileReader(const std::string& file_name) {
+FileReader::FileReader(const std::string& file_name, Graph<Airport>& graph)
+    : graph_(graph) {
     file_.open(file_name);
     if (!file_.is_open()) {
         std::cerr << "Error opening file: " << file_name << std::endl;
@@ -13,7 +14,19 @@ FileReader::FileReader(const std::string& file_name) {
 }
 
 void FileReader::readAirports() {
-    // Implementation for reading airports
+    std::string line;
+    std::getline(file_, line);
+    while(std::getline(file_, line)) {
+        std::istringstream iss(line);
+        std::string value;
+        std::vector<std::string> v;
+        while (std::getline(iss, value, ',')) {
+            v.push_back(value);
+        }
+        Airport airport(v.at(0), v.at(1), v.at(2),v.at(3), std::stod(v.at(4)), std::stod(v.at(5)));
+        graph_.addVertex(airport);
+    }
+    file_.close();
 }
 
 void FileReader::readAirlines() {

@@ -13,12 +13,12 @@
 #include "Flight.h"
 #include "Graph.h"
 
-
 class FileReader {
 private:
     std::ifstream file_;
+    Graph<Airport>& graph_;
 public:
-    explicit FileReader(const std::string& file_name);
+    explicit FileReader(const std::string& file_name, Graph<Airport>& graph);
     void readAirports();
     void readAirlines();
     void readFlights();

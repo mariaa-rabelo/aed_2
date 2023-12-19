@@ -16,7 +16,6 @@ private:
     std::string country;
     double latitude;
     double longitude;
-    std::vector<Flight*> outgoingFlights;
 
 public:
     Airport(const std::string& code, const std::string& name, const std::string& city, const std::string& country, double latitude, double longitude);
@@ -29,8 +28,7 @@ public:
     double getLatitude() const;
     double getLongitude() const;
 
-    // Function to add outgoing flight
-    void addOutgoingFlight(Flight* flight);
+    bool operator==(const Airport& other) const;
 };
 
 
