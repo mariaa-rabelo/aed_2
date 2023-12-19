@@ -10,6 +10,7 @@
 #include <stack>
 #include <list>
 #include <queue>
+#include "Airline.h"
 
 template <class T> class Edge;
 template <class T> class Graph;
@@ -25,7 +26,7 @@ class Vertex {
     int num;               // auxiliary field
     int low;               // auxiliary field
 
-    void addEdge(Vertex<T> *dest, double w);
+    void addEdge(Vertex<T> *dest, Airline *a);
     bool removeEdgeTo(Vertex<T> *d);
 public:
     Vertex(T in);
@@ -53,22 +54,21 @@ public:
 template <class T>
 class Edge {
     Vertex<T> * dest;      // destination vertex
-    double weight;         // edge weight
+    Airline* airline;         // edge weight
 public:
-    Edge(Vertex<T> *d, double w);
+    Edge(Vertex<T> *d, Airline *a);
     Vertex<T> *getDest() const;
     void setDest(Vertex<T> *dest);
-    double getWeight() const;
-    void setWeight(double weight);
+    Airline* getAirline() const;
+    void setAirline(Airline airline);
     friend class Graph<T>;
     friend class Vertex<T>;
 };
 
-
 template <class T>
 class Graph {
     std::vector<Vertex<T> *> vertexSet;      // vertex set
-    int _index_;                        // auxiliary field
+    std::vector<Airline*> airlines;
     std::stack<Vertex<T>> _stack_;           // auxiliary field
     std::list<std::list<T>> _list_sccs_;        // auxiliary field
 
@@ -79,7 +79,11 @@ public:
     int getNumVertex() const;
     bool addVertex(const T &in);
     bool removeVertex(const T &in);
-    bool addEdge(const T &sourc, const T &dest, double w);
+
+    Airline* findAirline(const std::string& code) const;
+    bool addAirline(const Airline& airline);
+
+    bool addEdge(const T &sourc, const T &dest, Airline* airline);
     bool removeEdge(const T &sourc, const T &dest);
     std::vector<Vertex<T> * > getVertexSet() const;
     std::vector<T> dfs() const;
@@ -95,7 +99,7 @@ template <class T>
 Vertex<T>::Vertex(T in): info(in) {}
 
 template <class T>
-Edge<T>::Edge(Vertex<T> *d, double w): dest(d), weight(w) {}
+Edge<T>::Edge(Vertex<T> *d, Airline* a): dest(d), airline(a) {}
 
 
 template <class T>
@@ -139,13 +143,13 @@ void Edge<T>::setDest(Vertex<T> *d) {
 }
 
 template<class T>
-double Edge<T>::getWeight() const {
-    return weight;
+Airline* Edge<T>::getAirline() const {
+    return airline;
 }
 
 template<class T>
-void Edge<T>::setWeight(double weight) {
-    Edge::weight = weight;
+void Edge<T>::setAirline(Airline airline) {
+    Edge::airline = airline;
 }
 
 /*
@@ -231,12 +235,12 @@ bool Graph<T>::addVertex(const T &in) {
  * Returns true if successful, and false if the source or destination vertex does not exist.
  */
 template <class T>
-bool Graph<T>::addEdge(const T &sourc, const T &dest, double w) {
+bool Graph<T>::addEdge(const T &sourc, const T &dest, Airline* airline) {
     auto v1 = findVertex(sourc);
     auto v2 = findVertex(dest);
-    if (v1 == NULL || v2 == NULL)
+    if (v1 == nullptr || v2 == nullptr)
         return false;
-    v1->addEdge(v2,w);
+    v1->addEdge(v2,airline);
     return true;
 }
 
@@ -245,8 +249,8 @@ bool Graph<T>::addEdge(const T &sourc, const T &dest, double w) {
  * with a given destination vertex (d) and edge weight (w).
  */
 template <class T>
-void Vertex<T>::addEdge(Vertex<T> *d, double w) {
-    adj.push_back(Edge<T>(d, w));
+void Vertex<T>::addEdge(Vertex<T> *d, Airline *a) {
+    adj.push_back(Edge<T>(d, a));
 }
 
 
@@ -278,6 +282,26 @@ bool Vertex<T>::removeEdgeTo(Vertex<T> *d) {
         }
     return false;
 }
+
+template <class T>
+Airline* Graph<T>::findAirline(const std::string& code) const {
+    for (Airline* airline : airlines) {
+        if (airline->getCode() == code) {
+            return airline;
+        }
+    }
+    return nullptr;  // Airline not found
+}
+
+template <class T>
+bool Graph<T>::addAirline(const Airline& airline) {
+    if (findAirline(airline.getCode()) == nullptr) {
+        airlines.push_back(new Airline(airline));
+        return true;
+    }
+    return false;  // Airline with the same code already exists
+}
+
 
 /*
  *  Removes a vertex with a given content (in) from a graph (this), and
