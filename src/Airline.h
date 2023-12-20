@@ -7,7 +7,6 @@
 
 #include <string>
 
-
 class Airline {
 private:
     std::string code;

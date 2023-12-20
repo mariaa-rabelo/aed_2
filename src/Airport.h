@@ -6,7 +6,7 @@
 #define AED_2_AIRPORT_H
 
 #include <vector>
-#include "Flight.h"
+#include <string>
 
 class Airport {
 private:
@@ -20,7 +20,6 @@ private:
 public:
     Airport(const std::string& code, const std::string& name, const std::string& city, const std::string& country, double latitude, double longitude);
 
-    // Add getter functions as needed
     std::string getCode() const;
     std::string getName() const;
     std::string getCity() const;

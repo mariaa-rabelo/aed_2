@@ -10,7 +10,6 @@
 #include <iostream>
 #include "Airline.h"
 #include "Airport.h"
-#include "Flight.h"
 #include "Graph.h"
 
 class FileReader {

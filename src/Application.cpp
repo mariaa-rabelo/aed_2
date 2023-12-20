@@ -15,7 +15,6 @@ void Application::run() {
     airlines_file.readAirlines();
     flights_file.readFlights();
 
-    // Example: Print the number of airports in the graph
-    //std::cout << "Number of airports: " << graph.getNumAirports() << std::endl;
+    std::cout << "Number of airports: " << g_airport.getNumVertex() << std::endl;
 }
 

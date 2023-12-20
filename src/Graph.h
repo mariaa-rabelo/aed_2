@@ -76,6 +76,7 @@ class Graph {
     bool dfsIsDAG(Vertex<T> *v) const;
 public:
     Vertex<T> *findVertex(const T &in) const;
+    Vertex<T> * findVertex(const std::string &code) const;
     int getNumVertex() const;
     bool addVertex(const T &in);
     bool removeVertex(const T &in);
@@ -160,7 +161,16 @@ Vertex<T> * Graph<T>::findVertex(const T &in) const {
     for (auto v : vertexSet)
         if (v->info == in)
             return v;
-    return NULL;
+    return nullptr;
+}
+
+template <class T>
+Vertex<T> * Graph<T>::findVertex(const std::string &code) const {
+    for (auto v : vertexSet) {
+        if (v->info.getCode() == code)
+            return v;
+    }
+    return nullptr;
 }
 
 template <class T>

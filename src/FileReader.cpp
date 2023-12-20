@@ -63,12 +63,8 @@ void FileReader::readFlights() {
         auto target = graph_.findVertex(targetCode);
         auto airline = graph_.findAirline(airlineCode);
 
-        if (source && target && airline) {
-            graph_.addEdge(source, target, airline);
-        } else {
-            // Handle the case where source, target, or airline is not found
-            std::cerr << "Error: Source, target, or airline not found." << std::endl;
-        }
+        graph_.addEdge(source->getInfo(), target->getInfo(), airline);
+
     }
     file_.close();
 }

@@ -10,3 +10,7 @@ Airport::Airport(const std::string& code, const std::string& name, const std::st
 bool Airport::operator==(const Airport& other) const {
     return code == other.code;
 }
+
+std::string Airport::getCode() const{
+    return code;
+}
