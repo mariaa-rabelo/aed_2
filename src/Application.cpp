@@ -3,6 +3,10 @@
 //
 
 #include "Application.h"
+#include <set>
+//#include <string>
+
+//using namespace  std;
 
 Application::Application() {}
 
@@ -16,5 +20,84 @@ void Application::run() {
     flights_file.readFlights();
 
     std::cout << "Number of airports: " << g_airport.getNumVertex() << std::endl;
+}
+
+void Application::findAirportMaxX( string code, int x, int option){
+    set<Airport> destinations;
+    auto setVertex = g_airport.getVertexSet();
+    bool flag = false;
+    for (auto node: setVertex){
+        auto airport = node->getInfo();
+        if ( airport.getCode() ==  code){
+            flag = true;
+            vector<Airport> possible_dests = nodesAtLessDistanceDFS( &g_airport, airport, x);
+            for (const Airport& a : possible_dests){
+                destinations.insert(a);
+            }
+            break;
+        }
+    }
+    if (!flag){
+        cout << "airport code not found!"<< endl;
+        return;
+    }
+    //airports
+    if (option == 1){
+        for (const Airport& a: destinations){
+            a.print();
+        }
+    }
+        //cities
+    else if (option == 2){
+        set<string> cities;
+        for (const Airport& a: destinations){
+            cities.insert(a.getCity());
+        }
+        for (const string& city : cities){
+            cout << city<< endl;
+        }
+    }
+        //countries
+    else if (option == 3){
+        set<string> countries;
+        for (const Airport& a: destinations){
+            countries.insert(a.getCountry());
+        }
+        for (const string& country : countries){
+            cout << country<< endl;
+        }
+    }
+
+
+}
+
+vector<Airport> Application::nodesAtLessDistanceDFS(const Graph<Airport> *g, const Airport &source, int k) {
+    vector<Airport> res;
+    Vertex<Airport> * y = g->findVertex(source);
+    if (y == nullptr)
+        return res;
+
+
+    for (auto b : g->getVertexSet()){
+        b->setVisited(false);
+    }
+    nodesAtLessDistanceDFSVisit(g, y, k, res);
+    return res;
+}
+
+void Application::nodesAtLessDistanceDFSVisit(const Graph<Airport> *g, Vertex<Airport> *v, int k, vector<Airport> &res) {
+
+    v->setVisited(true);
+    if (k <= 0){
+        res.push_back(v->getInfo());
+    }
+    else{
+        for (auto h : v->getAdj()){
+            Vertex<Airport> * u = h.getDest();
+            if (!u->isVisited()){
+                nodesAtLessDistanceDFSVisit(g, u, k-1, res);
+            }
+        }
+    }
 }
 

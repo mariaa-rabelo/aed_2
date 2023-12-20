@@ -28,6 +28,8 @@ public:
     double getLongitude() const;
 
     bool operator==(const Airport& other) const;
+    bool operator<(const Airport& other) const;
+    void print() const;
 };
 
 

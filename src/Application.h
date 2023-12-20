@@ -8,7 +8,10 @@
 #include "FileReader.h"
 #include "Graph.h"
 #include "Airport.h"
+#include <vector>
+#include <string>
 
+using namespace std;
 
 class Application {
 private:
@@ -17,6 +20,10 @@ private:
 public:
     Application();
     void run();
+    void findAirportMaxX( string code, int x, int option);
+    void nodesAtLessDistanceDFSVisit(const Graph<Airport> *g, Vertex<Airport> *v, int k, vector<Airport> &res);
+    vector<Airport> nodesAtLessDistanceDFS(const Graph<Airport> *g, const Airport &source, int k);
+
 };
 
 
