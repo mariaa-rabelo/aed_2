@@ -39,6 +39,9 @@ public:
     const std::vector<Edge<T>> &getAdj() const;
     void setAdj(const std::vector<Edge<T>> &adj);
 
+    void increaseIndegree();
+    void decreaseIndegree();
+
     int getIndegree() const;
     void setIndegree(int indegree);
 
@@ -179,6 +182,15 @@ bool Vertex<T>::isVisited() const {
 }
 
 template<class T>
+void Vertex<T>::increaseIndegree(){
+    indegree++;
+}
+template<class T>
+void Vertex<T>::decreaseIndegree(){
+    indegree;
+}
+
+template<class T>
 int Vertex<T>::getIndegree() const {
     return indegree;
 }
@@ -261,6 +273,7 @@ bool Graph<T>::addEdge(const T &sourc, const T &dest, Airline* airline) {
 template <class T>
 void Vertex<T>::addEdge(Vertex<T> *d, Airline *a) {
     adj.push_back(Edge<T>(d, a));
+    d->increaseIndegree();
 }
 
 
@@ -287,6 +300,7 @@ template <class T>
 bool Vertex<T>::removeEdgeTo(Vertex<T> *d) {
     for (auto it = adj.begin(); it != adj.end(); it++)
         if (it->dest  == d) {
+            d->decreaseIndegree();
             adj.erase(it);
             return true;
         }

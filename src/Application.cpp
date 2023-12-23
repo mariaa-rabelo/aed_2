@@ -4,6 +4,8 @@
 
 #include "Application.h"
 #include <set>
+#include <algorithm>
+#include <map>
 //#include <string>
 
 //using namespace  std;
@@ -22,6 +24,7 @@ void Application::run() {
     std::cout << "Number of airports: " << g_airport.getNumVertex() << std::endl;
 }
 
+// funcionalidade 6
 void Application::findAirportMaxX( string code, int x, int option){
     set<Airport> destinations;
     auto setVertex = g_airport.getVertexSet();
@@ -99,5 +102,37 @@ void Application::nodesAtLessDistanceDFSVisit(const Graph<Airport> *g, Vertex<Ai
             }
         }
     }
+}
+// funcionalidade 8
+int Application::getTotalFlights(const Graph<Airport> *g, Vertex<Airport> * v){
+    auto setVertex = g->getVertexSet();
+    Airport airport = v->getInfo();
+    //outgoing
+    int outgoing = v->getAdj().size();
+    return v->getIndegree()+outgoing;
+
+}
+void Application::getKAirportsGreatestCap(int k){
+    vector<int> caps;
+   multimap<int, Airport> capacity;
+    auto vertexSet = g_airport.getVertexSet();
+    for (auto v : vertexSet){
+        int vertCap = getTotalFlights(&g_airport, v);
+        caps.push_back(vertCap);
+        capacity.emplace(vertCap, v->getInfo());
+    }
+    std::sort(caps.begin(), caps.end(), [](int a, int b) { return a > b; });
+    for (int i = 0; i < k; i++){
+        auto it = capacity.find(caps[i]);
+        if (it != capacity.end()){
+            Airport airport = (*it).second;
+            airport.print();
+            capacity.erase(it);
+        }
+
+
+    }
+
+
 }
 

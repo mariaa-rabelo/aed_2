@@ -33,7 +33,8 @@ double Airport::getLongitude() const {
 
 
 bool Airport::operator==(const Airport& other) const {
-    return code == other.code;
+    return latitude == other.latitude && longitude == other.longitude;
+    //return code == other.code;
 }
 bool Airport::operator<(const Airport& other) const{
     if (latitude < other.latitude){
