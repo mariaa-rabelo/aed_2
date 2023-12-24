@@ -136,3 +136,75 @@ void Application::getKAirportsGreatestCap(int k){
 
 }
 
+//funcionalidade 9
+
+//unordered_
+set<Airport> Application::articulationPoints(Graph<Airport> *g) {
+    set<Airport> res;
+    //unordered_set<Airport> res;
+    if (g->getVertexSet().empty())
+        return res;
+    auto g_ = g;
+    auto verts = g_->getVertexSet();
+    for (auto v : verts){
+        v->setVisited(false);
+        v->setLow(0);
+        v->setNum(0);
+
+    }
+    int i = 1;
+    stack<Airport> s = {};
+    for (auto v : verts){
+        if (v->getNum() == 0)
+            dfs_art(g_, v, s, res, i);
+    }
+    return res;
+}
+
+void Application::dfs_art(Graph<Airport> *g, Vertex<Airport> *v, stack<Airport> &s, set<Airport> &l, int &i){
+    v->setNum(i);
+    v->setLow(i);
+    i++;
+    s.push(v->getInfo());
+    int children = 0;
+    for (auto e : v->getAdj()){
+        auto adj = e.getDest();
+        stack<Airport> copy = s;
+        bool flag = false;
+        while (!copy.empty()){
+            if (copy.top() == adj->getInfo()) {
+                flag = true;
+            }
+            copy.pop();
+        }
+        if (adj->getNum() == 0){
+            children++;
+            dfs_art(g, adj, s, l, i);
+            v->setLow(min(v->getLow(), adj->getLow()));
+            if (adj->getLow() >= v->getNum()){
+
+                if (v->getInfo() == g->getVertexSet()[0]->getInfo()) {
+                    if (children > 1){
+                        l.insert(v->getInfo());
+                    }
+                }
+                else {
+                    l.insert(v->getInfo());
+                }
+            }
+        }
+        else if (flag){
+            v->setLow(min(v->getLow(), adj->getNum()));
+        }
+    }
+    s.pop();
+}
+
+void Application::essentialAirports(){
+    set<Airport> airports =  articulationPoints(&g_airport);
+    cout << endl<< "Essential Airports: " << endl;
+    for (const Airport& a : airports){
+        a.print();
+    }
+
+}

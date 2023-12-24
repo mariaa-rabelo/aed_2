@@ -13,4 +13,6 @@ add_executable(aed_2
         src/FileReader.h
         src/FileReader.cpp
         src/Application.h
-        src/Application.cpp )
+        src/Application.cpp
+        src/Menu.h
+        src/Menu.cpp)

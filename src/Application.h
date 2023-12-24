@@ -10,6 +10,8 @@
 #include "Airport.h"
 #include <vector>
 #include <string>
+#include <unordered_set>
+#include <set>
 
 using namespace std;
 
@@ -25,6 +27,10 @@ public:
     vector<Airport> nodesAtLessDistanceDFS(const Graph<Airport> *g, const Airport &source, int k);
     int getTotalFlights(const Graph<Airport> *g, Vertex<Airport> * v);
     void getKAirportsGreatestCap(int k);
+    void essentialAirports();
+    set<Airport> articulationPoints(Graph<Airport> *g);
+    void dfs_art(Graph<Airport> *g, Vertex<Airport> *v, stack<Airport> &s,set<Airport> &l, int &i);
+
 };
 
 
