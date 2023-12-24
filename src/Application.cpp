@@ -8,14 +8,14 @@
 #include <map>
 //#include <string>
 
-//using namespace  std;
+using namespace  std;
 
 Application::Application() {}
 
 void Application::run() {
-    FileReader airlines_file("../dataset/airlines.csv", g_airport);
-    FileReader airports_file("../dataset/airports.csv", g_airport);
-    FileReader flights_file("../dataset/flights.csv", g_airport);
+    FileReader airlines_file("../dataset/airlines1.csv", g_airport);
+    FileReader airports_file("../dataset/airports1.csv", g_airport);
+    FileReader flights_file("../dataset/flights1.csv", g_airport);
 
     airports_file.readAirports();
     airlines_file.readAirlines();
@@ -124,6 +124,101 @@ vector<Airport> Application::nodesAtLessDistanceBFS(const Graph<Airport> *g, con
     }
     return res;
 }
+
+//funcionalidade 7
+
+void Application::maximumTrip(){
+    vector<pair<Airport,Airport>> res;
+    map<Airport, vector<pair<Airport, int>>> paths;
+    vector<int> max_pathsV;
+    auto verts = g_airport.getVertexSet();
+    for (auto v : verts){
+        for (auto v_ : verts){
+            v_->setVisited(false);
+        }
+        vector<pair<Airport, int>> max_path = getMaxPathBFS(v, &g_airport);
+        for (const pair<Airport, int>& p : max_path){
+            max_pathsV.push_back(p.second);
+        }
+        auto v_paths = make_pair(v->getInfo(), max_path);
+        paths.insert(v_paths);
+
+    }
+    //encontrar lenght de max_path
+    int max = *max_element(max_pathsV.begin(), max_pathsV.end());
+    //colocar em res todos os que têm max_lenght
+    for (const auto& p : paths){
+        //cout <<"b: "<<endl;
+        //p.first.print();
+        //cout <<"endl: "<<endl;
+        for (const auto& k : p.second){
+            //k.first.print();
+            if (k.second == max){
+                res.emplace_back(p.first, k.first);
+            }
+        }
+    }
+    cout << "res:"<<endl;
+    for (const auto& p : res){
+        cout <<"from:"<< endl;
+        p.first.print();
+        cout << "to: "<<endl;
+        p.second.print();
+    }
+
+}
+
+vector<pair<Airport, int>> Application::getMaxPathBFS( Vertex<Airport> *v, Graph<Airport> *g){
+    //vector<pair<Vertex<Airport>, int>> res;
+    vector<pair<Airport, int>> res;
+    int level = 0;
+    queue<Vertex<Airport>*> vert;
+    queue<Vertex<Airport>*> aux;
+    queue<Vertex<Airport>*> final;
+    v->setVisited(true);
+    vert.push(v);
+    while (!vert.empty()){
+        //cout << "h";
+        while (!vert.empty()){
+
+            Vertex<Airport> * current = vert.front();
+            vert.pop();
+        //    cout << "being analized:" << endl;
+        //    current->getInfo().print();
+        //    cout << "adj:" << endl;
+            for ( Edge<Airport> e : current->getAdj()) {
+                Vertex<Airport>* adj = e.getDest();
+                if (!adj->isVisited()) {
+                   // adj->getInfo().print();
+                    aux.push(adj);
+                    adj->setVisited(true);
+                }
+            }
+        }
+        level++;
+        if (!aux.empty()){
+            final = aux;
+        }/*
+        cout << "tf?";
+        queue<Vertex<Airport>*> some = aux;
+        while (!some.empty()){
+            some.front()->getInfo().print();
+            some.pop();
+        }*/
+        vert = aux;
+        aux = {};
+
+    }
+    while (!final.empty()){
+        Airport ar= final.front()->getInfo();
+        //Vertex<Airport> frontV = *vert.front();
+        res.push_back(make_pair(ar, level));
+        final.pop();
+    }
+    return res;
+}
+
+
 
 // funcionalidade 8
 int Application::getTotalFlights(const Graph<Airport> *g, Vertex<Airport> * v){

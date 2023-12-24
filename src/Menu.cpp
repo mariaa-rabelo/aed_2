@@ -16,7 +16,7 @@ void Menu::listMenu() {
     << "4: " << endl
     << "5: " << endl
     << "6: findAirportMaxX" << endl
-    << "7: " << endl
+    << "7: Maximum trip" << endl
     << "8: getKAirportsGreatestCap" << endl
     << "9: essentialAirports"<< endl;
     //<< "quit to well... quit" << endl;
@@ -76,6 +76,9 @@ void Menu::print(){
                         app.findAirportMaxX(code, xI, optI);
                 }
 
+        }
+        else if (input == "7"){
+            app.maximumTrip();
         }
         else if (input == "8") {
                 cout << "K?" << endl;
