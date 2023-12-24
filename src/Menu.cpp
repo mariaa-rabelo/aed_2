@@ -36,23 +36,59 @@ void Menu::print(){
                 cout << "1: airports" << endl
                      << "2: cities" << endl
                      << "3: countries" << endl;
-                int opt;
+                string opt;
                 cin >> opt;
-                cout << "What is the maximum number of stops?" << endl;
-                int x;
-                cin >> x;
-                app.findAirportMaxX(code, x, opt);
-                break;
+                int optI = 0;
+                bool flag = false;
+                try{
+                    optI = std::stoi(opt);
+
+                }
+                catch(const std::invalid_argument& e){
+                    std::cerr << "Error: invalid argument - must be a number from 1 to 3!" << std::endl;
+                    flag = true;
+                }
+                catch (const std::out_of_range& e) {
+                    flag = true;
+                    std::cerr << "Error: out of range - " << e.what() << std::endl;
+                }
+                if (!flag) {
+                    if (optI < 1 || optI > 3){
+                        std::cerr << "Must be a number from 1 to 3!" << std::endl;
+                        continue;
+                    }
+                    cout << "What is the maximum number of stops?" << endl;
+                    string x;
+                    int xI = 0;
+                    cin >> x;
+                    try{
+                        xI = std::stoi(x);
+                    }
+                    catch(const std::invalid_argument& e){
+                        std::cerr << "Error: invalid argument - must be a number!" << std::endl;
+                        flag = true;
+                    }
+                    catch (const std::out_of_range& e) {
+                        flag = true;
+                        std::cerr << "Error: out of range - " << e.what() << std::endl;
+                    }
+                    if (!flag)
+                        app.findAirportMaxX(code, xI, optI);
+                }
+
         }
         else if (input == "8") {
                 cout << "K?" << endl;
                 int k;
                 cin >> k;
                 app.getKAirportsGreatestCap(k);
-                break;
+
         }
         else if (input== "9") {
                 app.essentialAirports();
+        }
+        else if (input == "quit"){
+
         }
         else {
                 cout << "no functionality called!" << endl;

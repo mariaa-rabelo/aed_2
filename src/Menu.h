@@ -7,7 +7,8 @@
 
 
 #include "Application.h"
-
+#include <iostream>
+#include <string>
 class Menu{
 private:
     Application app;

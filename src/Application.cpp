@@ -29,13 +29,18 @@ void Application::findAirportMaxX( string code, int x, int option){
     set<Airport> destinations;
     auto setVertex = g_airport.getVertexSet();
     bool flag = false;
+    /*
+    for (auto node: setVertex){
+        node->setVisited(false);
+    }*/
     for (auto node: setVertex){
         auto airport = node->getInfo();
         if ( airport.getCode() ==  code){
             flag = true;
-            vector<Airport> possible_dests = nodesAtLessDistanceDFS( &g_airport, airport, x);
+            vector<Airport> possible_dests = nodesAtLessDistanceBFS( &g_airport, airport, x);
             for (const Airport& a : possible_dests){
-                destinations.insert(a);
+                //if (a.getCode() != code)
+                    destinations.insert(a);
             }
             break;
         }
@@ -50,7 +55,7 @@ void Application::findAirportMaxX( string code, int x, int option){
             a.print();
         }
     }
-        //cities
+    //cities
     else if (option == 2){
         set<string> cities;
         for (const Airport& a: destinations){
@@ -60,7 +65,7 @@ void Application::findAirportMaxX( string code, int x, int option){
             cout << city<< endl;
         }
     }
-        //countries
+    //countries
     else if (option == 3){
         set<string> countries;
         for (const Airport& a: destinations){
@@ -74,35 +79,52 @@ void Application::findAirportMaxX( string code, int x, int option){
 
 }
 
-vector<Airport> Application::nodesAtLessDistanceDFS(const Graph<Airport> *g, const Airport &source, int k) {
+vector<Airport> Application::nodesAtLessDistanceBFS(const Graph<Airport> *g, const Airport &source, int k) {
     vector<Airport> res;
-    Vertex<Airport> * y = g->findVertex(source);
-    if (y == nullptr)
+
+    Vertex<Airport> * v = g->findVertex(source);
+    /*if (v == nullptr) {
+        //cout<< "NULL";
         return res;
-
-
+    }*/
+    // pôr todos vertices a falso
     for (auto b : g->getVertexSet()){
+        // cout<< "H";
         b->setVisited(false);
     }
-    nodesAtLessDistanceDFSVisit(g, y, k, res);
+    int level = 0;
+    queue<Vertex<Airport>*> vert;
+    queue<Vertex<Airport>*> aux;
+    //cout<< "L";
+    vert.push(v);
+    while (level < k){
+        while (!vert.empty()){
+            Vertex<Airport> * current = vert.front();
+            vert.pop();
+            for ( Edge<Airport> e : current->getAdj()) {
+                Vertex<Airport>* adj = e.getDest();
+                if (!adj->isVisited()) {
+                    aux.push(adj);
+                    adj->setVisited(true);
+                }
+            }
+        }
+        level++;
+        vert = aux;
+        while (!aux.empty()){
+            res.push_back(aux.front()->getInfo());
+            aux.pop();
+        }
+        //aux = {};
+
+    }
+    while (!vert.empty()){
+        res.push_back(vert.front()->getInfo());
+        vert.pop();
+    }
     return res;
 }
 
-void Application::nodesAtLessDistanceDFSVisit(const Graph<Airport> *g, Vertex<Airport> *v, int k, vector<Airport> &res) {
-
-    v->setVisited(true);
-    if (k <= 0){
-        res.push_back(v->getInfo());
-    }
-    else{
-        for (auto h : v->getAdj()){
-            Vertex<Airport> * u = h.getDest();
-            if (!u->isVisited()){
-                nodesAtLessDistanceDFSVisit(g, u, k-1, res);
-            }
-        }
-    }
-}
 // funcionalidade 8
 int Application::getTotalFlights(const Graph<Airport> *g, Vertex<Airport> * v){
     auto setVertex = g->getVertexSet();
@@ -146,6 +168,11 @@ set<Airport> Application::articulationPoints(Graph<Airport> *g) {
         return res;
     auto g_ = g;
     auto verts = g_->getVertexSet();
+    for (auto n : verts){
+        for (auto e : n->getAdj()){
+            g->addEdge(e.getDest()->getInfo(), n->getInfo(), 0);
+        }
+    }
     for (auto v : verts){
         v->setVisited(false);
         v->setLow(0);
