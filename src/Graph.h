@@ -10,6 +10,7 @@
 #include <stack>
 #include <list>
 #include <queue>
+#include <set>
 #include "Airline.h"
 
 template <class T> class Edge;
@@ -90,6 +91,8 @@ public:
 
     bool addEdge(const T &sourc, const T &dest, Airline* airline);
     bool removeEdge(const T &sourc, const T &dest);
+    int getTotalEdges() const;
+
     std::vector<Vertex<T> * > getVertexSet() const;
     std::vector<T> dfs() const;
     std::vector<T> dfs(const T & source) const;
@@ -194,7 +197,7 @@ void Vertex<T>::increaseIndegree(){
 }
 template<class T>
 void Vertex<T>::decreaseIndegree(){
-    indegree;
+    indegree--;
 }
 
 template<class T>
@@ -293,7 +296,7 @@ template <class T>
 bool Graph<T>::removeEdge(const T &sourc, const T &dest) {
     auto v1 = findVertex(sourc);
     auto v2 = findVertex(dest);
-    if (v1 == NULL || v2 == NULL)
+    if (v1 == nullptr || v2 == nullptr)
         return false;
     return v1->removeEdgeTo(v2);
 }
@@ -312,6 +315,15 @@ bool Vertex<T>::removeEdgeTo(Vertex<T> *d) {
             return true;
         }
     return false;
+}
+
+template <class T>
+int Graph<T>::getTotalEdges() const {
+    int totalEdges = 0;
+    for (auto v : vertexSet) {
+        totalEdges += v->getAdj().size();
+    }
+    return totalEdges;
 }
 
 template <class T>
