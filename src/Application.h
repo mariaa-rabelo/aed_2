@@ -14,8 +14,6 @@
 #include <unordered_set>
 #include <set>
 
-using namespace std;
-
 class Application {
 private:
     Graph<Airport> g_airport;
@@ -25,8 +23,26 @@ public:
     Application();
 
     void run();
+    int getNumAirports() const;
+    int getGlobalNumFlights() const;
 
-    void findAirportMaxX(string code, int x, int option);
+    //func2
+    int getOutFlights(const std::string& airportCode) const;
+    int getUniqueAirlines(const std::string& airportCode) const;
+
+    //func3
+    std::map<std::string, int> getFlightsByCity();
+    std::map<std::string, int> getFlightsByAirline();
+
+    //func4
+    int getUniqueCountriesFromAirport(const std::string& airportCode);
+    int getUniqueCountriesFromCity(const std::string& cityName);
+
+    //func5
+    int getUniqueAirportsFromAirport(const std::string& airportCode);
+    int getUniqueCitiesFromAirport(const std::string& airportCode);
+
+    void findAirportMaxX(std::string code, int x, int option);
 
     vector<Airport> nodesAtLessDistanceBFS(const Graph<Airport> *g, const Airport &source, int k);
 

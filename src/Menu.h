@@ -9,6 +9,7 @@
 #include "Application.h"
 #include <iostream>
 #include <string>
+
 class Menu{
 private:
     Application app;
@@ -17,7 +18,12 @@ public:
     void print();
     void selectOptions(queue<string>& order);
     void listMenu();
+    void showGlobalStats();
+    void showAirportDetails();
+    void showCityOrAirlineStats();
+    void showCountryStats();
+    void showDestinationsStats();
 
-
+    void enterForMenu();
 };
 #endif //AED_2_MENU_H
