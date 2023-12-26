@@ -6,11 +6,11 @@
 #include <set>
 #include <algorithm>
 #include <map>
-//#include <string>
 
-using namespace  std;
 
-Application::Application() {}
+Application::Application() {
+    flightOption = FlightOption();
+}
 
 void Application::run() {
     FileReader airlines_file("../dataset/airlines1.csv", g_airport);
@@ -330,3 +330,53 @@ void Application::essentialAirports(){
     }
 
 }
+//FlightOption
+
+void Application::getBestFlightOption(Vertex<Airport>* src, Vertex<Airport>* dest ){
+    set<vector<Airport>> path = flightOption.flights(&g_airport, src, dest);
+    for(const auto& possible_path : path){
+        cout << "possible path:"<<endl;
+        for (const auto& airport : possible_path){
+            airport.print();
+        }
+    }
+}
+
+ bool Application::getAirportsInCity(const string& city, const string& country, set<Vertex<Airport>*> res){
+    bool result = false;
+    auto verts = g_airport.getVertexSet();
+    for ( const auto &v : verts){
+        if (v->getInfo().getCity() == city && v->getInfo().getCountry() == country){
+            res.insert(v);
+            result = true;
+        }
+
+    }
+    return result;
+}
+bool Application::getAirport(const string& identifier, bool opt, Vertex<Airport>* &vert){
+    auto verts = g_airport.getVertexSet();
+    if (opt) {
+        for (const auto &v: verts) {
+            if (v->getInfo().getCode() == identifier) {
+                vert = v;
+
+                return true;
+            }
+        }
+    }
+    else {
+        for (const auto &v: verts) {
+            if (v->getInfo().getName() == identifier){
+                vert = v;
+                //return v;
+                return true;
+            }
+        }
+
+    }
+    return false;
+
+}
+
+

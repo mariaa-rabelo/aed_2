@@ -15,4 +15,6 @@ add_executable(aed_2
         src/Application.h
         src/Application.cpp
         src/Menu.h
-        src/Menu.cpp)
+        src/Menu.cpp
+        src/FlightOption.h
+        src/FlightOption.cpp)

@@ -5,6 +5,7 @@
 #ifndef AED_2_APPLICATION_H
 #define AED_2_APPLICATION_H
 
+#include "FlightOption.h"
 #include "FileReader.h"
 #include "Graph.h"
 #include "Airport.h"
@@ -18,6 +19,7 @@ using namespace std;
 class Application {
 private:
     Graph<Airport> g_airport;
+    FlightOption flightOption;
 
 public:
     Application();
@@ -42,6 +44,12 @@ public:
 
     void maximumTrip();
 
+    //BestFlightOption
+    bool getAirportsInCity(const string& city, const string& country, set<Vertex<Airport>*>res);
+    bool getAirport(const string& identifier, bool opt, Vertex<Airport>* &vert);
+    void getBestFlightOption(Vertex<Airport>* src, Vertex<Airport>* dest );
 };
+
+
 
 #endif //AED_2_APPLICATION_H

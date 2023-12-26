@@ -50,6 +50,7 @@ public:
 
     int getLow() const;
     void setLow(int low);
+    bool operator<(const Vertex<T>& other) const;
 
     friend class Graph<T>;
 };
@@ -95,6 +96,7 @@ public:
     std::vector<T> bfs(const T &source) const;
     std::vector<T> topsort() const;
     bool isDAG() const;
+
 };
 
 /****************** Provided constructors and functions ********************/
@@ -135,7 +137,11 @@ template<class T>
 void Vertex<T>::setProcessing(bool p) {
     Vertex::processing = p;
 }
-
+                                // operador <
+template<class T>
+bool Vertex<T>::operator<(const Vertex<T>& other) const{
+    return this->getInfo() < other.getInfo();
+}
 template<class T>
 Vertex<T> *Edge<T>::getDest() const {
     return dest;
@@ -155,6 +161,7 @@ template<class T>
 void Edge<T>::setAirline(Airline airline) {
     Edge::airline = airline;
 }
+
 
 /*
  * Auxiliary function to find a vertex with a given content.
@@ -426,6 +433,7 @@ std::vector<T> Graph<T>::bfs(const T & source) const {
             auto w = e.dest;
             if ( ! w->visited ) {
                 q.push(w);
+
                 w->visited = true;
             }
         }

@@ -18,9 +18,47 @@ void Menu::listMenu() {
     << "6: findAirportMaxX" << endl
     << "7: Maximum trip" << endl
     << "8: getKAirportsGreatestCap" << endl
-    << "9: essentialAirports"<< endl;
+    << "9: essentialAirports"<< endl
+    << "10: best flight opt"<< endl;
     //<< "quit to well... quit" << endl;
 }
+
+void Menu::selectOptions(queue<string>& order){
+    cout << "1: airport code"<<endl
+    << "2: airport name"<<endl
+    << "3: city and country"<<endl
+    << "4: cancel"<<endl;
+    //<< "coordinates"<<endl;
+    string opt;
+    cin >> opt;
+    order.push(opt);
+    if (opt == "4") {
+        return;
+    }
+    else if (opt == "1"){
+        cout << "airport's code:"<<endl;
+        cin >> opt;
+        order.push(opt);
+    }
+    else if (opt == "2"){
+        cout << "airport's name:"<<endl;
+        cin >> opt;
+        order.push(opt);
+
+    }
+    else if (opt == "3"){
+        cout << "city"<<endl;
+        cin >> opt;
+        order.push(opt);
+        cout << "country"<<endl;
+        cin >> opt;
+        order.push(opt);
+    }
+
+    else {cout << "invalid input!"<<endl; order.pop(); order.push("4");}
+
+}
+
 
 void Menu::print(){
     app.run();
@@ -89,6 +127,108 @@ void Menu::print(){
         }
         else if (input== "9") {
                 app.essentialAirports();
+        }
+        else if (input == "10"){
+            cout << "choose the option for the departure location:"<<endl;
+            queue<string> order;
+            selectOptions(order);
+            auto option = order.front();
+            order.pop();
+            if (option == "4"){
+                continue;
+                //ignorar o resto, passa para prox iteração
+            }
+            bool src = false;
+            bool dst = false;
+            Vertex<Airport>* sourc;
+            Vertex<Airport>* dest;
+            set<Vertex<Airport>*> sourc_;
+            set<Vertex<Airport>*> dest_;
+            if (option == "1" ){
+                if (!app.getAirport(order.front(), true, sourc)){
+                    cout << "airport's code not found!"<<endl;
+                    continue;
+                }
+                //cout << "src:"<<endl;
+                //sourc->getInfo().print();
+
+            }
+            else if (option == "2"){
+                if (!app.getAirport(order.front(), false, sourc)){
+                    cout << "airport's name not found!"<<endl;
+                    continue;
+                }
+
+            }
+            else if (option == "3"){
+                src = true;
+                string city = order.front();
+                order.pop();
+                if (!app.getAirportsInCity(city,order.front(),sourc_)){
+                    cout << "no city with that name was found!"<<endl;
+                    continue;
+                }
+
+            }
+            order = {};
+            selectOptions(order);
+            option= order.front();
+            order.pop();
+            if ( option== "4"){
+                continue;
+            }
+            if (option == "1" ){
+                if (!app.getAirport(order.front(), true, dest)){
+                    cout << "airport's code not found!"<<endl;
+                    continue;
+                }
+                //cout << "dest:"<<endl;
+                //dest->getInfo().print();
+
+            }
+            else if (option == "2"){
+                if (!app.getAirport(order.front(), false, dest)){
+                    cout << "airport's name not found!"<<endl;
+                    continue;
+                }
+
+            }
+            else if (option == "3"){
+                dst = true;
+                string city = order.front();
+                order.pop();
+                if (!app.getAirportsInCity(city,order.front(),dest_)){
+                    cout << "no city with that name was found!"<<endl;
+                    continue;
+                }
+
+            }
+            if (!src && !dst){
+                app.getBestFlightOption(sourc, dest);
+            }
+            else if (!src && dst){
+
+            }
+            else if (src && dst){
+
+            }
+            else if (src && !dst){
+
+            }
+            /*
+            while (!order.empty()){
+                if (order.front() == "1"){
+                    order.pop();
+                    Vertex<Airport>* v;
+                    if (!app.getAirport(order.front(), true, v)){
+                        break;
+                    }
+                }
+            }
+            app.getBestFlightOption();
+            */
+
+
         }
         else if (input == "quit"){
 

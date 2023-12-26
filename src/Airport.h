@@ -18,6 +18,7 @@ private:
     double longitude;
 
 public:
+
     Airport(const std::string& code, const std::string& name, const std::string& city, const std::string& country, double latitude, double longitude);
 
     std::string getCode() const;
@@ -30,6 +31,7 @@ public:
     bool operator==(const Airport& other) const;
     bool operator<(const Airport& other) const;
     void print() const;
+
 };
 
 

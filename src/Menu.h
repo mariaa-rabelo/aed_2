@@ -15,6 +15,7 @@ private:
 public:
     Menu();
     void print();
+    void selectOptions(queue<string>& order);
     void listMenu();
 
 
