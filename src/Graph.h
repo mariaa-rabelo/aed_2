@@ -102,7 +102,7 @@ public:
 
 };
 
-/****************** Provided constructors and functions ********************/
+/****************** Constructors and functions ********************/
 
 template <class T>
 Vertex<T>::Vertex(T in): info(in) {}
@@ -498,10 +498,6 @@ bool Graph<T>::dfsIsDAG(Vertex<T> *v) const {
 
 
 /****************** toposort ********************/
-//=============================================================================
-// Exercise 1: Topological Sorting
-//=============================================================================
-// TODO
 /*
  * Performs a topological sorting of the vertices of a graph (this).
  * Returns a vector with the contents of the vertices by topological order.
@@ -549,6 +545,5 @@ std::vector<T> Graph<T>::topsort() const {
 
     return res;
 }
-
 
 #endif //AED_2_GRAPH_H

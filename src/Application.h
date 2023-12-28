@@ -31,8 +31,8 @@ public:
     int getUniqueAirlines(const std::string& airportCode) const;
 
     //func3
-    std::map<std::string, int> getFlightsByCity();
-    std::map<std::string, int> getFlightsByAirline();
+    int getFlightsByCity(const std::string& cityName);
+    int getFlightsByAirline(const std::string& airlineCode);
 
     //func4
     int getUniqueCountriesFromAirport(const std::string& airportCode);
@@ -44,7 +44,7 @@ public:
 
     void findAirportMaxX(std::string code, int x, int option);
 
-    vector<Airport> nodesAtLessDistanceBFS(const Graph<Airport> *g, const Airport &source, int k);
+    std::vector<Airport> nodesAtLessDistanceBFS(const Graph<Airport> *g, const Airport &source, int k);
 
     int getTotalFlights(const Graph<Airport> *g, Vertex<Airport> *v);
 
@@ -52,18 +52,19 @@ public:
 
     void essentialAirports();
 
-    set<Airport> articulationPoints(Graph<Airport> *g);
+    std::set<Airport> articulationPoints(Graph<Airport> *g);
 
-    void dfs_art(Graph<Airport> *g, Vertex<Airport> *v, stack<Airport> &s, set<Airport> &l, int &i);
+    void dfs_art(Graph<Airport> *g, Vertex<Airport> *v, std::stack<Airport> &s, std::set<Airport> &l, int &i);
 
-    vector<pair<Airport, int>> getMaxPathBFS(Vertex<Airport> *v, Graph<Airport> *g);
+    std::vector<std::pair<Airport, int>> getMaxPathBFS(Vertex<Airport> *v, Graph<Airport> *g);
 
     void maximumTrip();
 
     //BestFlightOption
-    bool getAirportsInCity(const string& city, const string& country, set<Vertex<Airport>*>res);
-    bool getAirport(const string& identifier, bool opt, Vertex<Airport>* &vert);
+    bool getAirportsInCity(const std::string& city, const std::string& country, std::set<Vertex<Airport>*>res);
+    bool getAirport(const std::string& identifier, bool opt, Vertex<Airport>* &vert);
     void getBestFlightOption(Vertex<Airport>* src, Vertex<Airport>* dest );
+
 };
 
 
