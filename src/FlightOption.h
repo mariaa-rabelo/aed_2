@@ -10,14 +10,14 @@
 #include <vector>
 #include <set>
 #include <map>
-using namespace std;
+
 class FlightOption{
 private:
 
 public:
     FlightOption();
-    set<vector<Airport>>  flights(const Graph<Airport> *g, Vertex<Airport>* src, Vertex<Airport>* dest);
-    set<vector<Airport>> bfsFlightVisit(const Graph<Airport> *g, Vertex<Airport> *source, Vertex<Airport> *dest);
+    std::set<std::vector<Airport>>  flights(const Graph<Airport> *g, Vertex<Airport>* src, Vertex<Airport>* dest);
+    std::set<std::vector<Airport>> bfsFlightVisit(const Graph<Airport> *g, Vertex<Airport> *source, Vertex<Airport> *dest);
 
 };
 #endif //AED_2_FLIGHTOPTION_H

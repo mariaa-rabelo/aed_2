@@ -52,8 +52,8 @@ int Application::getUniqueAirlines(const std::string& airportCode) const{
     return uniqueAirlines.size();
 }
 // funcionalidade 6
-void Application::findAirportMaxX( string code, int x, int option){
-    set<Airport> destinations;
+void Application::findAirportMaxX( std::string code, int x, int option){
+    std::set<Airport> destinations;
     auto setVertex = g_airport.getVertexSet();
     bool flag = false;
     /*
@@ -64,7 +64,7 @@ void Application::findAirportMaxX( string code, int x, int option){
         auto airport = node->getInfo();
         if ( airport.getCode() ==  code){
             flag = true;
-            vector<Airport> possible_dests = nodesAtLessDistanceBFS( &g_airport, airport, x);
+            std::vector<Airport> possible_dests = nodesAtLessDistanceBFS( &g_airport, airport, x);
             for (const Airport& a : possible_dests){
                 //if (a.getCode() != code)
                     destinations.insert(a);
@@ -73,7 +73,7 @@ void Application::findAirportMaxX( string code, int x, int option){
         }
     }
     if (!flag){
-        cout << "airport code not found!"<< endl;
+        std::cout << "airport code not found!"<< std::endl;
         return;
     }
     //airports
@@ -84,28 +84,28 @@ void Application::findAirportMaxX( string code, int x, int option){
     }
     //cities
     else if (option == 2){
-        set<string> cities;
+        std::set<std::string> cities;
         for (const Airport& a: destinations){
             cities.insert(a.getCity());
         }
-        for (const string& city : cities){
-            cout << city<< endl;
+        for (const std::string& city : cities){
+            std::cout << city<< std::endl;
         }
     }
     //countries
     else if (option == 3){
-        set<string> countries;
+        std::set<std::string> countries;
         for (const Airport& a: destinations){
             countries.insert(a.getCountry());
         }
-        for (const string& country : countries){
-            cout << country<< endl;
+        for (const std::string& country : countries){
+            std::cout << country<< std::endl;
         }
     }
 }
 
-vector<Airport> Application::nodesAtLessDistanceBFS(const Graph<Airport> *g, const Airport &source, int k) {
-    vector<Airport> res;
+std::vector<Airport> Application::nodesAtLessDistanceBFS(const Graph<Airport> *g, const Airport &source, int k) {
+    std::vector<Airport> res;
 
     Vertex<Airport> * v = g->findVertex(source);
     /*if (v == nullptr) {
@@ -118,8 +118,8 @@ vector<Airport> Application::nodesAtLessDistanceBFS(const Graph<Airport> *g, con
         b->setVisited(false);
     }
     int level = 0;
-    queue<Vertex<Airport>*> vert;
-    queue<Vertex<Airport>*> aux;
+    std::queue<Vertex<Airport>*> vert;
+    std::queue<Vertex<Airport>*> aux;
     //cout<< "L";
     vert.push(v);
     while (level < k){
@@ -153,21 +153,20 @@ vector<Airport> Application::nodesAtLessDistanceBFS(const Graph<Airport> *g, con
 //funcionalidade 7
 
 void Application::maximumTrip(){
-    vector<pair<Airport,Airport>> res;
-    map<Airport, vector<pair<Airport, int>>> paths;
-    vector<int> max_pathsV;
+    std::vector<std::pair<Airport,Airport>> res;
+    std::map<Airport, std::vector<std::pair<Airport, int>>> paths;
+    std::vector<int> max_pathsV;
     auto verts = g_airport.getVertexSet();
     for (auto v : verts){
         for (auto v_ : verts){
             v_->setVisited(false);
         }
-        vector<pair<Airport, int>> max_path = getMaxPathBFS(v, &g_airport);
-        for (const pair<Airport, int>& p : max_path){
+        std::vector<std::pair<Airport, int>> max_path = getMaxPathBFS(v, &g_airport);
+        for (const std::pair<Airport, int>& p : max_path){
             max_pathsV.push_back(p.second);
         }
         auto v_paths = make_pair(v->getInfo(), max_path);
         paths.insert(v_paths);
-
     }
     //encontrar lenght de max_path
     int max = *max_element(max_pathsV.begin(), max_pathsV.end());
@@ -183,29 +182,27 @@ void Application::maximumTrip(){
             }
         }
     }
-    cout << "res:"<<endl;
+    std::cout << "res:"<<std::endl;
     for (const auto& p : res){
-        cout <<"from:"<< endl;
+        std::cout <<"from:"<< std::endl;
         p.first.print();
-        cout << "to: "<<endl;
+        std::cout << "to: "<<std::endl;
         p.second.print();
     }
-
 }
 
-vector<pair<Airport, int>> Application::getMaxPathBFS( Vertex<Airport> *v, Graph<Airport> *g){
+std::vector<std::pair<Airport, int>> Application::getMaxPathBFS( Vertex<Airport> *v, Graph<Airport> *g){
     //vector<pair<Vertex<Airport>, int>> res;
-    vector<pair<Airport, int>> res;
+    std::vector<std::pair<Airport, int>> res;
     int level = 0;
-    queue<Vertex<Airport>*> vert;
-    queue<Vertex<Airport>*> aux;
-    queue<Vertex<Airport>*> final;
+    std::queue<Vertex<Airport>*> vert;
+    std::queue<Vertex<Airport>*> aux;
+    std::queue<Vertex<Airport>*> final;
     v->setVisited(true);
     vert.push(v);
     while (!vert.empty()){
         //cout << "h";
         while (!vert.empty()){
-
             Vertex<Airport> * current = vert.front();
             vert.pop();
         //    cout << "being analized:" << endl;
@@ -232,17 +229,15 @@ vector<pair<Airport, int>> Application::getMaxPathBFS( Vertex<Airport> *v, Graph
         }*/
         vert = aux;
         aux = {};
-
     }
     while (!final.empty()){
         Airport ar= final.front()->getInfo();
         //Vertex<Airport> frontV = *vert.front();
-        res.push_back(make_pair(ar, level));
+        res.push_back(std::make_pair(ar, level));
         final.pop();
     }
     return res;
 }
-
 
 // funcionalidade 8
 int Application::getTotalFlights(const Graph<Airport> *g, Vertex<Airport> * v){
@@ -254,8 +249,8 @@ int Application::getTotalFlights(const Graph<Airport> *g, Vertex<Airport> * v){
 
 }
 void Application::getKAirportsGreatestCap(int k){
-    vector<int> caps;
-   multimap<int, Airport> capacity;
+    std::vector<int> caps;
+    std::multimap<int, Airport> capacity;
     auto vertexSet = g_airport.getVertexSet();
     for (auto v : vertexSet){
         int vertCap = getTotalFlights(&g_airport, v);
@@ -270,18 +265,13 @@ void Application::getKAirportsGreatestCap(int k){
             airport.print();
             capacity.erase(it);
         }
-
-
     }
-
-
 }
 
 //funcionalidade 9
-
 //unordered_
-set<Airport> Application::articulationPoints(Graph<Airport> *g) {
-    set<Airport> res;
+std::set<Airport> Application::articulationPoints(Graph<Airport> *g) {
+    std::set<Airport> res;
     //unordered_set<Airport> res;
     if (g->getVertexSet().empty())
         return res;
@@ -289,17 +279,16 @@ set<Airport> Application::articulationPoints(Graph<Airport> *g) {
     auto verts = g_->getVertexSet();
     for (auto n : verts){
         for (auto e : n->getAdj()){
-            g->addEdge(e.getDest()->getInfo(), n->getInfo(), 0);
+            g_->addEdge(e.getDest()->getInfo(), n->getInfo(), 0);
         }
     }
     for (auto v : verts){
         v->setVisited(false);
         v->setLow(0);
         v->setNum(0);
-
     }
     int i = 1;
-    stack<Airport> s = {};
+    std::stack<Airport> s = {};
     for (auto v : verts){
         if (v->getNum() == 0)
             dfs_art(g_, v, s, res, i);
@@ -307,7 +296,7 @@ set<Airport> Application::articulationPoints(Graph<Airport> *g) {
     return res;
 }
 
-void Application::dfs_art(Graph<Airport> *g, Vertex<Airport> *v, stack<Airport> &s, set<Airport> &l, int &i){
+void Application::dfs_art(Graph<Airport> *g, Vertex<Airport> *v, std::stack<Airport> &s, std::set<Airport> &l, int &i){
     v->setNum(i);
     v->setLow(i);
     i++;
@@ -315,7 +304,7 @@ void Application::dfs_art(Graph<Airport> *g, Vertex<Airport> *v, stack<Airport> 
     int children = 0;
     for (auto e : v->getAdj()){
         auto adj = e.getDest();
-        stack<Airport> copy = s;
+        std::stack<Airport> copy = s;
         bool flag = false;
         while (!copy.empty()){
             if (copy.top() == adj->getInfo()) {
@@ -326,9 +315,8 @@ void Application::dfs_art(Graph<Airport> *g, Vertex<Airport> *v, stack<Airport> 
         if (adj->getNum() == 0){
             children++;
             dfs_art(g, adj, s, l, i);
-            v->setLow(min(v->getLow(), adj->getLow()));
+            v->setLow(std::min(v->getLow(), adj->getLow()));
             if (adj->getLow() >= v->getNum()){
-
                 if (v->getInfo() == g->getVertexSet()[0]->getInfo()) {
                     if (children > 1){
                         l.insert(v->getInfo());
@@ -340,33 +328,33 @@ void Application::dfs_art(Graph<Airport> *g, Vertex<Airport> *v, stack<Airport> 
             }
         }
         else if (flag){
-            v->setLow(min(v->getLow(), adj->getNum()));
+            v->setLow(std::min(v->getLow(), adj->getNum()));
         }
     }
     s.pop();
 }
 
 void Application::essentialAirports(){
-    set<Airport> airports =  articulationPoints(&g_airport);
-    cout << endl<< "Essential Airports: " << endl;
+    std::set<Airport> airports =  articulationPoints(&g_airport);
+    std::cout << std::endl<< "Essential Airports: " << std::endl;
     for (const Airport& a : airports){
         a.print();
     }
-
+    std::cout << airports.size() << " essential airports" << std::endl;
 }
-//FlightOption
 
+//FlightOption
 void Application::getBestFlightOption(Vertex<Airport>* src, Vertex<Airport>* dest ){
-    set<vector<Airport>> path = flightOption.flights(&g_airport, src, dest);
+    std::set<std::vector<Airport>> path = flightOption.flights(&g_airport, src, dest);
     for(const auto& possible_path : path){
-        cout << "possible path:"<<endl;
+        std::cout << "possible path: "<< std::endl;
         for (const auto& airport : possible_path){
             airport.print();
         }
     }
 }
 
- bool Application::getAirportsInCity(const string& city, const string& country, set<Vertex<Airport>*> res){
+ bool Application::getAirportsInCity(const std::string& city, const std::string& country, std::set<Vertex<Airport>*> res){
     bool result = false;
     auto verts = g_airport.getVertexSet();
     for ( const auto &v : verts){
@@ -374,11 +362,11 @@ void Application::getBestFlightOption(Vertex<Airport>* src, Vertex<Airport>* des
             res.insert(v);
             result = true;
         }
-
     }
     return result;
 }
-bool Application::getAirport(const string& identifier, bool opt, Vertex<Airport>* &vert){
+
+bool Application::getAirport(const std::string& identifier, bool opt, Vertex<Airport>* &vert){
     auto verts = g_airport.getVertexSet();
     if (opt) {
         for (const auto &v: verts) {
@@ -400,22 +388,26 @@ bool Application::getAirport(const string& identifier, bool opt, Vertex<Airport>
     return false;
 }
 
-std::map<std::string, int> Application::getFlightsByCity() {
-    std::map<std::string, int> flightsByCity;
+int Application::getFlightsByCity(const std::string& cityName) {
+    int flightCount = 0;
     for (auto vertex : g_airport.getVertexSet()) {
-        flightsByCity[vertex->getInfo().getCity()] += vertex->getAdj().size();
-    }
-    return flightsByCity;
-}
-
-std::map<std::string, int> Application::getFlightsByAirline() {
-    std::map<std::string, int> flightsByAirline;
-    for (auto vertex : g_airport.getVertexSet()) {
-        for (auto& edge : vertex->getAdj()) {
-            flightsByAirline[edge.getAirline()->getName()]++;
+        if (vertex->getInfo().getCity() == cityName) {
+            flightCount += vertex->getAdj().size();
         }
     }
-    return flightsByAirline;
+    return flightCount;
+}
+
+int Application::getFlightsByAirline(const std::string& airlineCode) {
+    int flightCount = 0;
+    for (auto vertex : g_airport.getVertexSet()) {
+        for (auto& edge : vertex->getAdj()) {
+            if (edge.getAirline()->getCode() == airlineCode) {
+                flightCount++;
+            }
+        }
+    }
+    return flightCount;
 }
 
 int Application::getUniqueCountriesFromAirport(const std::string& airportCode) {
@@ -441,7 +433,7 @@ int Application::getUniqueCountriesFromCity(const std::string& cityName) {
     return uniqueCountries.size();
 }
 
-int Application::getUniqueAirportsFromAirport(const string &airportCode) {
+int Application::getUniqueAirportsFromAirport(const std::string &airportCode) {
     Vertex<Airport>* airport = g_airport.findVertex(airportCode);
     if (!airport) return 0;
 
@@ -462,8 +454,3 @@ int Application::getUniqueCitiesFromAirport(const std::string& airportCode) {
     }
     return uniqueCities.size();
 }
-
-
-
-
-
