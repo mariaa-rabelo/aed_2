@@ -337,9 +337,20 @@ void Application::getKAirportsGreatestCap(int k){
 }
 
 //funcionalidade 9
-//unordered_
-std::set<Airport> Application::articulationPoints(Graph<Airport> *g) {
-    std::set<Airport> res;
+
+void Application::essentialAirports(){
+    std::set<Airport> airports =  articulationPoints(&g_airport);
+    std::cout << std::endl<< "Essential Airports: " << std::endl;
+    for (const Airport& a : airports){
+        a.print();
+    }
+    std::cout << airports.size() << " essential airports" << std::endl;
+}
+
+
+set<Airport> Application::articulationPoints(Graph<Airport> *g) {
+    set<Airport> res;
+
     if (g->getVertexSet().empty())
         return res;
     auto g_ = g;
@@ -401,20 +412,12 @@ void Application::dfs_art(Graph<Airport> *g, Vertex<Airport> *v, std::stack<Airp
     s.pop();
 }
 
-void Application::essentialAirports(){
-    std::set<Airport> airports =  articulationPoints(&g_airport);
-    std::cout << std::endl<< "Essential Airports: " << std::endl;
-    for (const Airport& a : airports){
-        a.print();
-    }
-    std::cout << airports.size() << " essential airports" << std::endl;
-}
-
 
 
 //FlightOption
 
- bool Application::getAirportsInCity(const std::string& city, const std::string& country, std::set<Vertex<Airport>*> res){
+
+ bool Application::getAirportsInCity(const string& city, const string& country, set<Vertex<Airport>*> res){
     bool result = false;
     auto verts = g_airport.getVertexSet();
     for ( const auto &v : verts){
@@ -422,6 +425,7 @@ void Application::essentialAirports(){
             res.insert(v);
             result = true;
         }
+
     }
     return result;
 }
@@ -458,11 +462,15 @@ void Application::getBestFlightOption(Vertex<Airport>* src, Vertex<Airport>* des
     }
 }
 
+//bestFlightOption com filtros
+
 
 void Application::bestFlightOptGivenAirports(set<string>& airlines, Vertex<Airport>* src, Vertex<Airport>* dest ){
     auto paths = flightOption.getAllPaths(&g_airport, src, dest);
     auto res = flightOption.flightsChoosenAirlines(&g_airport, paths, airlines);
-    cout << "ALL PATHS FOR "<< src->getInfo().getCode() << "TO" << dest->getInfo().getCode()<<endl;
+
+    cout << "ALL PATHS FOR "<< src->getInfo().getCode() << " TO " << dest->getInfo().getCode()<<endl;
+
     for (auto path : res){
         cout << "possible path:"<<endl;
         for (auto vert : path){
@@ -505,5 +513,6 @@ bool Application::checkIfExists(const string& code){
     }
     return false;
 }
+
 
 

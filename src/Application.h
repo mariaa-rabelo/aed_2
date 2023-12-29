@@ -14,7 +14,6 @@
 #include <unordered_set>
 #include <set>
 using namespace std;
-
 class Application {
 private:
     Graph<Airport> g_airport;
@@ -60,7 +59,6 @@ public:
     void dfs_art(Graph<Airport> *g, Vertex<Airport> *v, std::stack<Airport> &s, std::set<Airport> &l, int &i);
     void essentialAirports();
 
-
     //BestFlightOption
 
     // sem filtros
@@ -72,9 +70,13 @@ public:
     void bestFlightOptGivenAirports(set<string> &airlines, Vertex<Airport> *src, Vertex<Airport> *dest);
     void bestFlightOptMaxAirports(int maxAirlines, Vertex<Airport> *src, Vertex<Airport> *dest);
 
+
+
+
     //auxiliar
     Vertex<Airport> *getVertex(string v);
     bool checkIfExists(const string &code);
+
 
 };
 #endif //AED_2_APPLICATION_H
