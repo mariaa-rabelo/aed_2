@@ -13,9 +13,9 @@ Application::Application() {
 }
 
 void Application::run() {
-    FileReader airlines_file("../dataset/airlines.csv", g_airport);
-    FileReader airports_file("../dataset/airports.csv", g_airport);
-    FileReader flights_file("../dataset/flights.csv", g_airport);
+    FileReader airlines_file("../dataset/airlines1.csv", g_airport);
+    FileReader airports_file("../dataset/airports1.csv", g_airport);
+    FileReader flights_file("../dataset/flights1.csv", g_airport);
 
     airports_file.readAirports();
     airlines_file.readAirlines();
@@ -313,6 +313,8 @@ int Application::getTotalFlights(const Graph<Airport> *g, Vertex<Airport> * v){
     Airport airport = v->getInfo();
     //outgoing
     int outgoing = v->getAdj().size();
+    cout << "vert:"<< v->getInfo().getCode()<<endl
+    << "indeg:"<< v->getIndegree()<<endl;
     return v->getIndegree()+outgoing;
 
 }
@@ -466,6 +468,14 @@ void Application::getBestFlightOption(Vertex<Airport>* src, Vertex<Airport>* des
 
 
 void Application::bestFlightOptGivenAirports(set<string>& airlines, Vertex<Airport>* src, Vertex<Airport>* dest ){
+    auto paths = flightOption.bfsFlightVisitFilter(&g_airport, src, dest, airlines);
+    for (const auto& path : paths){
+        cout << "possible path:"<<endl;
+        for (const auto& airport : path){
+            airport.print();
+        }
+    }
+    /*
     auto paths = flightOption.getAllPaths(&g_airport, src, dest);
     auto res = flightOption.flightsChoosenAirlines(&g_airport, paths, airlines);
 
@@ -477,6 +487,7 @@ void Application::bestFlightOptGivenAirports(set<string>& airlines, Vertex<Airpo
             vert->getInfo().print();
         }
     }
+    */
 }
 
 void Application::bestFlightOptMaxAirports(  int maxAirlines, Vertex<Airport>* src, Vertex<Airport>* dest){

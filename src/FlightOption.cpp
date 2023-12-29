@@ -171,6 +171,54 @@ bool FlightOption::dfsFlightVisit(const Graph<Airport> *g, Vertex<Airport> *sour
 }
 
 
+
+set<vector<Airport>> FlightOption::bfsFlightVisitFilter(const Graph<Airport> *g, Vertex<Airport> *source, Vertex<Airport> *dest, set<string>& airlines ){
+    set<vector<Airport>> res;
+    map<Airport, std::vector<Airport>> pred;
+    vector<Airport> p = {};
+    auto verts = g->getVertexSet();
+    for (auto v : verts){
+        v->setVisited(false);
+        pred.emplace(v->getInfo(), p);
+    }
+
+    queue<Vertex<Airport>*> q;
+    queue<Vertex<Airport>*> aux;
+    q.push(source);
+    source->setVisited(true);
+    bool foundDest= false;
+    while (!q.empty()) {
+        while (!q.empty()) {
+            auto v = q.front();
+            //cout << "being analized:"<<endl;
+            // v->getInfo().print();
+            q.pop();
+            // cout << "adjacent:"<<endl;
+            for (auto e: v->getAdj()) {
+                auto neig = e.getDest();
+                auto it = airlines.find(e.getAirline()->getCode());
+                if (!neig->isVisited() && it != airlines.end()) {
+                    //neig->getInfo().print();
+                    pred[neig->getInfo()] = pred[v->getInfo()];
+                    pred[neig->getInfo()].push_back(v->getInfo());
+                    aux.push(neig);
+                    if (neig == dest) {
+                        foundDest = true;
+                        neig->setVisited(false);
+                        pred[neig->getInfo()].push_back(neig->getInfo());
+                        res.insert(pred[neig->getInfo()]);
+                        //return pred[neig->getInfo()];
+                    }
+                }
+            }
+        }
+        if (foundDest)
+            break;
+        q = aux;
+        aux = {};
+    }
+    return res;
+}
 /*
 set<vector<Airport>> FlightOption::flightsChoosenAirlines(const Graph<Airport> *g, set<vector<Airport>>& paths, set<string>& airlines ){
 

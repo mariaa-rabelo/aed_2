@@ -23,8 +23,8 @@ public:
     bool dfsFlightVisit(const Graph<Airport> *g, Vertex<Airport> *source, Vertex<Airport> *dest,vector<Vertex<Airport>*> &path, set<vector<Vertex<Airport>*>> &all_paths );
     set<vector<Vertex<Airport>*>> flightsChoosenAirlines(const Graph<Airport> *g, set<vector<Vertex<Airport>*>>& paths, set<string>& airlines);
     set<vector<Airport>> flightsMaxAirlineNumber(const Graph<Airport> *g, set<vector<Airport>>& paths, int maxAirlines);
-
-    // sem filtros
+    set<vector<Airport>> bfsFlightVisitFilter(const Graph<Airport> *g, Vertex<Airport> *source, Vertex<Airport> *dest, set<string>& airlines );
+        // sem filtros
     set<vector<Airport>>  flights(const Graph<Airport> *g, Vertex<Airport>* src, Vertex<Airport>* dest);
     set<vector<Airport>> bfsFlightVisit(const Graph<Airport> *g, Vertex<Airport> *source, Vertex<Airport> *dest);
 
