@@ -51,6 +51,80 @@ int Application::getUniqueAirlines(const std::string& airportCode) const{
     }
     return uniqueAirlines.size();
 }
+
+//func3
+int Application::getFlightsByCity(const std::string& cityName) {
+    int flightCount = 0;
+    for (auto vertex : g_airport.getVertexSet()) {
+        if (vertex->getInfo().getCity() == cityName) {
+            flightCount += vertex->getAdj().size();
+        }
+    }
+    return flightCount;
+}
+
+int Application::getFlightsByAirline(const std::string& airlineCode) {
+    int flightCount = 0;
+    for (auto vertex : g_airport.getVertexSet()) {
+        for (auto& edge : vertex->getAdj()) {
+            if (edge.getAirline()->getCode() == airlineCode) {
+                flightCount++;
+            }
+        }
+    }
+    return flightCount;
+}
+
+//func4
+int Application::getUniqueCountriesFromAirport(const std::string& airportCode) {
+    Vertex<Airport>* airport = g_airport.findVertex(airportCode);
+    if (!airport) return 0;
+
+    std::set<std::string> uniqueCountries;
+    for (auto& edge : airport->getAdj()) {
+        uniqueCountries.insert(edge.getDest()->getInfo().getCountry());
+    }
+    return uniqueCountries.size();
+}
+
+int Application::getUniqueCountriesFromCity(const std::string& cityName) {
+    std::set<std::string> uniqueCountries;
+    for (auto vertex : g_airport.getVertexSet()) {
+        if (vertex->getInfo().getCity() == cityName) {
+            for (auto& edge : vertex->getAdj()) {
+                uniqueCountries.insert(edge.getDest()->getInfo().getCountry());
+            }
+        }
+    }
+    return uniqueCountries.size();
+}
+
+//func5
+int Application::getUniqueAirportsFromAirport(const std::string &airportCode) {
+    Vertex<Airport>* airport = g_airport.findVertex(airportCode);
+    if (!airport) return 0;
+
+    std::set<std::string> uniqueAirports;
+    for (auto& edge : airport->getAdj()) {
+        uniqueAirports.insert(edge.getDest()->getInfo().getCode());
+    }
+    return uniqueAirports.size();
+}
+
+int Application::getUniqueCitiesFromAirport(const std::string& airportCode) {
+    Vertex<Airport>* airport = g_airport.findVertex(airportCode);
+    if (!airport) return 0;
+
+    std::set<std::string> uniqueCities;
+    for (auto& edge : airport->getAdj()) {
+        uniqueCities.insert(edge.getDest()->getInfo().getCity());
+    }
+    return uniqueCities.size();
+}
+
+
+
+
 // funcionalidade 6
 void Application::findAirportMaxX( std::string code, int x, int option){
     std::set<Airport> destinations;
@@ -220,13 +294,7 @@ std::vector<std::pair<Airport, int>> Application::getMaxPathBFS( Vertex<Airport>
         level++;
         if (!aux.empty()){
             final = aux;
-        }/*
-        cout << "tf?";
-        queue<Vertex<Airport>*> some = aux;
-        while (!some.empty()){
-            some.front()->getInfo().print();
-            some.pop();
-        }*/
+        }
         vert = aux;
         aux = {};
     }
@@ -272,7 +340,6 @@ void Application::getKAirportsGreatestCap(int k){
 //unordered_
 std::set<Airport> Application::articulationPoints(Graph<Airport> *g) {
     std::set<Airport> res;
-    //unordered_set<Airport> res;
     if (g->getVertexSet().empty())
         return res;
     auto g_ = g;
@@ -343,16 +410,9 @@ void Application::essentialAirports(){
     std::cout << airports.size() << " essential airports" << std::endl;
 }
 
+
+
 //FlightOption
-void Application::getBestFlightOption(Vertex<Airport>* src, Vertex<Airport>* dest ){
-    std::set<std::vector<Airport>> path = flightOption.flights(&g_airport, src, dest);
-    for(const auto& possible_path : path){
-        std::cout << "possible path: "<< std::endl;
-        for (const auto& airport : possible_path){
-            airport.print();
-        }
-    }
-}
 
  bool Application::getAirportsInCity(const std::string& city, const std::string& country, std::set<Vertex<Airport>*> res){
     bool result = false;
@@ -388,69 +448,62 @@ bool Application::getAirport(const std::string& identifier, bool opt, Vertex<Air
     return false;
 }
 
-int Application::getFlightsByCity(const std::string& cityName) {
-    int flightCount = 0;
-    for (auto vertex : g_airport.getVertexSet()) {
-        if (vertex->getInfo().getCity() == cityName) {
-            flightCount += vertex->getAdj().size();
+void Application::getBestFlightOption(Vertex<Airport>* src, Vertex<Airport>* dest ){
+    std::set<std::vector<Airport>> path = flightOption.flights(&g_airport, src, dest);
+    for(const auto& possible_path : path){
+        std::cout << "possible path: "<< std::endl;
+        for (const auto& airport : possible_path){
+            airport.print();
         }
     }
-    return flightCount;
 }
 
-int Application::getFlightsByAirline(const std::string& airlineCode) {
-    int flightCount = 0;
-    for (auto vertex : g_airport.getVertexSet()) {
-        for (auto& edge : vertex->getAdj()) {
-            if (edge.getAirline()->getCode() == airlineCode) {
-                flightCount++;
+
+void Application::bestFlightOptGivenAirports(set<string>& airlines, Vertex<Airport>* src, Vertex<Airport>* dest ){
+    auto paths = flightOption.getAllPaths(&g_airport, src, dest);
+    auto res = flightOption.flightsChoosenAirlines(&g_airport, paths, airlines);
+    cout << "ALL PATHS FOR "<< src->getInfo().getCode() << "TO" << dest->getInfo().getCode()<<endl;
+    for (auto path : res){
+        cout << "possible path:"<<endl;
+        for (auto vert : path){
+            vert->getInfo().print();
+        }
+    }
+}
+
+void Application::bestFlightOptMaxAirports(  int maxAirlines, Vertex<Airport>* src, Vertex<Airport>* dest){
+    auto paths = flightOption.flights(&g_airport, src, dest);
+    auto res = flightOption.flightsMaxAirlineNumber(&g_airport, paths, maxAirlines);
+    for(const auto& possible_path : res){
+        cout << "possible path:"<<endl;
+        for (const auto& airport : possible_path){
+            airport.print();
+        }
+    }
+
+}
+
+//auxiliar
+
+Vertex<Airport>* Application::getVertex(string v){
+    return g_airport.findVertex(v);
+
+}
+
+bool Application::checkIfExists(const string& code){
+    auto setVertex = g_airport.getVertexSet();
+    cout << "code:"<<code<<endl;
+    for (auto node: setVertex){
+        cout << "airlines im graph"<<endl;
+        for (auto e : node->getAdj()){
+            cout << e.getAirline()->getCode() << endl;
+            if (e.getAirline()->getCode() == code){
+                return true;
             }
         }
+
     }
-    return flightCount;
+    return false;
 }
 
-int Application::getUniqueCountriesFromAirport(const std::string& airportCode) {
-    Vertex<Airport>* airport = g_airport.findVertex(airportCode);
-    if (!airport) return 0;
 
-    std::set<std::string> uniqueCountries;
-    for (auto& edge : airport->getAdj()) {
-        uniqueCountries.insert(edge.getDest()->getInfo().getCountry());
-    }
-    return uniqueCountries.size();
-}
-
-int Application::getUniqueCountriesFromCity(const std::string& cityName) {
-    std::set<std::string> uniqueCountries;
-    for (auto vertex : g_airport.getVertexSet()) {
-        if (vertex->getInfo().getCity() == cityName) {
-            for (auto& edge : vertex->getAdj()) {
-                uniqueCountries.insert(edge.getDest()->getInfo().getCountry());
-            }
-        }
-    }
-    return uniqueCountries.size();
-}
-
-int Application::getUniqueAirportsFromAirport(const std::string &airportCode) {
-    Vertex<Airport>* airport = g_airport.findVertex(airportCode);
-    if (!airport) return 0;
-
-    std::set<std::string> uniqueAirports;
-    for (auto& edge : airport->getAdj()) {
-        uniqueAirports.insert(edge.getDest()->getInfo().getCode());
-    }
-    return uniqueAirports.size();
-}
-
-int Application::getUniqueCitiesFromAirport(const std::string& airportCode) {
-    Vertex<Airport>* airport = g_airport.findVertex(airportCode);
-    if (!airport) return 0;
-
-    std::set<std::string> uniqueCities;
-    for (auto& edge : airport->getAdj()) {
-        uniqueCities.insert(edge.getDest()->getInfo().getCity());
-    }
-    return uniqueCities.size();
-}

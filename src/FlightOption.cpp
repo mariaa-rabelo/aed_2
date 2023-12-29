@@ -17,20 +17,11 @@ set<vector<Airport>> FlightOption::flights(const Graph<Airport> *g, Vertex<Airpo
     for (auto v : verts){
         v->setVisited(false);
     }
-    //Vertex<Airport>* v1 = verts[1];
-    //Vertex<Airport>* v2 = verts[3];
     std::set<vector<Airport>> path;
-    //dfsFlightVisit(g, v1, v2, path);
     path = bfsFlightVisit(g ,src, dest);
 
     return path;
 }
-
-
-
-//ver se source existe
-//ver se dest existe
-//ver se source != dest
 
 set<vector<Airport>> FlightOption::bfsFlightVisit(const Graph<Airport> *g, Vertex<Airport> *source, Vertex<Airport> *dest ){
     set<vector<Airport>> res;
@@ -79,6 +70,146 @@ set<vector<Airport>> FlightOption::bfsFlightVisit(const Graph<Airport> *g, Verte
     return res;
 }
 
+set<vector<Vertex<Airport>*>> FlightOption::flightsChoosenAirlines(const Graph<Airport> *g, set<vector<Vertex<Airport>*>>& paths, set<string>& airlines) {
+    set<vector<Vertex<Airport>*>> res;
+    // vê se voos entre aeroportos têm as airlines dadas
+    for ( const vector<Vertex<Airport>*> &path: paths) {
+        bool is_valid = false;
+        for (int i = 1; i < path.size(); i++) {
+            Vertex<Airport> *src = path[i - 1];
+            Vertex<Airport> *dst = path[i];
+            auto adjs = src->getAdj();
+            // procura de voo entre current src e current dst
+            for (auto edge: src->getAdj()) {
+                if (edge.getDest() == dst) {
+                    is_valid = true;
+                    // voo encontrado não tem airline que esteja nas airlines dadas
+                    if (airlines.find(edge.getAirline()->getCode()) == airlines.end()) {
+                        is_valid = false;
+                    }
+                    break;
+                }
+            }
+            if (!is_valid)
+                break;
+
+        }
+        if (is_valid){
+            res.insert(path);
+        }
+    }
+    return res;
+}
+
+
+set<vector<Airport>> FlightOption::flightsMaxAirlineNumber(const Graph<Airport> *g, set<vector<Airport>>& paths, int maxAirlines){
+    set<vector<Airport>> res;
+    for (const auto& path : paths) {
+        vector<Vertex<Airport> *> verts_of_path;
+        for (const auto &airport: path) {
+            Vertex<Airport> *v = g->findVertex(airport);
+            verts_of_path.push_back(v);
+        }
+        //airlines de cada path;
+        set<Airline*> airlines;
+        // encontrar voo entre src -> dst
+        for (int i = 1; i < verts_of_path.size(); i++){
+            Vertex<Airport>* src = verts_of_path[i-1];
+            Vertex<Airport>* dst = verts_of_path[i];
+            for (auto& e : src->getAdj()){
+                auto neig = e.getDest();
+                if (neig == dst){
+                    Airline* airline = e.getAirline();
+                    // airline nova
+                    if (airlines.find(airline) == airlines.end()){
+                        airlines.insert(airline);
+
+                    }
+                }
+            }
+        }
+        if (airlines.size() <= maxAirlines){
+            res.insert(path);
+        }
+
+    }
+    return res;
+}
+
+set<vector<Vertex<Airport>*>> FlightOption::getAllPaths( const Graph<Airport> *g, Vertex<Airport> *source, Vertex<Airport> *dest){
+    for (auto v :g->getVertexSet()){
+        v->setVisited(false);
+    }
+    vector<Vertex<Airport>*> path;
+    set<vector<Vertex<Airport>*>> all_paths;
+    dfsFlightVisit(g, source, dest, path, all_paths);
+    return all_paths;
+
+}
+
+
+bool FlightOption::dfsFlightVisit(const Graph<Airport> *g, Vertex<Airport> *source, Vertex<Airport> *dest,
+                    vector<Vertex<Airport>*> &path, set<vector<Vertex<Airport>*>> &all_paths ){
+    source->setVisited(true);
+    path.push_back(source);
+    if (source == dest){
+        source->setVisited(false);
+        return true;
+    }
+    for (auto edge : source->getAdj() ){
+        auto neig = edge.getDest();
+        if (!neig->isVisited() ){
+            if (dfsFlightVisit(g, neig, dest, path, all_paths)) {
+                all_paths.insert(path);
+                path.pop_back();
+            }
+        }
+    }
+    source->setVisited(false);
+    path.pop_back();
+    return false;
+}
+
+
+/*
+set<vector<Airport>> FlightOption::flightsChoosenAirlines(const Graph<Airport> *g, set<vector<Airport>>& paths, set<string>& airlines ){
+
+    set<vector<Airport>> res;
+
+    for (const auto& path : paths){
+        vector<Vertex<Airport>*> verts_of_path;
+        for (const auto& airport : path){
+            Vertex<Airport>* v = g->findVertex(airport);
+            verts_of_path.push_back(v);
+        }
+        bool flag = false;
+        // encontrar voo entre src -> dst
+        for (int i = 1; i < verts_of_path.size(); i++){
+            Vertex<Airport>* src = verts_of_path[i-1];
+            Vertex<Airport>* dst = verts_of_path[i];
+            for (auto& e : src->getAdj()){
+                auto neig = e.getDest();
+                if (neig == dst){
+                    //airline do voo não está em lista de airlines que quero
+                    if (airlines.find(e.getAirline()->getCode()) == airlines.end()){
+                        flag = true;
+                        break;
+                    }
+                }
+            }
+            if (flag){break;}
+        }
+        //nenhum dos voos entre os aeroportos têm airlines que não foram selecionadas
+        if (!flag){
+            res.insert(path);
+        }
+
+    }
+
+    return res;
+
+}
+*/
 
 /*
 bool FlightOption::bfsFlightVisit(const Graph<Airport> *g, Vertex<Airport> *source, Vertex<Airport> *dest, vector<Airport> &res ){

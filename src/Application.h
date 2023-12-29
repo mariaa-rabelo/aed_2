@@ -13,6 +13,7 @@
 #include <string>
 #include <unordered_set>
 #include <set>
+using namespace std;
 
 class Application {
 private:
@@ -42,31 +43,38 @@ public:
     int getUniqueAirportsFromAirport(const std::string& airportCode);
     int getUniqueCitiesFromAirport(const std::string& airportCode);
 
+    //func6
     void findAirportMaxX(std::string code, int x, int option);
-
     std::vector<Airport> nodesAtLessDistanceBFS(const Graph<Airport> *g, const Airport &source, int k);
 
-    int getTotalFlights(const Graph<Airport> *g, Vertex<Airport> *v);
-
-    void getKAirportsGreatestCap(int k);
-
-    void essentialAirports();
-
-    std::set<Airport> articulationPoints(Graph<Airport> *g);
-
-    void dfs_art(Graph<Airport> *g, Vertex<Airport> *v, std::stack<Airport> &s, std::set<Airport> &l, int &i);
-
+    //func7
+    void maximumTrip();
     std::vector<std::pair<Airport, int>> getMaxPathBFS(Vertex<Airport> *v, Graph<Airport> *g);
 
-    void maximumTrip();
+    //func8
+    int getTotalFlights(const Graph<Airport> *g, Vertex<Airport> *v);
+    void getKAirportsGreatestCap(int k);
+
+    //func9
+    std::set<Airport> articulationPoints(Graph<Airport> *g);
+    void dfs_art(Graph<Airport> *g, Vertex<Airport> *v, std::stack<Airport> &s, std::set<Airport> &l, int &i);
+    void essentialAirports();
+
 
     //BestFlightOption
+
+    // sem filtros
     bool getAirportsInCity(const std::string& city, const std::string& country, std::set<Vertex<Airport>*>res);
     bool getAirport(const std::string& identifier, bool opt, Vertex<Airport>* &vert);
     void getBestFlightOption(Vertex<Airport>* src, Vertex<Airport>* dest );
 
+    // com filtros
+    void bestFlightOptGivenAirports(set<string> &airlines, Vertex<Airport> *src, Vertex<Airport> *dest);
+    void bestFlightOptMaxAirports(int maxAirlines, Vertex<Airport> *src, Vertex<Airport> *dest);
+
+    //auxiliar
+    Vertex<Airport> *getVertex(string v);
+    bool checkIfExists(const string &code);
+
 };
-
-
-
 #endif //AED_2_APPLICATION_H
