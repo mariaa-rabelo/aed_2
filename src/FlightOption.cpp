@@ -3,38 +3,35 @@
 //
 
 #include <map>
-
 #include <iostream>
 #include "FlightOption.h"
 #include "Airport.h"
-using namespace std;
-FlightOption::FlightOption() {
 
-}
+FlightOption::FlightOption() {}
 
-set<vector<Airport>> FlightOption::flights(const Graph<Airport> *g, Vertex<Airport>* src, Vertex<Airport>* dest){
+std::set<std::vector<Airport>> FlightOption::flights(const Graph<Airport> *g, Vertex<Airport>* src, Vertex<Airport>* dest){
     auto verts = g->getVertexSet();
     for (auto v : verts){
         v->setVisited(false);
     }
-    std::set<vector<Airport>> path;
+    std::set<std::vector<Airport>> path;
     path = bfsFlightVisit(g ,src, dest);
 
     return path;
 }
 
-set<vector<Airport>> FlightOption::bfsFlightVisit(const Graph<Airport> *g, Vertex<Airport> *source, Vertex<Airport> *dest ){
-    set<vector<Airport>> res;
-    map<Airport, std::vector<Airport>> pred;
-    vector<Airport> p = {};
+std::set<std::vector<Airport>> FlightOption::bfsFlightVisit(const Graph<Airport> *g, Vertex<Airport> *source, Vertex<Airport> *dest ){
+    std::set<std::vector<Airport>> res;
+    std::map<Airport, std::vector<Airport>> pred;
+    std::vector<Airport> p = {};
     auto verts = g->getVertexSet();
     for (auto v : verts){
         v->setVisited(false);
         pred.emplace(v->getInfo(), p);
     }
 
-    queue<Vertex<Airport>*> q;
-    queue<Vertex<Airport>*> aux;
+    std::queue<Vertex<Airport>*> q;
+    std::queue<Vertex<Airport>*> aux;
     q.push(source);
     source->setVisited(true);
     bool foundDest= false;
@@ -70,10 +67,10 @@ set<vector<Airport>> FlightOption::bfsFlightVisit(const Graph<Airport> *g, Verte
     return res;
 }
 
-set<vector<Vertex<Airport>*>> FlightOption::flightsChoosenAirlines(const Graph<Airport> *g, set<vector<Vertex<Airport>*>>& paths, set<string>& airlines) {
-    set<vector<Vertex<Airport>*>> res;
+std::set<std::vector<Vertex<Airport>*>> FlightOption::flightsChoosenAirlines(const Graph<Airport> *g, std::set<std::vector<Vertex<Airport>*>>& paths, std::set<std::string>& airlines) {
+    std::set<std::vector<Vertex<Airport>*>> res;
     // vê se voos entre aeroportos têm as airlines dadas
-    for ( const vector<Vertex<Airport>*> &path: paths) {
+    for ( const std::vector<Vertex<Airport>*> &path: paths) {
         bool is_valid = false;
         for (int i = 1; i < path.size(); i++) {
             Vertex<Airport> *src = path[i - 1];
@@ -102,16 +99,16 @@ set<vector<Vertex<Airport>*>> FlightOption::flightsChoosenAirlines(const Graph<A
 }
 
 
-set<vector<Airport>> FlightOption::flightsMaxAirlineNumber(const Graph<Airport> *g, set<vector<Airport>>& paths, int maxAirlines){
-    set<vector<Airport>> res;
+std::set<std::vector<Airport>> FlightOption::flightsMaxAirlineNumber(const Graph<Airport> *g, std::set<std::vector<Airport>>& paths, int maxAirlines){
+    std::set<std::vector<Airport>> res;
     for (const auto& path : paths) {
-        vector<Vertex<Airport> *> verts_of_path;
+        std::vector<Vertex<Airport> *> verts_of_path;
         for (const auto &airport: path) {
             Vertex<Airport> *v = g->findVertex(airport);
             verts_of_path.push_back(v);
         }
         //airlines de cada path;
-        set<Airline*> airlines;
+        std::set<Airline*> airlines;
         // encontrar voo entre src -> dst
         for (int i = 1; i < verts_of_path.size(); i++){
             Vertex<Airport>* src = verts_of_path[i-1];
@@ -123,7 +120,6 @@ set<vector<Airport>> FlightOption::flightsMaxAirlineNumber(const Graph<Airport> 
                     // airline nova
                     if (airlines.find(airline) == airlines.end()){
                         airlines.insert(airline);
-
                     }
                 }
             }
@@ -131,25 +127,22 @@ set<vector<Airport>> FlightOption::flightsMaxAirlineNumber(const Graph<Airport> 
         if (airlines.size() <= maxAirlines){
             res.insert(path);
         }
-
     }
     return res;
 }
 
-set<vector<Vertex<Airport>*>> FlightOption::getAllPaths( const Graph<Airport> *g, Vertex<Airport> *source, Vertex<Airport> *dest){
+std::set<std::vector<Vertex<Airport>*>> FlightOption::getAllPaths( const Graph<Airport> *g, Vertex<Airport> *source, Vertex<Airport> *dest){
     for (auto v :g->getVertexSet()){
         v->setVisited(false);
     }
-    vector<Vertex<Airport>*> path;
-    set<vector<Vertex<Airport>*>> all_paths;
+    std::vector<Vertex<Airport>*> path;
+    std::set<std::vector<Vertex<Airport>*>> all_paths;
     dfsFlightVisit(g, source, dest, path, all_paths);
     return all_paths;
-
 }
 
-
 bool FlightOption::dfsFlightVisit(const Graph<Airport> *g, Vertex<Airport> *source, Vertex<Airport> *dest,
-                    vector<Vertex<Airport>*> &path, set<vector<Vertex<Airport>*>> &all_paths ){
+                                  std::vector<Vertex<Airport>*> &path, std::set<std::vector<Vertex<Airport>*>> &all_paths ){
     source->setVisited(true);
     path.push_back(source);
     if (source == dest){
@@ -170,20 +163,18 @@ bool FlightOption::dfsFlightVisit(const Graph<Airport> *g, Vertex<Airport> *sour
     return false;
 }
 
-
-
-set<vector<Airport>> FlightOption::bfsFlightVisitFilter(const Graph<Airport> *g, Vertex<Airport> *source, Vertex<Airport> *dest, set<string>& airlines ){
-    set<vector<Airport>> res;
-    map<Airport, std::vector<Airport>> pred;
-    vector<Airport> p = {};
+std::set<std::vector<Airport>> FlightOption::bfsFlightVisitFilter(const Graph<Airport> *g, Vertex<Airport> *source, Vertex<Airport> *dest, std::set<std::string>& airlines ){
+    std::set<std::vector<Airport>> res;
+    std::map<Airport, std::vector<Airport>> pred;
+    std::vector<Airport> p = {};
     auto verts = g->getVertexSet();
     for (auto v : verts){
         v->setVisited(false);
         pred.emplace(v->getInfo(), p);
     }
 
-    queue<Vertex<Airport>*> q;
-    queue<Vertex<Airport>*> aux;
+    std::queue<Vertex<Airport>*> q;
+    std::queue<Vertex<Airport>*> aux;
     q.push(source);
     source->setVisited(true);
     bool foundDest= false;
@@ -220,9 +211,9 @@ set<vector<Airport>> FlightOption::bfsFlightVisitFilter(const Graph<Airport> *g,
     return res;
 }
 /*
-set<vector<Airport>> FlightOption::flightsChoosenAirlines(const Graph<Airport> *g, set<vector<Airport>>& paths, set<string>& airlines ){
+set<std::vector><Airport>> FlightOption::flightsChoosenAirlines(const Graph<Airport> *g, set<std::vector><Airport>>& paths, set<string>& airlines ){
 
-    set<vector<Airport>> res;
+    set<std::vector><Airport>> res;
 
     for (const auto& path : paths){
         vector<Vertex<Airport>*> verts_of_path;

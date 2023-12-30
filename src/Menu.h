@@ -17,14 +17,18 @@ private:
 public:
     Menu();
     void print();
-    void selectOptions(std::queue<std::string>& order);
-    void listMenu();
-    void showGlobalStats();
-    void showAirportDetails();
-    void showCityOrAirlineStats();
-    void showCountryStats();
-    void showDestinationsStats();
+    static void selectOptions(std::queue<std::string>& order);
+    static void listMenu();
+    void handleGlobalStats();
+    void handleAirportDetails();
+    void handleCityOrAirlineStats();
+    void handleCountryStats();
+    void handleDestinationsStats();
+    void handleReachableInMaxXStops();
+    void handleBestFlightOption();
+    void handleAirlinesFLightOptions();
+    void handleFlightOptionWithMaxStops();
 
-    void enterForMenu();
+    static void askReturnToMenu();
 };
 #endif //AED_2_MENU_H

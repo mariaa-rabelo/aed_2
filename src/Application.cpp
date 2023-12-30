@@ -130,18 +130,13 @@ void Application::findAirportMaxX( std::string code, int x, int option){
     std::set<Airport> destinations;
     auto setVertex = g_airport.getVertexSet();
     bool flag = false;
-    /*
-    for (auto node: setVertex){
-        node->setVisited(false);
-    }*/
     for (auto node: setVertex){
         auto airport = node->getInfo();
         if ( airport.getCode() ==  code){
             flag = true;
             std::vector<Airport> possible_dests = nodesAtLessDistanceBFS( &g_airport, airport, x);
             for (const Airport& a : possible_dests){
-                //if (a.getCode() != code)
-                    destinations.insert(a);
+                destinations.insert(a);
             }
             break;
         }
