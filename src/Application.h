@@ -13,7 +13,7 @@
 #include <string>
 #include <unordered_set>
 #include <set>
-using namespace std;
+
 class Application {
 private:
     Graph<Airport> g_airport;
@@ -39,8 +39,7 @@ public:
     int getUniqueCountriesFromCity(const std::string& cityName);
 
     //func5
-    int getUniqueAirportsFromAirport(const std::string& airportCode);
-    int getUniqueCitiesFromAirport(const std::string& airportCode);
+    void findAllDestinations(const std::string airportCode);
 
     //func6
     void findAirportMaxX(std::string code, int x, int option);
@@ -67,16 +66,12 @@ public:
     void getBestFlightOption(Vertex<Airport>* src, Vertex<Airport>* dest );
 
     // com filtros
-    void bestFlightOptGivenAirports(set<string> &airlines, Vertex<Airport> *src, Vertex<Airport> *dest);
+    void bestFlightOptGivenAirports(std::set<std::string> &airlines, Vertex<Airport> *src, Vertex<Airport> *dest);
     void bestFlightOptMaxAirports(int maxAirlines, Vertex<Airport> *src, Vertex<Airport> *dest);
 
-
-
-
     //auxiliar
-    Vertex<Airport> *getVertex(string v);
-    bool checkIfExists(const string &code);
-
+    Vertex<Airport> *getVertex(std::string v);
+    bool checkIfExists(const std::string &code);
 
 };
 #endif //AED_2_APPLICATION_H

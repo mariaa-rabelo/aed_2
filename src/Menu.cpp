@@ -9,18 +9,21 @@ Menu::Menu() {
 
 
 void Menu::listMenu() {
-    std::cout << "MENU:" << std::endl;
-    std::cout << "0. Quit" << std::endl
-    << "1: NumAirports and NumFlights" << std::endl
-    << "2: Flights out of an airport and airlines"<< std::endl
-    << "3: Flights per city/airline" << std::endl
-    << "4: Countries from airport/city" << std::endl
-    << "5: Destinations from airport" << std::endl
-    << "6: findAirportMaxX" << std::endl
-    << "7: Maximum trip" << std::endl
-    << "8: getKAirportsGreatestCap" << std::endl
-    << "9: essentialAirports"<< std::endl
-    << "10: best flight opt"<< std::endl;
+    std::cout << "\n--- AIRPORT MANAGEMENT SYSTEM MENU ---\n";
+    std::cout << "0. Quit Application\n";
+    std::cout << "1. Show Global Airport and Flight Statistics\n";
+    std::cout << "2. Display Details of a Specific Airport\n";
+    std::cout << "3. Show Flight Statistics by City or Airline\n";
+    std::cout << "4. List Unique Countries Served by an Airport/City\n";
+    std::cout << "5. Explore Destinations from an Airport\n";
+    std::cout << "6. Find Reachable Destinations Within X Stops from an Airport\n";
+    std::cout << "7. Plan a Maximum Trip\n";
+    std::cout << "8. Find Top K Airports with the Greatest Capacity\n";
+    std::cout << "9. Identify Essential Airports in the Network\n";
+    std::cout << "10. Find the Best Flight Option\n";
+    std::cout << "11. Explore Flight Options with Specific Airlines\n";
+    std::cout << "12. Find Flight Options with Maximum Stops\n";
+    std::cout << "Please choose an option (0-12): ";
 }
 
 
@@ -31,7 +34,7 @@ void Menu::selectOptions(std::queue<std::string>& order){
         << "4: cancel"<< std::endl;
 
     std::string opt;
-    std::cin >> opt;
+    std::getline(std::cin, opt);
     int type = std::stoi(opt);
     switch (type) {
         case 1:
@@ -52,15 +55,14 @@ void Menu::selectOptions(std::queue<std::string>& order){
             std::cout << "invalid input!" << std::endl;
             return;
     }
-    cin >> opt;
+    std::cin >> opt;
     order.push(opt);
 }
 
 void Menu::askReturnToMenu() {
     std::cout << "Press enter to return to the menu or type 'exit' to quit: ";
     std::string choice;
-    std::cin.clear();
-    getline(cin, choice);
+    std::getline(std::cin, choice);
     if (choice == "exit") {
         exit(0);
     } else {
@@ -72,9 +74,20 @@ void Menu::print(){
     app.run();
     listMenu();
     std::string input;
-    while (input !="0") {
-        std::cin >> input;
-        int option = std::stoi(input);
+    while (true) {
+        std::getline(std::cin, input);
+        if (input == "0") {
+            break;
+        }
+        int option;
+        try {
+            option = std::stoi(input);
+        } catch (const std::invalid_argument& e) {
+            std::cout << "Invalid input, please enter a number.\n";
+            askReturnToMenu();
+            continue;
+        }
+
         switch (option) {
             case 0:
                 break;
@@ -138,103 +151,112 @@ void Menu::print(){
 }
 
 void Menu::handleGlobalStats() {
+    std::cout << std::endl;
     std::cout << "Total number of airports: " << app.getNumAirports() << std::endl;
     std::cout << "Total number of flights: " << app.getGlobalNumFlights() << std::endl;
+    std::cout << std::endl;
 }
 
 void Menu::handleAirportDetails() {
+    std::cout << std::endl;
+    std::cout << "Enter airport code (eg, BSB): ";
     std::string airportCode;
-    bool isValidInput = false;
+    std::getline(std::cin, airportCode);
 
-    do {
-        std::cout << "Enter airport code: ";
-        std::cin >> airportCode;
+    std::cout << std::endl;
+    std::cout << "Fetching number of outgoing flights..." <<std::endl;
+    int outFlights = app.getOutFlights(airportCode);
 
+    while (outFlights==-1) {
+        std::cout << "Invalid airport code, please try again (eg, BSB): ";
+        std::getline(std::cin, airportCode);
+
+        std::cout << std::endl;
         std::cout << "Fetching number of outgoing flights..." <<std::endl;
-        int outFlights = app.getOutFlights(airportCode);
+        outFlights = app.getOutFlights(airportCode);
+    }
+    std::cout << std::endl;
+    std::cout << "Number of outgoing flights from " << airportCode << ": " << outFlights << std::endl;
 
-        if (outFlights != -1) {
-            isValidInput = true;
-            std::cout << "Number of outgoing flights from " << airportCode << ": " << outFlights << std::endl;
-
-            std::cout << "Fetching number of unique airlines..."<<std::endl;
-            int uniqueAirlines = app.getUniqueAirlines(airportCode);
-            std::cout << "There are " << uniqueAirlines << " different airlines operating from this airport." << std::endl;
-
-        } else {
-            std::cout << "Invalid airport code. Please try again. Example: CDG" << std::endl;
-        }
-    } while (!isValidInput);
+    std::cout << std::endl;
+    std::cout << "Fetching number of unique airlines..."<<std::endl;
+    int uniqueAirlines = app.getUniqueAirlines(airportCode);
+    std::cout << std::endl;
+    std::cout << "There are " << uniqueAirlines << " different airlines operating from this airport." << std::endl;
 }
 
 void Menu::handleCityOrAirlineStats(){
-    int choice;
     std::string input;
-    int numFlights;
     std::cout << "1. Flights from City\n";
     std::cout << "2. Flights by Airline\n";
     std::cout << "Enter your choice: ";
-    std::cin >> choice;
+    std::getline(std::cin, input);
 
-    if (choice == 1) {
+    while (input != "1" && input != "2"){
+        std::cout << "Invalid choice, try again." << std::endl;
+        std::cout << "1. Flights from City\n";
+        std::cout << "2. Flights by Airline\n";
+        std::cout << "Enter your choice: ";
+        std::getline(std::cin, input);
+    }
+
+    int numFlights;
+    if (input == "1"){
         std::cout << "Enter city name (eg, Roma): ";
-        std::cin >> input;
+        std::getline(std::cin, input);
         numFlights = app.getFlightsByCity(input);
         std::cout << "City: " << input << ", Flights: " << numFlights << std::endl;
-    } else if (choice == 2) {
-        std::cout << "Enter airline code (eg, SWD):  ";
-        std::cin >> input;
-        numFlights = app.getFlightsByAirline(input);
-        std::cout << "Airline: " << input << ", Flights: " << numFlights << std::endl;
-    } else {
-        std::cout << "Invalid choice.\n";
+        return;
     }
+    std::cout << "Enter airline code (eg, SWD):  ";
+    std::getline(std::cin, input);
+    numFlights = app.getFlightsByAirline(input);
+    std::cout << "Airline: " << input << ", Flights: " << numFlights << std::endl;
+    return;
 }
 
 //Number of different countries
 // that a given airport/city flies to;
 void Menu::handleCountryStats(){
-    int choice;
-    std::cout << "1. Unique countries from Airport\n";
-    std::cout << "2. Unique countries from City\n";
+    std::string input;
+    std::cout << "1. Unique countries directly reachable from Airport\n";
+    std::cout << "2. Unique countries directly reachable from City\n";
     std::cout << "Enter your choice: ";
-    std::cin >> choice;
+    std::getline(std::cin, input);
 
-    if (choice == 1) {
-        std::string input;
+    while (input != "1" && input != "2"){
+        std::cout << "Invalid choice, try again." << std::endl;
+        std::cout << "1. Unique countries from Airport\n";
+        std::cout << "2. Unique countries from City\n";
+        std::cout << "Enter your choice: ";
+        std::getline(std::cin, input);
+    }
+
+    if (input == "1") {
+        std::string airportCode;
         std::cout << "Enter airport code: ";
-        std::cin >> input;
+        std::getline(std::cin, airportCode);
 
         int countriesFromAirport = app.getUniqueCountriesFromAirport(input);
-        std::cout << "Number of unique countries from " << input << ": " << countriesFromAirport << std::endl;
-    } else if (choice == 2) {
-        std::string input;
-        std::cout << "Enter city name: ";
-        std::cin >> input;
-
-        int countriesFromCity = app.getUniqueCountriesFromCity(input);
-        std::cout << "Number of unique countries from " << input << ": " << countriesFromCity << std::endl;
-    } else {
-        std::cout << "Invalid choice.\n";
+        std::cout << "Number of unique countries directly reachable from " << input << ": " << countriesFromAirport << std::endl;
+        return;
     }
+
+    std::string cityName;
+    std::cout << "Enter city name: ";
+    std::getline(std::cin, input);
+
+    int countriesFromCity = app.getUniqueCountriesFromCity(input);
+    std::cout << "Number of unique countries from " << input << ": " << countriesFromCity << std::endl;
 }
 
 //Number of destinations (airports, cities or countries)
 //available for a given airport; func 5
 void Menu::handleDestinationsStats(){
-    std::string input;
+    std::string airportCode;
     std::cout << "Enter airport code: ";
-    std::cin >> input;
-    int airportDest = app.getUniqueAirportsFromAirport(input);
-    int citiesDest = app.getUniqueCitiesFromAirport(input);
-    int countriesDest = app.getUniqueCountriesFromAirport(input);
-
-    std::cout << airportDest <<
-        " airports are a destination for " << input << std::endl;
-    std::cout << citiesDest <<
-              " cities are a destination for " << input << std::endl;
-    std::cout << countriesDest <<
-              " countries are a destination for " << input << std::endl;
+    std::getline(std::cin, airportCode);
+    app.findAllDestinations(airportCode);
 }
 
 void Menu::handleReachableInMaxXStops() {
@@ -358,15 +380,14 @@ void Menu::handleBestFlightOption() {
 }
 
 void Menu::handleAirlinesFLightOptions() {
-    std::set<string> airlines;
+    std::set<std::string> airlines;
     std::string airlineCode;
-    cout<< "Please input the airlines you wish to use, type exit when done!"<<endl
-        <<"Be aware that for the operation to be valid, all airlines given MUST be valid."<<endl;
+    std::cout<< "Please input the airlines you wish to use, type exit when done!"<< std::endl
+        <<"Be aware that for the operation to be valid, all airlines given MUST be valid."<< std::endl;
     while (airlineCode != "exit"){
-        cout << "airline's code:"<<endl;
-        cin >> airlineCode;
+        std::cout << "airline's code:"<< std::endl;
+        std::cin >> airlineCode;
         airlines.insert(airlineCode);
-
     }
     auto it =airlines.find("exit");
     airlines.erase(it);
@@ -374,7 +395,7 @@ void Menu::handleAirlinesFLightOptions() {
 
     for (const std::string& airline : airlines){
         if (!app.checkIfExists(airline)){
-            cout << "Invalid airline code given! "<< airline <<endl;
+            std::cout << "Invalid airline code given! "<< airline << std::endl;
             valid = false;
         }
     }
@@ -382,14 +403,14 @@ void Menu::handleAirlinesFLightOptions() {
         return;
     }
     std::string airport;
-    cout << "source airport code:"<<endl;
-    cin >> airport;
+    std::cout << "source airport code:"<< std::endl;
+    std::cin >> airport;
     auto src = app.getVertex(airport);
-    cout << "destination airport code:"<<endl;
-    cin >> airport;
+    std::cout << "destination airport code:"<< std::endl;
+    std::cin >> airport;
     auto dst = app.getVertex(airport);
     if (src == nullptr || dst == nullptr){
-        cout << "invalid airport"<<endl;
+        std::cout << "invalid airport"<< std::endl;
         return;
     }
     app.bestFlightOptGivenAirports(airlines,src, dst );
@@ -397,19 +418,18 @@ void Menu::handleAirlinesFLightOptions() {
 
 void Menu::handleFlightOptionWithMaxStops() {
     int max;
-    cout << "max trips"<<endl;
-    cin>> max;
-    cout << "source airport code"<<endl;
+    std::cout << "max trips"<< std::endl;
+    std::cin>> max;
+    std::cout << "source airport code"<< std::endl;
     std::string airport;
-    cin >> airport;
+    std::cin >> airport;
     auto src = app.getVertex(airport);
-    cout << "dest airport code"<<endl;
-    cin >> airport;
+    std::cout << "dest airport code"<< std::endl;
+    std::cin >> airport;
     auto dest = app.getVertex(airport);
     if (src == nullptr || dest == nullptr){
-        cout << "invalid airport"<<endl;
+        std::cout << "invalid airport"<< std::endl;
         return;
     }
     app.bestFlightOptMaxAirports(max,src,dest);
 }
-
