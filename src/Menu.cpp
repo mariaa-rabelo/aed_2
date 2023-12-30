@@ -29,9 +29,9 @@ void Menu::listMenu() {
 
 void Menu::selectOptions(std::queue<std::string>& order){
     std::cout << "1: airport code"<< std::endl
-        << "2: airport name"<< std::endl
-        << "3: city and country"<< std::endl
-        << "4: cancel"<< std::endl;
+            << "2: airport name"<< std::endl
+            << "3: city and country"<< std::endl
+            << "4: cancel"<< std::endl;
 
     std::string opt;
     std::getline(std::cin, opt);
@@ -44,10 +44,10 @@ void Menu::selectOptions(std::queue<std::string>& order){
             std::cout << "airport's name:"<<std::endl;
             break;
         case 3:
-            std::cout << "city"<<std::endl;
-            std::cin >> opt;
+            std::cout << "city: "<<std::endl;
+            std::getline(std::cin, opt);
             order.push(opt);
-            std::cout << "country"<<std::endl;
+            std::cout << "country: "<<std::endl;
             break;
         case 4:
             return;
@@ -55,7 +55,7 @@ void Menu::selectOptions(std::queue<std::string>& order){
             std::cout << "invalid input!" << std::endl;
             return;
     }
-    std::cin >> opt;
+    std::getline(std::cin, opt);
     order.push(opt);
 }
 
@@ -76,21 +76,18 @@ void Menu::print(){
     std::string input;
     while (true) {
         std::getline(std::cin, input);
-        if (input == "0") {
-            break;
-        }
+
         int option;
         try {
             option = std::stoi(input);
         } catch (const std::invalid_argument& e) {
             std::cout << "Invalid input, please enter a number.\n";
-            askReturnToMenu();
             continue;
         }
 
         switch (option) {
             case 0:
-                break;
+                return;
             case 1:
                 handleGlobalStats();
                 askReturnToMenu();
@@ -120,10 +117,7 @@ void Menu::print(){
                 askReturnToMenu();
                 break;
             case 8:
-                std::cout << "Enter the number of airports with the greatest capacity (K):" << std::endl;
-                int k;
-                std::cin >> k;
-                app.getKAirportsGreatestCap(k);
+                handleGreatestCap();
                 askReturnToMenu();
                 break;
             case 9:
@@ -212,7 +206,6 @@ void Menu::handleCityOrAirlineStats(){
     std::getline(std::cin, input);
     numFlights = app.getFlightsByAirline(input);
     std::cout << "Airline: " << input << ", Flights: " << numFlights << std::endl;
-    return;
 }
 
 //Number of different countries
@@ -226,8 +219,8 @@ void Menu::handleCountryStats(){
 
     while (input != "1" && input != "2"){
         std::cout << "Invalid choice, try again." << std::endl;
-        std::cout << "1. Unique countries from Airport\n";
-        std::cout << "2. Unique countries from City\n";
+        std::cout << "1. Unique countries directly reachable from Airport\n";
+        std::cout << "2. Unique countries directly reachable from City\n";
         std::cout << "Enter your choice: ";
         std::getline(std::cin, input);
     }
@@ -237,17 +230,17 @@ void Menu::handleCountryStats(){
         std::cout << "Enter airport code: ";
         std::getline(std::cin, airportCode);
 
-        int countriesFromAirport = app.getUniqueCountriesFromAirport(input);
-        std::cout << "Number of unique countries directly reachable from " << input << ": " << countriesFromAirport << std::endl;
+        int countriesFromAirport = app.getUniqueCountriesFromAirport(airportCode);
+        std::cout << "Number of unique countries directly reachable from " << airportCode << ": " << countriesFromAirport << std::endl;
         return;
     }
 
     std::string cityName;
     std::cout << "Enter city name: ";
-    std::getline(std::cin, input);
+    std::getline(std::cin, cityName);
 
-    int countriesFromCity = app.getUniqueCountriesFromCity(input);
-    std::cout << "Number of unique countries from " << input << ": " << countriesFromCity << std::endl;
+    int countriesFromCity = app.getUniqueCountriesFromCity(cityName);
+    std::cout << "Number of unique countries directly reachable from " << cityName << ": " << countriesFromCity << std::endl;
 }
 
 //Number of destinations (airports, cities or countries)
@@ -260,17 +253,20 @@ void Menu::handleDestinationsStats(){
 }
 
 void Menu::handleReachableInMaxXStops() {
-    std::cout << "code of airport: " << std::endl;
+    std::cout << "Enter airport code: " << std::endl;
     std::string code;
-    std::cin >> code;
+    std::getline(std::cin, code);
+
     std::cout << "What type of destinations are you looking for?" << std::endl;
     std::cout << "1: airports" << std::endl
               << "2: cities" << std::endl
               << "3: countries" << std::endl;
+
     std::string opt;
-    std::cin >> opt;
+    std::getline(std::cin, opt);
     int optI = 0;
     bool flag = false;
+
     try{
         optI = std::stoi(opt);
     } catch(const std::invalid_argument& e){
@@ -280,6 +276,7 @@ void Menu::handleReachableInMaxXStops() {
         flag = true;
         std::cerr << "Error: out of range - " << e.what() << std::endl;
     }
+
     if (!flag) {
         if (optI < 1 || optI > 3){
             std::cerr << "Must be a number from 1 to 3!" << std::endl;
@@ -287,16 +284,17 @@ void Menu::handleReachableInMaxXStops() {
         }
         std::cout << "What is the maximum number of stops?" << std::endl;
         std::string x;
+        std::getline(std::cin, x);
         int xI = 0;
-        std::cin >> x;
+
         try {
             xI = std::stoi(x);
         } catch(const std::invalid_argument& e){
             std::cerr << "Error: invalid argument - must be a number!" << std::endl;
-            flag = true;
+            return;
         } catch (const std::out_of_range& e) {
-            flag = true;
             std::cerr << "Error: out of range - " << e.what() << std::endl;
+            return;
         }
         app.findAirportMaxX(code, xI, optI);
     }
@@ -386,7 +384,7 @@ void Menu::handleAirlinesFLightOptions() {
         <<"Be aware that for the operation to be valid, all airlines given MUST be valid."<< std::endl;
     while (airlineCode != "exit"){
         std::cout << "airline's code:"<< std::endl;
-        std::cin >> airlineCode;
+        std::getline(std::cin, airlineCode);
         airlines.insert(airlineCode);
     }
     auto it =airlines.find("exit");
@@ -404,10 +402,10 @@ void Menu::handleAirlinesFLightOptions() {
     }
     std::string airport;
     std::cout << "source airport code:"<< std::endl;
-    std::cin >> airport;
+    std::getline(std::cin, airport);
     auto src = app.getVertex(airport);
     std::cout << "destination airport code:"<< std::endl;
-    std::cin >> airport;
+    std::getline(std::cin, airport);
     auto dst = app.getVertex(airport);
     if (src == nullptr || dst == nullptr){
         std::cout << "invalid airport"<< std::endl;
@@ -432,4 +430,26 @@ void Menu::handleFlightOptionWithMaxStops() {
         return;
     }
     app.bestFlightOptMaxAirports(max,src,dest);
+}
+
+void Menu::handleGreatestCap() {
+
+    int k = -1;
+    while (k < 0) {
+        std::cout << "Enter the number of airports (K):" << std::endl;
+        std::string inputK;
+        std::getline(std::cin, inputK);
+
+        try {
+            k = std::stoi(inputK);
+            if (k < 0) {
+                std::cout << "Please enter a positive number.\n";
+            }
+        } catch (const std::invalid_argument& e) {
+            std::cout << "Invalid input, please enter a valid number.\n";
+        } catch (const std::out_of_range& e) {
+            std::cout << "Number is too large, please enter a smaller number.\n";
+        }
+    }
+    app.getKAirportsGreatestCap(k);
 }

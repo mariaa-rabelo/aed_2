@@ -29,5 +29,7 @@ public:
     void handleFlightOptionWithMaxStops();
 
     static void askReturnToMenu();
+
+    void handleGreatestCap();
 };
 #endif //AED_2_MENU_H
