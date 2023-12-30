@@ -7,6 +7,7 @@
 #include <algorithm>
 #include <map>
 #include <limits>
+#include <cmath>
 
 Application::Application() {
     flightOption = FlightOption();
@@ -421,38 +422,6 @@ void Application::dfs_art(Graph<Airport> *g, Vertex<Airport> *v, std::stack<Airp
 }
 
 //FlightOption
- bool Application::getAirportsInCity(const std::string& city, const std::string& country, std::set<Vertex<Airport>*> res){
-    bool result = false;
-    auto verts = g_airport.getVertexSet();
-    for ( const auto &v : verts){
-        if (v->getInfo().getCity() == city && v->getInfo().getCountry() == country){
-            res.insert(v);
-            result = true;
-        }
-    }
-    return result;
-}
-
-bool Application::getAirport(const std::string& identifier, bool opt, Vertex<Airport>* &vert){
-    auto verts = g_airport.getVertexSet();
-    if (opt) {
-        for (const auto &v: verts) {
-            if (v->getInfo().getCode() == identifier) {
-                vert = v;
-                return true;
-            }
-        }
-    }
-    else {
-        for (const auto &v: verts) {
-            if (v->getInfo().getName() == identifier){
-                vert = v;
-                return true;
-            }
-        }
-    }
-    return false;
-}
 
 void Application::getBestFlightOption(std::pair<std::string, std::string> src, std::pair<std::string, std::string> dest){
     //std::set<std::vector<Airport>> path = flightOption.flights(&g_airport, src, dest);
@@ -470,7 +439,7 @@ void Application::getBestFlightOption(std::pair<std::string, std::string> src, s
     for (auto srcVertex : srcVertices) {
         for (auto destVertex : destVertices) {
             auto path = findShortestPath(srcVertex, destVertex);
-            std::cout << "path size : " << srcVertices.size()<< " between " << srcVertex->getInfo().getCode()
+            std::cout << "path size : " <<  path.size()<< " between " << srcVertex->getInfo().getCode()
             << " and " << destVertex->getInfo().getCode() << std::endl;
 
             int stops = path.size() - 2; // Subtract source and destination
@@ -495,7 +464,6 @@ void Application::getBestFlightOption(std::pair<std::string, std::string> src, s
     }
 }
 
-
 std::set<Vertex<Airport>*> Application::getVerticesBasedOnInput(std::pair<std::string, std::string> input) {
     std::set<Vertex<Airport>*> vertices;
     if (input.first == "1") { // Airport code
@@ -512,8 +480,41 @@ std::set<Vertex<Airport>*> Application::getVerticesBasedOnInput(std::pair<std::s
             if (vertex->getInfo().getCity() == input.second) {
                 vertices.insert(vertex);
             }
-        }}
+        }
+    } else if (input.first =="4"){ //lat and long
+        std::istringstream iss(input.second);
+        double inputLat, inputLon;
+        iss >> inputLat >> inputLon;
+
+        double minDistance = std::numeric_limits<double>::max();
+
+        for (auto& vertex : g_airport.getVertexSet()) {
+            double distance = haversineDistance(inputLat, inputLon, vertex->getInfo().getLatitude(), vertex->getInfo().getLongitude());
+            if (distance < minDistance) {
+                minDistance = distance;
+                vertices.clear();
+                vertices.insert(vertex);
+            } else if (distance == minDistance) {
+                vertices.insert(vertex);
+            }
+        }
+    }
     return vertices;
+}
+
+double Application::haversineDistance(double lat1, double lon1, double lat2, double lon2) {
+    const double earthRadiusKm = 6371.0;
+
+    double dLat = (lat2 - lat1) * M_PI / 180.0;
+    double dLon = (lon2 - lon1) * M_PI / 180.0;
+
+    lat1 = lat1 * M_PI / 180.0;
+    lat2 = lat2 * M_PI / 180.0;
+
+    double a = sin(dLat/2) * sin(dLat/2) +
+               sin(dLon/2) * sin(dLon/2) * cos(lat1) * cos(lat2);
+    double c = 2 * atan2(sqrt(a), sqrt(1-a));
+    return earthRadiusKm * c;
 }
 
 std::vector<Airport> Application::findShortestPath(Vertex<Airport>* src, Vertex<Airport>* dest) {
@@ -573,19 +574,6 @@ void Application::bestFlightOptGivenAirports(std::set<std::string>& airlines, Ve
             airport.print();
         }
     }
-    /*
-    auto paths = flightOption.getAllPaths(&g_airport, src, dest);
-    auto res = flightOption.flightsChoosenAirlines(&g_airport, paths, airlines);
-
-    cout << "ALL PATHS FOR "<< src->getInfo().getCode() << " TO " << dest->getInfo().getCode()<<endl;
-
-    for (auto path : res){
-        cout << "possible path:"<<endl;
-        for (auto vert : path){
-            vert->getInfo().print();
-        }
-    }
-    */
 }
 
 void Application::bestFlightOptMaxAirports(  int maxAirlines, Vertex<Airport>* src, Vertex<Airport>* dest){
@@ -613,16 +601,5 @@ bool Application::checkIfExists(const std::string& code){
         if (airl->getCode() == code)
             return true;
     }
-    //auto setVertex = g_airport.getVertexSet();
-    //std::cout << "code:"<<code<< std::endl;
-    /*for (auto node: setVertex){
-        std::cout << "airlines in graph"<< std::endl;
-        for (auto e : node->getAdj()){
-            std::cout << e.getAirline()->getCode() << std::endl;
-            if (e.getAirline()->getCode() == code){
-                return true;
-            }
-        }
-    }*/
     return false;
 }

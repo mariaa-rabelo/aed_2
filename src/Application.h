@@ -61,9 +61,10 @@ public:
     //BestFlightOption
 
     // sem filtros
-    bool getAirportsInCity(const std::string& city, const std::string& country, std::set<Vertex<Airport>*>res);
-    bool getAirport(const std::string& identifier, bool opt, Vertex<Airport>* &vert);
-    void getBestFlightOption(Vertex<Airport>* src, Vertex<Airport>* dest );
+    double haversineDistance(double lat1, double lon1, double lat2, double lon2);
+    void getBestFlightOption(std::pair<std::string, std::string> src, std::pair<std::string, std::string> dest);
+    std::vector<Airport> findShortestPath(Vertex<Airport> *src, Vertex<Airport> *dest);
+    std::set<Vertex<Airport> *> getVerticesBasedOnInput(std::pair<std::string, std::string> pair1);
 
     // com filtros
     void bestFlightOptGivenAirports(std::set<std::string> &airlines, Vertex<Airport> *src, Vertex<Airport> *dest);
@@ -73,11 +74,5 @@ public:
     Vertex<Airport>* getVertex(std::string v, const Graph<Airport> *g);
         Vertex<Airport> *getVertex(std::string v);
     bool checkIfExists(const std::string &code);
-
-    void getBestFlightOption(std::pair<std::string, std::string> src, std::pair<std::string, std::string> dest);
-
-    std::vector<Airport> findShortestPath(Vertex<Airport> *src, Vertex<Airport> *dest);
-
-    std::set<Vertex<Airport> *> getVerticesBasedOnInput(std::pair<std::string, std::string> pair1);
 };
 #endif //AED_2_APPLICATION_H

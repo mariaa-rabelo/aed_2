@@ -267,17 +267,22 @@ void Menu::handleReachableInMaxXStops() {
     }
 }
 
-
 std::pair<std::string, std::string> Menu::selectOptions(){
     std::cout << "1: airport code"<< std::endl
               << "2: airport name"<< std::endl
-              << "3: city"<< std::endl
-              << "4: cancel"<< std::endl;
+              << "3: city name"<< std::endl
+              << "4: geographical coordinates\n"
+              << "5: cancel\n";
 
     std::string type, detail;
     std::getline(std::cin, type);
 
-    if (type < "1" || type > "3") {
+    if (type < "1" || type > "5") {
+        std::cout << "Invalid input, please choose a number between 1 and 5.\n";
+        return std::make_pair("invalid", "");
+    }
+
+    if (type == "5") {
         return std::make_pair("cancel", "");
     }
 
@@ -291,6 +296,15 @@ std::pair<std::string, std::string> Menu::selectOptions(){
         case 3:
             std::cout << "city: "<<std::endl;
             break;
+        case 4:{
+            std::string latitude, longitude;
+            std::cout << "Enter latitude: ";
+            std::getline(std::cin, latitude);
+            std::cout << "Enter longitude: ";
+            std::getline(std::cin, longitude);
+            detail = (latitude + " " + longitude);
+            return std::make_pair(type, detail);
+        }
         default:
             std::cout << "invalid input!" << std::endl;
             return std::make_pair("invalid", "");

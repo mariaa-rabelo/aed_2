@@ -24,12 +24,11 @@ public:
     void handleCountryStats();
     void handleDestinationsStats();
     void handleReachableInMaxXStops();
+    void handleGreatestCap();
     void handleBestFlightOption();
     void handleAirlinesFLightOptions();
     void handleFlightOptionWithMaxStops();
 
     static void askReturnToMenu();
-
-    void handleGreatestCap();
 };
 #endif //AED_2_MENU_H
