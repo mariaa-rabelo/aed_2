@@ -7,7 +7,7 @@
 #include <algorithm>
 #include <map>
 
-
+using namespace std;
 Application::Application() {
     flightOption = FlightOption();
 }
@@ -466,7 +466,14 @@ void Application::getBestFlightOption(Vertex<Airport>* src, Vertex<Airport>* des
 
 //bestFlightOption com filtros
 void Application::bestFlightOptGivenAirports(std::set<std::string>& airlines, Vertex<Airport>* src, Vertex<Airport>* dest ){
-    auto paths = flightOption.bfsFlightVisitFilter(&g_airport, src, dest, airlines);
+    auto new_g = flightOption.removeEdgeGivenAirline(&g_airport, airlines);
+    auto srcV = getVertex(src->getInfo().getCode(), &new_g );
+    auto destV = getVertex(dest->getInfo().getCode(), &new_g);
+    if (srcV == nullptr || destV == nullptr){
+        std::cout << "No options found!"<<std::endl;
+        return;
+    }
+    auto paths = flightOption.bfsFlightVisitFilter(&new_g, src, dest, airlines);
     for (const auto& path : paths){
         std::cout << "possible path:"<< std::endl;
         for (const auto& airport : path){
@@ -500,14 +507,22 @@ void Application::bestFlightOptMaxAirports(  int maxAirlines, Vertex<Airport>* s
 }
 
 //auxiliar
+Vertex<Airport>*Application::getVertex(std::string v, const Graph<Airport> *g) {
+    return g->findVertex(v);
+}
+
 Vertex<Airport>* Application::getVertex(std::string v){
     return g_airport.findVertex(v);
 }
 
 bool Application::checkIfExists(const std::string& code){
-    auto setVertex = g_airport.getVertexSet();
-    std::cout << "code:"<<code<< std::endl;
-    for (auto node: setVertex){
+    for (auto airl : g_airport.getAirlines()){
+        if (airl->getCode() == code)
+            return true;
+    }
+    //auto setVertex = g_airport.getVertexSet();
+    //std::cout << "code:"<<code<< std::endl;
+    /*for (auto node: setVertex){
         std::cout << "airlines in graph"<< std::endl;
         for (auto e : node->getAdj()){
             std::cout << e.getAirline()->getCode() << std::endl;
@@ -515,6 +530,6 @@ bool Application::checkIfExists(const std::string& code){
                 return true;
             }
         }
-    }
+    }*/
     return false;
 }

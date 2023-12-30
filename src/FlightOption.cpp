@@ -6,7 +6,7 @@
 #include <iostream>
 #include "FlightOption.h"
 #include "Airport.h"
-
+using namespace std;
 FlightOption::FlightOption() {}
 
 std::set<std::vector<Airport>> FlightOption::flights(const Graph<Airport> *g, Vertex<Airport>* src, Vertex<Airport>* dest){
@@ -162,8 +162,12 @@ bool FlightOption::dfsFlightVisit(const Graph<Airport> *g, Vertex<Airport> *sour
     path.pop_back();
     return false;
 }
+/*
+std::set<std::vector<std::pair<Airport, std::set<std::string>>>> bfsFlightVisitFilter(const Graph<Airport> *g, Vertex<Airport> *source,
+                                                            Vertex<Airport> *dest, std::set<std::string>& airlines ){
+    std::set<std::vector<std::pair<Airport, std::set<std::string>>>> res;
+    std::map<Airport, std::vector<std::pair<Airport, std::set<std::string>>
 
-std::set<std::vector<Airport>> FlightOption::bfsFlightVisitFilter(const Graph<Airport> *g, Vertex<Airport> *source, Vertex<Airport> *dest, std::set<std::string>& airlines ){
     std::set<std::vector<Airport>> res;
     std::map<Airport, std::vector<Airport>> pred;
     std::vector<Airport> p = {};
@@ -172,7 +176,6 @@ std::set<std::vector<Airport>> FlightOption::bfsFlightVisitFilter(const Graph<Ai
         v->setVisited(false);
         pred.emplace(v->getInfo(), p);
     }
-
     std::queue<Vertex<Airport>*> q;
     std::queue<Vertex<Airport>*> aux;
     q.push(source);
@@ -181,10 +184,55 @@ std::set<std::vector<Airport>> FlightOption::bfsFlightVisitFilter(const Graph<Ai
     while (!q.empty()) {
         while (!q.empty()) {
             auto v = q.front();
-            //cout << "being analized:"<<endl;
-            // v->getInfo().print();
             q.pop();
-            // cout << "adjacent:"<<endl;
+            v->setVisited(true);
+            for (auto e: v->getAdj()) {
+                auto neig = e.getDest();
+                if (!neig->isVisited()) {
+                    //neig->getInfo().print();
+                    pred[neig->getInfo()] = pred[v->getInfo()];
+                    pred[neig->getInfo()].push_back(v->getInfo());
+                    aux.push(neig);
+                    if (neig == dest) {
+                        foundDest = true;
+                        neig->setVisited(false);
+                        pred[neig->getInfo()].push_back(neig->getInfo());
+                        res.insert(pred[neig->getInfo()]);
+                        //return pred[neig->getInfo()];
+                    }
+                }
+            }
+        }
+
+        if (foundDest)
+            break;
+        q = aux;
+        aux = {};
+    }
+    return res;
+
+}
+*/
+std::set<std::vector<Airport>> FlightOption::bfsFlightVisitFilter(const Graph<Airport> *g, Vertex<Airport> *source, Vertex<Airport> *dest, std::set<std::string>& airlines ){
+
+    std::set<std::vector<Airport>> res;
+    std::map<Airport, std::vector<Airport>> pred;
+    std::vector<Airport> p = {};
+    auto verts = g->getVertexSet();
+    for (auto v : verts){
+        v->setVisited(false);
+        pred.emplace(v->getInfo(), p);
+    }
+    std::queue<Vertex<Airport>*> q;
+    std::queue<Vertex<Airport>*> aux;
+    q.push(source);
+    source->setVisited(true);
+    bool foundDest= false;
+    while (!q.empty()) {
+        while (!q.empty()) {
+            auto v = q.front();
+            q.pop();
+            //v->setVisited(true);
             for (auto e: v->getAdj()) {
                 auto neig = e.getDest();
                 auto it = airlines.find(e.getAirline()->getCode());
@@ -203,6 +251,7 @@ std::set<std::vector<Airport>> FlightOption::bfsFlightVisitFilter(const Graph<Ai
                 }
             }
         }
+
         if (foundDest)
             break;
         q = aux;
@@ -210,6 +259,27 @@ std::set<std::vector<Airport>> FlightOption::bfsFlightVisitFilter(const Graph<Ai
     }
     return res;
 }
+
+Graph<Airport>  FlightOption::removeEdgeGivenAirline(const Graph<Airport> *g, std::set<std::string>& airlines ){
+    Graph<Airport> new_graph;
+    for (auto v : g->getVertexSet()){
+        new_graph.addVertex(v->getInfo());
+    }
+    for (auto v : g->getVertexSet()){
+        for (auto edge : v->getAdj()){
+            if (airlines.find(edge.getAirline()->getCode()) != airlines.end()){
+                new_graph.addEdge(v->getInfo(), edge.getDest()->getInfo(), edge.getAirline());
+            }
+        }
+    }
+    for (auto v : new_graph.getVertexSet()){
+        if (v->getAdj().empty()){
+            new_graph.removeVertex(v->getInfo());
+        }
+    }
+    return new_graph;
+}
+
 /*
 set<std::vector><Airport>> FlightOption::flightsChoosenAirlines(const Graph<Airport> *g, set<std::vector><Airport>>& paths, set<string>& airlines ){
 

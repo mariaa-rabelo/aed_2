@@ -94,6 +94,7 @@ public:
     int getTotalEdges() const;
 
     std::vector<Vertex<T> * > getVertexSet() const;
+    std::vector<Airline*> getAirlines() const;
     std::vector<T> dfs() const;
     std::vector<T> dfs(const T & source) const;
     std::vector<T> bfs(const T &source) const;
@@ -119,6 +120,10 @@ int Graph<T>::getNumVertex() const {
 template <class T>
 std::vector<Vertex<T> * > Graph<T>::getVertexSet() const {
     return vertexSet;
+}
+template <class T>
+std::vector<Airline*> Graph<T>::getAirlines() const{
+    return airlines;
 }
 
 template<class T>

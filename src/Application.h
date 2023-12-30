@@ -70,7 +70,8 @@ public:
     void bestFlightOptMaxAirports(int maxAirlines, Vertex<Airport> *src, Vertex<Airport> *dest);
 
     //auxiliar
-    Vertex<Airport> *getVertex(std::string v);
+    Vertex<Airport>* getVertex(std::string v, const Graph<Airport> *g);
+        Vertex<Airport> *getVertex(std::string v);
     bool checkIfExists(const std::string &code);
 
 };
