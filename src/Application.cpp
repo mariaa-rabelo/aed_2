@@ -13,9 +13,9 @@ Application::Application() {
 }
 
 void Application::run() {
-    FileReader airlines_file("../dataset/airlines1.csv", g_airport);
-    FileReader airports_file("../dataset/airports1.csv", g_airport);
-    FileReader flights_file("../dataset/flights1.csv", g_airport);
+    FileReader airlines_file("../dataset/airlines.csv", g_airport);
+    FileReader airports_file("../dataset/airports.csv", g_airport);
+    FileReader flights_file("../dataset/flights.csv", g_airport);
 
     airports_file.readAirports();
     airlines_file.readAirlines();
