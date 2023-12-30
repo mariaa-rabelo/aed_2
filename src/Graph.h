@@ -430,7 +430,7 @@ template <class T>
 std::vector<T> Graph<T>::bfs(const T & source) const {
     std::vector<T> res;
     auto s = findVertex(source);
-    if (s == NULL)
+    if (s == nullptr)
         return res;
     std::queue<Vertex<T> *> q;
     for (auto v : vertexSet)
