@@ -6,7 +6,7 @@
 #include <iostream>
 #include "FlightOption.h"
 #include "Airport.h"
-using namespace std;
+
 FlightOption::FlightOption() {}
 
 std::set<std::vector<Airport>> FlightOption::flights(const Graph<Airport> *g, Vertex<Airport>* src, Vertex<Airport>* dest){
@@ -97,7 +97,6 @@ std::set<std::vector<Vertex<Airport>*>> FlightOption::flightsChoosenAirlines(con
     }
     return res;
 }
-
 
 std::set<std::vector<Airport>> FlightOption::flightsMaxAirlineNumber(const Graph<Airport> *g, std::set<std::vector<Airport>>& paths, int maxAirlines){
     std::set<std::vector<Airport>> res;

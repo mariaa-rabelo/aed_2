@@ -16,7 +16,7 @@ private:
 public:
     Menu();
     void print();
-    static void selectOptions(std::queue<std::string>& order);
+    static std::pair<std::string, std::string> selectOptions();
     static void listMenu();
     void handleGlobalStats();
     void handleAirportDetails();

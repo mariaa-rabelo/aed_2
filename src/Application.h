@@ -74,5 +74,10 @@ public:
         Vertex<Airport> *getVertex(std::string v);
     bool checkIfExists(const std::string &code);
 
+    void getBestFlightOption(std::pair<std::string, std::string> src, std::pair<std::string, std::string> dest);
+
+    std::vector<Airport> findShortestPath(Vertex<Airport> *src, Vertex<Airport> *dest);
+
+    std::set<Vertex<Airport> *> getVerticesBasedOnInput(std::pair<std::string, std::string> pair1);
 };
 #endif //AED_2_APPLICATION_H

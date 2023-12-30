@@ -26,39 +26,6 @@ void Menu::listMenu() {
     std::cout << "Please choose an option (0-12): ";
 }
 
-
-void Menu::selectOptions(std::queue<std::string>& order){
-    std::cout << "1: airport code"<< std::endl
-            << "2: airport name"<< std::endl
-            << "3: city and country"<< std::endl
-            << "4: cancel"<< std::endl;
-
-    std::string opt;
-    std::getline(std::cin, opt);
-    int type = std::stoi(opt);
-    switch (type) {
-        case 1:
-            std::cout << "airport's code:"<<std::endl;
-            break;
-        case 2:
-            std::cout << "airport's name:"<<std::endl;
-            break;
-        case 3:
-            std::cout << "city: "<<std::endl;
-            std::getline(std::cin, opt);
-            order.push(opt);
-            std::cout << "country: "<<std::endl;
-            break;
-        case 4:
-            return;
-        default:
-            std::cout << "invalid input!" << std::endl;
-            return;
-    }
-    std::getline(std::cin, opt);
-    order.push(opt);
-}
-
 void Menu::askReturnToMenu() {
     std::cout << "Press enter to return to the menu or type 'exit' to quit: ";
     std::string choice;
@@ -300,81 +267,50 @@ void Menu::handleReachableInMaxXStops() {
     }
 }
 
+
+std::pair<std::string, std::string> Menu::selectOptions(){
+    std::cout << "1: airport code"<< std::endl
+              << "2: airport name"<< std::endl
+              << "3: city"<< std::endl
+              << "4: cancel"<< std::endl;
+
+    std::string type, detail;
+    std::getline(std::cin, type);
+
+    if (type < "1" || type > "3") {
+        return std::make_pair("cancel", "");
+    }
+
+    switch (std::stoi(type)) {
+        case 1:
+            std::cout << "airport's code:"<<std::endl;
+            break;
+        case 2:
+            std::cout << "airport's name:"<<std::endl;
+            break;
+        case 3:
+            std::cout << "city: "<<std::endl;
+            break;
+        default:
+            std::cout << "invalid input!" << std::endl;
+            return std::make_pair("invalid", "");
+    }
+
+    std::getline(std::cin, detail);
+    return std::make_pair(type, detail);
+}
+
+
 void Menu::handleBestFlightOption() {
-    std::cout << "choose the option for the departure location:"<< std::endl;
-    std::queue<std::string> order;
-    selectOptions(order);
-    auto option = order.front();
-    order.pop();
-    if (option == "4")
-        return;
-    bool src = false;
-    bool dst = false;
-    Vertex<Airport>* sourc;
-    Vertex<Airport>* dest;
-    std::set<Vertex<Airport>*> sourc_;
-    std::set<Vertex<Airport>*> dest_;
-    if (option == "1" ){
-        if (!app.getAirport(order.front(), true, sourc)){
-            std::cout << "airport's code not found!"<< std::endl;
-            return;
-        }
-    }
-    else if (option == "2"){
-        if (!app.getAirport(order.front(), false, sourc)){
-            std::cout << "airport's name not found!"<< std::endl;
-            return;
-        }
-    }
-    else if (option == "3"){
-        src = true;
-        std::string city = order.front();
-        order.pop();
-        if (!app.getAirportsInCity(city,order.front(),sourc_)){
-            std::cout << "no city with that name was found!"<< std::endl;
-            return;
-        }
-    }
-    order = {};
-    selectOptions(order);
-    option= order.front();
-    order.pop();
-    if ( option== "4"){
-        return;
-    }
-    if (option == "1" ){
-        if (!app.getAirport(order.front(), true, dest)){
-            std::cout << "airport's code not found!"<< std::endl;
-            return;
-        }
-    }
-    else if (option == "2"){
-        if (!app.getAirport(order.front(), false, dest)){
-            std::cout << "airport's name not found!"<<std::endl;
-            return;
-        }
-    }
-    else if (option == "3"){
-        dst = true;
-        std::string city = order.front();
-        order.pop();
-        if (!app.getAirportsInCity(city,order.front(),dest_)){
-            std::cout << "no city with that name was found!"<< std::endl;
-            return;
-        }
-    }
-    if (!src && !dst){
-        app.getBestFlightOption(sourc, dest);
-    }
-    else if (!src && dst){
+    std::cout << "Choose the option for the departure location:"<< std::endl;
+    auto source = selectOptions();
+    if (source.first == "cancel" || source.first == "invalid") return;
 
-    }
-    else if (src && dst){
+    std::cout << "Choose the option for the destination location:\n";
+    auto destination = selectOptions();
+    if (destination.first == "cancel" || destination.first == "invalid") return;
 
-    }
-    else if (src && !dst) {
-
-    }
+    app.getBestFlightOption(source, destination);
 }
 
 void Menu::handleAirlinesFLightOptions() {

@@ -6,16 +6,16 @@
 #include <set>
 #include <algorithm>
 #include <map>
+#include <limits>
 
-using namespace std;
 Application::Application() {
     flightOption = FlightOption();
 }
 
 void Application::run() {
-    FileReader airlines_file("../dataset/airlines.csv", g_airport);
-    FileReader airports_file("../dataset/airports.csv", g_airport);
-    FileReader flights_file("../dataset/flights.csv", g_airport);
+    FileReader airlines_file("../dataset/airlines1.csv", g_airport);
+    FileReader airports_file("../dataset/airports1.csv", g_airport);
+    FileReader flights_file("../dataset/flights1.csv", g_airport);
 
     airports_file.readAirports();
     airlines_file.readAirlines();
@@ -454,14 +454,107 @@ bool Application::getAirport(const std::string& identifier, bool opt, Vertex<Air
     return false;
 }
 
-void Application::getBestFlightOption(Vertex<Airport>* src, Vertex<Airport>* dest ){
-    std::set<std::vector<Airport>> path = flightOption.flights(&g_airport, src, dest);
-    for(const auto& possible_path : path){
-        std::cout << "possible path: "<< std::endl;
-        for (const auto& airport : possible_path){
-            airport.print();
+void Application::getBestFlightOption(std::pair<std::string, std::string> src, std::pair<std::string, std::string> dest){
+    //std::set<std::vector<Airport>> path = flightOption.flights(&g_airport, src, dest);
+    std::cout << "beggining of getbestflightoption " <<std::endl;
+    // Find source and destination vertices based on input type
+    std::set<Vertex<Airport>*> srcVertices = getVerticesBasedOnInput(src);
+    std::cout << "srcvertices size : " << srcVertices.size()<<std::endl;
+    std::set<Vertex<Airport>*> destVertices = getVerticesBasedOnInput(dest);
+    std::cout << "destvertices size : " << destVertices.size()<<std::endl;
+
+    // Use BFS to find the shortest path(s) from source to destination
+    std::vector<std::vector<Airport>> bestPaths;
+    int minStops = std::numeric_limits<int>::max();
+
+    for (auto srcVertex : srcVertices) {
+        for (auto destVertex : destVertices) {
+            auto path = findShortestPath(srcVertex, destVertex);
+            std::cout << "path size : " << srcVertices.size()<< " between " << srcVertex->getInfo().getCode()
+            << " and " << destVertex->getInfo().getCode() << std::endl;
+
+            int stops = path.size() - 2; // Subtract source and destination
+            std::cout << "stops: " << stops <<std::endl;
+
+            if (stops < minStops) {
+                minStops = stops;
+                bestPaths.clear();
+                bestPaths.push_back(path);
+            } else if (stops == minStops) {
+                bestPaths.push_back(path);
+            }
         }
     }
+    // Display the best flight paths
+    for (const auto& path : bestPaths) {
+        std::cout << "Path with " << minStops << " stops: ";
+        for (const auto& airport : path) {
+            std::cout << airport.getCode() << " ";
+        }
+        std::cout << std::endl;
+    }
+}
+
+
+std::set<Vertex<Airport>*> Application::getVerticesBasedOnInput(std::pair<std::string, std::string> input) {
+    std::set<Vertex<Airport>*> vertices;
+    if (input.first == "1") { // Airport code
+        Vertex<Airport>* v = g_airport.findVertex(input.second);
+        if (v) vertices.insert(v);
+    } else if (input.first == "2") { // Airport name
+        for (auto& vertex : g_airport.getVertexSet()) {
+            if (vertex->getInfo().getName() == input.second) {
+                vertices.insert(vertex);
+            }
+        }
+    } else if (input.first == "3") { // City name
+        for (auto& vertex : g_airport.getVertexSet()) {
+            if (vertex->getInfo().getCity() == input.second) {
+                vertices.insert(vertex);
+            }
+        }}
+    return vertices;
+}
+
+std::vector<Airport> Application::findShortestPath(Vertex<Airport>* src, Vertex<Airport>* dest) {
+    //para cada vertice, seu predecessor no caminho mais curto
+    std::map<Vertex<Airport>*, Vertex<Airport>*> predecessors;
+    // entre src ate cada outro airport
+    std::map<Vertex<Airport>*, int> distances;
+    std::queue<Vertex<Airport>*> queue;
+
+    for (auto& vertex : g_airport.getVertexSet()) {
+        distances[vertex] = std::numeric_limits<int>::max();
+        vertex->setVisited(false);
+    }
+
+    distances[src] = 0;
+    queue.push(src);
+    src->setVisited(true);
+
+    while (!queue.empty()) {
+        Vertex<Airport>* current = queue.front();
+        queue.pop();
+
+        for (const Edge<Airport>& edge : current->getAdj()) {
+            Vertex<Airport>* neighbor = edge.getDest();
+            if (!neighbor->isVisited()) {
+                neighbor->setVisited(true);
+                queue.push(neighbor);
+                distances[neighbor] = distances[current] + 1;
+                predecessors[neighbor] = current;
+            }
+        }
+    }
+
+    std::vector<Airport> path;
+    if (distances[dest] != std::numeric_limits<int>::max()) {
+        for (Vertex<Airport>* at = dest; at != nullptr; at = predecessors[at]) {
+            path.push_back(at->getInfo());
+        }
+        std::reverse(path.begin(), path.end());
+    }
+    return path;
 }
 
 //bestFlightOption com filtros
