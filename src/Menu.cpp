@@ -22,7 +22,7 @@ void Menu::listMenu() {
     std::cout << "9. Identify Essential Airports in the Network\n";
     std::cout << "10. Find the Best Flight Option\n";
     std::cout << "11. Explore Flight Options with Specific Airlines\n";
-    std::cout << "12. Find Flight Options with Maximum Stops\n";
+    std::cout << "12. Find Flight Options with Maximum Airlines\n";
     std::cout << "Please choose an option (0-12): ";
 }
 

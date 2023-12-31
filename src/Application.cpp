@@ -472,7 +472,7 @@ void Application::bestFlightOptGivenAirports(std::set<std::string>& airlines, Ve
         path.push(new_pair);
         cout << "path:"<<endl;
         while (!path.empty()){
-            cout << " airport: "<< path.top().first.getCode() << " Airline: "<< path.top().second << endl;
+            cout << " airport: "<< path.top().first.getCode() << " airline: "<< path.top().second << endl;
             path.pop();
         }
     }
@@ -480,6 +480,20 @@ void Application::bestFlightOptGivenAirports(std::set<std::string>& airlines, Ve
 }
 
 void Application::bestFlightOptMaxAirports(  int maxAirlines, Vertex<Airport>* src, Vertex<Airport>* dest){
+
+    auto paths = flightOption.flights(&g_airport, src, dest);
+    auto res = flightOption.flightsMaxAirlineNumber(&g_airport, paths, maxAirlines);
+    for(const auto& possible_path : res){
+        std::cout << "possible path:"<< std::endl;
+        for (const auto& airport : possible_path){
+            if (airport.second == ""){
+                cout << "departure:"<< airport.first.getCode() <<endl;
+
+            }
+            else
+                cout << airport.first.getCode() << " ( " << airport.second<< " ) " <<endl;
+        }
+    }
     /*
     auto paths = flightOption.flightsMaxAirlineNumber(&g_airport, src, dest, maxAirlines);
     if (paths.size() == 1 && paths[0].empty()){
@@ -499,20 +513,6 @@ void Application::bestFlightOptMaxAirports(  int maxAirlines, Vertex<Airport>* s
     }
 
     */
-    auto paths = flightOption.flights(&g_airport, src, dest);
-    auto res = flightOption.flightsMaxAirlineNumber(&g_airport, paths, maxAirlines);
-    for(const auto& possible_path : res){
-        std::cout << "possible path:"<< std::endl;
-        for (const auto& airport : possible_path){
-            if (airport.second == ""){
-                cout << "departure:"<< airport.first.getCode() <<endl;
-
-            }
-            else
-                cout << airport.first.getCode() << " ( " << airport.second<< " ) " <<endl;
-        }
-    }
-
 }
 
 //auxiliar
