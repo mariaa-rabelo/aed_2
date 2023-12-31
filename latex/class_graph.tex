@@ -1,0 +1,274 @@
+\doxysection{Graph\texorpdfstring{$<$}{<} T \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{class_graph}{}\label{class_graph}\index{Graph$<$ T $>$@{Graph$<$ T $>$}}
+
+
+Template class representing a graph.  
+
+
+
+
+{\ttfamily \#include $<$Graph.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_vertex}{Vertex}}$<$ T $>$ \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_graph_a8b7b7465fbfd562e2a469f90a437ab75}{find\+Vertex}} (const T \&in) const
+\begin{DoxyCompactList}\small\item\em Finds a vertex in the graph with the given content. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_vertex}{Vertex}}$<$ T $>$ \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_graph_afd8fcbc064425f874884e6d24f235225}{find\+Vertex}} (const std\+::string \&code) const
+\begin{DoxyCompactList}\small\item\em Finds a vertex in the graph based on a given code (assuming the vertex content has a \textquotesingle{}get\+Code\textquotesingle{} method). \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_graph_a0853eac15cdf0f06d63f4b8a7820ec71}{get\+Num\+Vertex}} () const
+\begin{DoxyCompactList}\small\item\em Gets the number of vertices in the graph. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_graph_a00be284ea2be3b3d0f0d2e493b70245b}{add\+Vertex}} (const T \&in)
+\begin{DoxyCompactList}\small\item\em Adds a vertex to the graph. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_graph_af9c903104ad69a7782979fa9caedf163}{remove\+Vertex}} (const T \&in)
+\begin{DoxyCompactList}\small\item\em Removes the vertex with the specified content from the graph. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_airline}{Airline}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_graph_a250117f0f5c918679e635549cbd39963}{find\+Airline}} (const std\+::string \&code) const
+\begin{DoxyCompactList}\small\item\em Finds an airline by its code. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_graph_adf11d91fa7cfe0a05547609e7ac851a2}{add\+Airline}} (const \mbox{\hyperlink{class_airline}{Airline}} \&airline)
+\begin{DoxyCompactList}\small\item\em Adds an airline to the graph. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_graph_a6766c624c23d71cbe376299a196704c8}{add\+Edge}} (const T \&sourc, const T \&dest, \mbox{\hyperlink{class_airline}{Airline}} \texorpdfstring{$\ast$}{*}airline)
+\begin{DoxyCompactList}\small\item\em Adds an edge between two vertices in the graph. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_graph_a1106092a37366486cf55576f9ec01692}{remove\+Edge}} (const T \&sourc, const T \&dest)
+\begin{DoxyCompactList}\small\item\em Removes an edge between two vertices in the graph. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_graph_a38aeb4fa45b3c5f3f71e01cc6de5e8b0}{get\+Total\+Edges}} () const
+\begin{DoxyCompactList}\small\item\em Gets the total number of edges in the graph. \end{DoxyCompactList}\item 
+std\+::vector$<$ \mbox{\hyperlink{class_vertex}{Vertex}}$<$ T $>$ \texorpdfstring{$\ast$}{*} $>$ \mbox{\hyperlink{class_graph_a41624b03fcb6bd29e4df574a1ec58541}{get\+Vertex\+Set}} () const
+\begin{DoxyCompactList}\small\item\em Gets the list of vertices in the graph. \end{DoxyCompactList}\item 
+std\+::vector$<$ \mbox{\hyperlink{class_airline}{Airline}} \texorpdfstring{$\ast$}{*} $>$ \mbox{\hyperlink{class_graph_a46f41c4f02723836b6281ecc3a61ad94}{get\+Airlines}} () const
+\begin{DoxyCompactList}\small\item\em Gets the list of airlines in the graph. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$class T$>$\newline
+class Graph$<$ T $>$}
+Template class representing a graph. 
+
+This class models a graph data structure, using a list of vertices and airlines. It provides functionalities for adding and removing vertices and edges, finding vertices and airlines, and querying various properties of the graph.
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & The type of content in the vertices of the graph. \\
+\hline
+\end{DoxyTemplParams}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_graph_adf11d91fa7cfe0a05547609e7ac851a2}\label{class_graph_adf11d91fa7cfe0a05547609e7ac851a2} 
+\index{Graph$<$ T $>$@{Graph$<$ T $>$}!addAirline@{addAirline}}
+\index{addAirline@{addAirline}!Graph$<$ T $>$@{Graph$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{addAirline()}{addAirline()}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+bool \mbox{\hyperlink{class_graph}{Graph}}$<$ T $>$\+::add\+Airline (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_airline}{Airline}} \&}]{airline }\end{DoxyParamCaption})}
+
+
+
+Adds an airline to the graph. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em airline} & The airline to be added. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the airline is added successfully, false if an airline with the same code already exists. 
+\end{DoxyReturn}
+\Hypertarget{class_graph_a6766c624c23d71cbe376299a196704c8}\label{class_graph_a6766c624c23d71cbe376299a196704c8} 
+\index{Graph$<$ T $>$@{Graph$<$ T $>$}!addEdge@{addEdge}}
+\index{addEdge@{addEdge}!Graph$<$ T $>$@{Graph$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{addEdge()}{addEdge()}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+bool \mbox{\hyperlink{class_graph}{Graph}}$<$ T $>$\+::add\+Edge (\begin{DoxyParamCaption}\item[{const T \&}]{sourc,  }\item[{const T \&}]{dest,  }\item[{\mbox{\hyperlink{class_airline}{Airline}} \texorpdfstring{$\ast$}{*}}]{airline }\end{DoxyParamCaption})}
+
+
+
+Adds an edge between two vertices in the graph. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em sourc} & Content of the source vertex. \\
+\hline
+{\em dest} & Content of the destination vertex. \\
+\hline
+{\em airline} & \doxylink{class_airline}{Airline} associated with the edge. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the edge is added successfully, false if either vertex does not exist. 
+\end{DoxyReturn}
+\Hypertarget{class_graph_a00be284ea2be3b3d0f0d2e493b70245b}\label{class_graph_a00be284ea2be3b3d0f0d2e493b70245b} 
+\index{Graph$<$ T $>$@{Graph$<$ T $>$}!addVertex@{addVertex}}
+\index{addVertex@{addVertex}!Graph$<$ T $>$@{Graph$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{addVertex()}{addVertex()}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+bool \mbox{\hyperlink{class_graph}{Graph}}$<$ T $>$\+::add\+Vertex (\begin{DoxyParamCaption}\item[{const T \&}]{in }\end{DoxyParamCaption})}
+
+
+
+Adds a vertex to the graph. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em in} & Content of the vertex to be added. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the vertex was successfully added, false if it already exists. 
+\end{DoxyReturn}
+\Hypertarget{class_graph_a250117f0f5c918679e635549cbd39963}\label{class_graph_a250117f0f5c918679e635549cbd39963} 
+\index{Graph$<$ T $>$@{Graph$<$ T $>$}!findAirline@{findAirline}}
+\index{findAirline@{findAirline}!Graph$<$ T $>$@{Graph$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{findAirline()}{findAirline()}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+\mbox{\hyperlink{class_airline}{Airline}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_graph}{Graph}}$<$ T $>$\+::find\+Airline (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{code }\end{DoxyParamCaption}) const}
+
+
+
+Finds an airline by its code. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em code} & The airline\textquotesingle{}s code. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Pointer to the airline if found, nullptr otherwise. 
+\end{DoxyReturn}
+\Hypertarget{class_graph_afd8fcbc064425f874884e6d24f235225}\label{class_graph_afd8fcbc064425f874884e6d24f235225} 
+\index{Graph$<$ T $>$@{Graph$<$ T $>$}!findVertex@{findVertex}}
+\index{findVertex@{findVertex}!Graph$<$ T $>$@{Graph$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{findVertex()}{findVertex()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+\mbox{\hyperlink{class_vertex}{Vertex}}$<$ T $>$ \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_graph}{Graph}}$<$ T $>$\+::find\+Vertex (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{code }\end{DoxyParamCaption}) const}
+
+
+
+Finds a vertex in the graph based on a given code (assuming the vertex content has a \textquotesingle{}get\+Code\textquotesingle{} method). 
+
+
+\begin{DoxyParams}{Parameters}
+{\em code} & The code to search for. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Pointer to the vertex if found, nullptr otherwise. 
+\end{DoxyReturn}
+\Hypertarget{class_graph_a8b7b7465fbfd562e2a469f90a437ab75}\label{class_graph_a8b7b7465fbfd562e2a469f90a437ab75} 
+\index{Graph$<$ T $>$@{Graph$<$ T $>$}!findVertex@{findVertex}}
+\index{findVertex@{findVertex}!Graph$<$ T $>$@{Graph$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{findVertex()}{findVertex()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+\mbox{\hyperlink{class_vertex}{Vertex}}$<$ T $>$ \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_graph}{Graph}}$<$ T $>$\+::find\+Vertex (\begin{DoxyParamCaption}\item[{const T \&}]{in }\end{DoxyParamCaption}) const}
+
+
+
+Finds a vertex in the graph with the given content. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em in} & The content to search for. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Pointer to the vertex if found, nullptr otherwise. 
+\end{DoxyReturn}
+\Hypertarget{class_graph_a46f41c4f02723836b6281ecc3a61ad94}\label{class_graph_a46f41c4f02723836b6281ecc3a61ad94} 
+\index{Graph$<$ T $>$@{Graph$<$ T $>$}!getAirlines@{getAirlines}}
+\index{getAirlines@{getAirlines}!Graph$<$ T $>$@{Graph$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{getAirlines()}{getAirlines()}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+std\+::vector$<$ \mbox{\hyperlink{class_airline}{Airline}} \texorpdfstring{$\ast$}{*} $>$ \mbox{\hyperlink{class_graph}{Graph}}$<$ T $>$\+::get\+Airlines (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Gets the list of airlines in the graph. 
+
+\begin{DoxyReturn}{Returns}
+Vector of pointers to airlines. 
+\end{DoxyReturn}
+\Hypertarget{class_graph_a0853eac15cdf0f06d63f4b8a7820ec71}\label{class_graph_a0853eac15cdf0f06d63f4b8a7820ec71} 
+\index{Graph$<$ T $>$@{Graph$<$ T $>$}!getNumVertex@{getNumVertex}}
+\index{getNumVertex@{getNumVertex}!Graph$<$ T $>$@{Graph$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{getNumVertex()}{getNumVertex()}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+int \mbox{\hyperlink{class_graph}{Graph}}$<$ T $>$\+::get\+Num\+Vertex (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Gets the number of vertices in the graph. 
+
+\begin{DoxyReturn}{Returns}
+The number of vertices. 
+\end{DoxyReturn}
+\Hypertarget{class_graph_a38aeb4fa45b3c5f3f71e01cc6de5e8b0}\label{class_graph_a38aeb4fa45b3c5f3f71e01cc6de5e8b0} 
+\index{Graph$<$ T $>$@{Graph$<$ T $>$}!getTotalEdges@{getTotalEdges}}
+\index{getTotalEdges@{getTotalEdges}!Graph$<$ T $>$@{Graph$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{getTotalEdges()}{getTotalEdges()}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+int \mbox{\hyperlink{class_graph}{Graph}}$<$ T $>$\+::get\+Total\+Edges (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Gets the total number of edges in the graph. 
+
+\begin{DoxyReturn}{Returns}
+Total number of edges. 
+\end{DoxyReturn}
+\Hypertarget{class_graph_a41624b03fcb6bd29e4df574a1ec58541}\label{class_graph_a41624b03fcb6bd29e4df574a1ec58541} 
+\index{Graph$<$ T $>$@{Graph$<$ T $>$}!getVertexSet@{getVertexSet}}
+\index{getVertexSet@{getVertexSet}!Graph$<$ T $>$@{Graph$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{getVertexSet()}{getVertexSet()}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+std\+::vector$<$ \mbox{\hyperlink{class_vertex}{Vertex}}$<$ T $>$ \texorpdfstring{$\ast$}{*} $>$ \mbox{\hyperlink{class_graph}{Graph}}$<$ T $>$\+::get\+Vertex\+Set (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Gets the list of vertices in the graph. 
+
+\begin{DoxyReturn}{Returns}
+Vector of pointers to vertices. 
+\end{DoxyReturn}
+\Hypertarget{class_graph_a1106092a37366486cf55576f9ec01692}\label{class_graph_a1106092a37366486cf55576f9ec01692} 
+\index{Graph$<$ T $>$@{Graph$<$ T $>$}!removeEdge@{removeEdge}}
+\index{removeEdge@{removeEdge}!Graph$<$ T $>$@{Graph$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{removeEdge()}{removeEdge()}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+bool \mbox{\hyperlink{class_graph}{Graph}}$<$ T $>$\+::remove\+Edge (\begin{DoxyParamCaption}\item[{const T \&}]{sourc,  }\item[{const T \&}]{dest }\end{DoxyParamCaption})}
+
+
+
+Removes an edge between two vertices in the graph. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em sourc} & Content of the source vertex. \\
+\hline
+{\em dest} & Content of the destination vertex. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the edge is removed successfully, false if either vertex does not exist or the edge does not exist. 
+\end{DoxyReturn}
+\Hypertarget{class_graph_af9c903104ad69a7782979fa9caedf163}\label{class_graph_af9c903104ad69a7782979fa9caedf163} 
+\index{Graph$<$ T $>$@{Graph$<$ T $>$}!removeVertex@{removeVertex}}
+\index{removeVertex@{removeVertex}!Graph$<$ T $>$@{Graph$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{removeVertex()}{removeVertex()}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+bool \mbox{\hyperlink{class_graph}{Graph}}$<$ T $>$\+::remove\+Vertex (\begin{DoxyParamCaption}\item[{const T \&}]{in }\end{DoxyParamCaption})}
+
+
+
+Removes the vertex with the specified content from the graph. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em in} & Content of the vertex to be removed. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the vertex is removed successfully, false if it does not exist. 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/\mbox{\hyperlink{_graph_8h}{Graph.\+h}}\end{DoxyCompactItemize}

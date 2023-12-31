@@ -1,0 +1,33 @@
+\doxysection{File\+Reader.\+h}
+\hypertarget{_file_reader_8h_source}{}\label{_file_reader_8h_source}\index{src/FileReader.h@{src/FileReader.h}}
+\mbox{\hyperlink{_file_reader_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ }
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#ifndef\ AED\_2\_FILEREADER\_H}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#define\ AED\_2\_FILEREADER\_H}}
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ <fstream>}}
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#include\ <sstream>}}
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#include\ <iostream>}}
+\DoxyCodeLine{00014\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_airline_8h}{Airline.h}}"{}}}
+\DoxyCodeLine{00015\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_airport_8h}{Airport.h}}"{}}}
+\DoxyCodeLine{00016\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_graph_8h}{Graph.h}}"{}}}
+\DoxyCodeLine{00017\ }
+\DoxyCodeLine{00025\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_file_reader}{FileReader}}\ \{}
+\DoxyCodeLine{00026\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00027\ \ \ \ \ std::ifstream\ file\_;\ }
+\DoxyCodeLine{00028\ \ \ \ \ \mbox{\hyperlink{class_graph}{Graph<Airport>}}\&\ graph\_;\ }
+\DoxyCodeLine{00029\ }
+\DoxyCodeLine{00030\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00037\ \ \ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{class_file_reader_a886f6927d3b4380cad2fd71243a24bdc}{FileReader}}(\textcolor{keyword}{const}\ std::string\&\ file\_name,\ \mbox{\hyperlink{class_graph}{Graph<Airport>}}\&\ graph);}
+\DoxyCodeLine{00038\ }
+\DoxyCodeLine{00042\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_file_reader_aaba321b51749696204493ce7cf89d32f}{readAirports}}();}
+\DoxyCodeLine{00043\ }
+\DoxyCodeLine{00047\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_file_reader_ac58ed5b17ae36e71a0d5a564b2386b32}{readAirlines}}();}
+\DoxyCodeLine{00048\ }
+\DoxyCodeLine{00052\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_file_reader_aac556907dcee7b51af75bc4eb0a3fbfd}{readFlights}}();}
+\DoxyCodeLine{00053\ \};}
+\DoxyCodeLine{00054\ }
+\DoxyCodeLine{00055\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//AED\_2\_FILEREADER\_H}}
+
+\end{DoxyCode}

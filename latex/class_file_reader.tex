@@ -1,0 +1,56 @@
+\doxysection{File\+Reader Class Reference}
+\hypertarget{class_file_reader}{}\label{class_file_reader}\index{FileReader@{FileReader}}
+
+
+Class for reading and parsing data from files to populate a graph.  
+
+
+
+
+{\ttfamily \#include $<$File\+Reader.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_file_reader_a886f6927d3b4380cad2fd71243a24bdc}{File\+Reader}} (const std\+::string \&file\+\_\+name, \mbox{\hyperlink{class_graph}{Graph}}$<$ \mbox{\hyperlink{class_airport}{Airport}} $>$ \&graph)
+\begin{DoxyCompactList}\small\item\em Constructs a \doxylink{class_file_reader}{File\+Reader} object with the provided file name and graph. \end{DoxyCompactList}\item 
+\Hypertarget{class_file_reader_aaba321b51749696204493ce7cf89d32f}\label{class_file_reader_aaba321b51749696204493ce7cf89d32f} 
+void {\bfseries read\+Airports} ()
+\begin{DoxyCompactList}\small\item\em Reads and processes airport data from the file and populates the graph. \end{DoxyCompactList}\item 
+\Hypertarget{class_file_reader_ac58ed5b17ae36e71a0d5a564b2386b32}\label{class_file_reader_ac58ed5b17ae36e71a0d5a564b2386b32} 
+void {\bfseries read\+Airlines} ()
+\begin{DoxyCompactList}\small\item\em Reads and processes airline data from the file and populates the graph. \end{DoxyCompactList}\item 
+\Hypertarget{class_file_reader_aac556907dcee7b51af75bc4eb0a3fbfd}\label{class_file_reader_aac556907dcee7b51af75bc4eb0a3fbfd} 
+void {\bfseries read\+Flights} ()
+\begin{DoxyCompactList}\small\item\em Reads and processes flight data from the file and populates the graph. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Class for reading and parsing data from files to populate a graph. 
+
+This class is responsible for opening and reading data from specified files, such as airports, airlines, and flights, and populating a graph with this data. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_file_reader_a886f6927d3b4380cad2fd71243a24bdc}\label{class_file_reader_a886f6927d3b4380cad2fd71243a24bdc} 
+\index{FileReader@{FileReader}!FileReader@{FileReader}}
+\index{FileReader@{FileReader}!FileReader@{FileReader}}
+\doxysubsubsection{\texorpdfstring{FileReader()}{FileReader()}}
+{\footnotesize\ttfamily File\+Reader\+::\+File\+Reader (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{file\+\_\+name,  }\item[{\mbox{\hyperlink{class_graph}{Graph}}$<$ \mbox{\hyperlink{class_airport}{Airport}} $>$ \&}]{graph }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+
+
+Constructs a \doxylink{class_file_reader}{File\+Reader} object with the provided file name and graph. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em file\+\_\+name} & The name of the file to read from. \\
+\hline
+{\em graph} & Reference to the graph to be populated with the data. \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/\mbox{\hyperlink{_file_reader_8h}{File\+Reader.\+h}}\item 
+src/File\+Reader.\+cpp\end{DoxyCompactItemize}

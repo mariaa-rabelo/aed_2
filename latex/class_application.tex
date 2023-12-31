@@ -1,0 +1,549 @@
+\doxysection{Application Class Reference}
+\hypertarget{class_application}{}\label{class_application}\index{Application@{Application}}
+
+
+Manages the main functionalities of the airport management system including graph operations and flight options.  
+
+
+
+
+{\ttfamily \#include $<$Application.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_application_afa8cc05ce6b6092be5ecdfdae44e05f8}\label{class_application_afa8cc05ce6b6092be5ecdfdae44e05f8} 
+{\bfseries Application} ()
+\begin{DoxyCompactList}\small\item\em Constructor for the \doxylink{class_application}{Application} class. \end{DoxyCompactList}\item 
+\Hypertarget{class_application_a68965449404743bf1add056784d6cf81}\label{class_application_a68965449404743bf1add056784d6cf81} 
+void {\bfseries run} ()
+\begin{DoxyCompactList}\small\item\em Runs the main loop of the application. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_application_a91288f71aa78c68f6990e14930c0339c}{get\+Num\+Airports}} () const
+\begin{DoxyCompactList}\small\item\em Gets the total number of airports in the graph. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_application_ad56b2e853477f3509217918017983780}{get\+Global\+Num\+Flights}} () const
+\begin{DoxyCompactList}\small\item\em Gets the total number of flights in the graph. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_application_a1db0310eb1907e2e7edc33d6b365989c}{get\+Out\+Flights}} (const std\+::string \&airport\+Code) const
+\begin{DoxyCompactList}\small\item\em Gets the number of outgoing flights from a specified airport. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_application_ac6669dfc8ece0dd8c302bbd4fc1eeb43}{get\+Unique\+Airlines}} (const std\+::string \&airport\+Code) const
+\begin{DoxyCompactList}\small\item\em Gets the number of unique airlines operating from a specified airport. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_application_aa1d09c8cecf5b5cc23fc1f52aa8ef14e}{get\+Flights\+By\+City}} (const std\+::string \&city\+Name)
+\begin{DoxyCompactList}\small\item\em Gets the number of flights departing from a specified city. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_application_a533215d2b94f5cda9010b66924dd0ef7}{get\+Flights\+By\+Airline}} (const std\+::string \&airline\+Code)
+\begin{DoxyCompactList}\small\item\em Gets the number of flights operated by a specified airline. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_application_a9e3015db09698f1f56ef76337f44b76f}{get\+Unique\+Countries\+From\+Airport}} (const std\+::string \&airport\+Code)
+\begin{DoxyCompactList}\small\item\em Gets the number of unique countries directly reachable from a specified airport. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_application_a20158431690a39e735a1ed485f6853d7}{get\+Unique\+Countries\+From\+City}} (const std\+::string \&city\+Name)
+\begin{DoxyCompactList}\small\item\em Gets the number of unique countries directly reachable from a specified city. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_application_ac0c435e0b9f13678a945a5c0a7be2fd6}{find\+All\+Destinations}} (const std\+::string \&airport\+Code)
+\begin{DoxyCompactList}\small\item\em Finds all destinations reachable from a specified airport. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_application_a93eab4940e57d384c2b6c52874cd376c}{find\+Airport\+MaxX}} (std\+::string code, int x, int option)
+\begin{DoxyCompactList}\small\item\em Finds airports reachable within a maximum number of stops from a specified airport. \end{DoxyCompactList}\item 
+std\+::vector$<$ \mbox{\hyperlink{class_airport}{Airport}} $>$ \mbox{\hyperlink{class_application_a86cc93d306b053cf4e78491fa643dd66}{nodes\+At\+Less\+Distance\+BFS}} (const \mbox{\hyperlink{class_graph}{Graph}}$<$ \mbox{\hyperlink{class_airport}{Airport}} $>$ \texorpdfstring{$\ast$}{*}g, const \mbox{\hyperlink{class_airport}{Airport}} \&source, int k)
+\begin{DoxyCompactList}\small\item\em Finds nodes (airports) at a distance less than or equal to a given number of stops. \end{DoxyCompactList}\item 
+\Hypertarget{class_application_ae6b0b23d587485f7f369b9da5c8d0956}\label{class_application_ae6b0b23d587485f7f369b9da5c8d0956} 
+void {\bfseries maximum\+Trip} ()
+\begin{DoxyCompactList}\small\item\em Plans a maximum trip, finding the longest path in the graph. \end{DoxyCompactList}\item 
+std\+::vector$<$ std\+::pair$<$ \mbox{\hyperlink{class_airport}{Airport}}, int $>$ $>$ \mbox{\hyperlink{class_application_ae6a305318d51c9853361c10d64f178ef}{get\+Max\+Path\+BFS}} (\mbox{\hyperlink{class_vertex}{Vertex}}$<$ \mbox{\hyperlink{class_airport}{Airport}} $>$ \texorpdfstring{$\ast$}{*}v, \mbox{\hyperlink{class_graph}{Graph}}$<$ \mbox{\hyperlink{class_airport}{Airport}} $>$ \texorpdfstring{$\ast$}{*}g)
+\begin{DoxyCompactList}\small\item\em Finds the maximum path from a specified vertex in the graph using BFS. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_application_a7c803a486587676732b08ce6f17f776b}{get\+Total\+Flights}} (const \mbox{\hyperlink{class_graph}{Graph}}$<$ \mbox{\hyperlink{class_airport}{Airport}} $>$ \texorpdfstring{$\ast$}{*}g, \mbox{\hyperlink{class_vertex}{Vertex}}$<$ \mbox{\hyperlink{class_airport}{Airport}} $>$ \texorpdfstring{$\ast$}{*}v)
+\begin{DoxyCompactList}\small\item\em Gets the total number of flights associated with a specified vertex (airport). \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_application_a0ab51575503a4ca1decc668b2f7b45af}{get\+KAirports\+Greatest\+Cap}} (int k)
+\begin{DoxyCompactList}\small\item\em Finds the top K airports with the greatest capacity. \end{DoxyCompactList}\item 
+std\+::set$<$ \mbox{\hyperlink{class_airport}{Airport}} $>$ \mbox{\hyperlink{class_application_a22eb1b019be1c2919856c572796a8820}{articulation\+Points}} (\mbox{\hyperlink{class_graph}{Graph}}$<$ \mbox{\hyperlink{class_airport}{Airport}} $>$ \texorpdfstring{$\ast$}{*}g)
+\begin{DoxyCompactList}\small\item\em Finds articulation points in the graph, representing essential airports. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_application_a1d16161f32808241bbd195f44eb92f07}{dfs\+\_\+art}} (\mbox{\hyperlink{class_graph}{Graph}}$<$ \mbox{\hyperlink{class_airport}{Airport}} $>$ \texorpdfstring{$\ast$}{*}g, \mbox{\hyperlink{class_vertex}{Vertex}}$<$ \mbox{\hyperlink{class_airport}{Airport}} $>$ \texorpdfstring{$\ast$}{*}v, std\+::stack$<$ \mbox{\hyperlink{class_airport}{Airport}} $>$ \&s, std\+::set$<$ \mbox{\hyperlink{class_airport}{Airport}} $>$ \&l, int \&i)
+\begin{DoxyCompactList}\small\item\em Depth-\/first search algorithm to find articulation points. \end{DoxyCompactList}\item 
+\Hypertarget{class_application_aba1a28d6689d2311b0f2990e6a530840}\label{class_application_aba1a28d6689d2311b0f2990e6a530840} 
+void {\bfseries essential\+Airports} ()
+\begin{DoxyCompactList}\small\item\em Identifies essential airports in the network. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{class_application_aae0ef77d4ebd4dda320a8e7d92a95fad}{haversine\+Distance}} (double lat1, double lon1, double lat2, double lon2)
+\begin{DoxyCompactList}\small\item\em Calculates the Haversine distance between two geographical points. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_application_aa64adce3d21a1bcb787374b860313668}{get\+Best\+Flight\+Option}} (std\+::pair$<$ std\+::string, std\+::string $>$ src, std\+::pair$<$ std\+::string, std\+::string $>$ dest)
+\begin{DoxyCompactList}\small\item\em Finds and displays the best flight option(s) based on the given source and destination inputs. \end{DoxyCompactList}\item 
+std\+::vector$<$ \mbox{\hyperlink{class_airport}{Airport}} $>$ \mbox{\hyperlink{class_application_a6a84f89d192c054855957ab17ac22140}{find\+Shortest\+Path}} (\mbox{\hyperlink{class_vertex}{Vertex}}$<$ \mbox{\hyperlink{class_airport}{Airport}} $>$ \texorpdfstring{$\ast$}{*}src, \mbox{\hyperlink{class_vertex}{Vertex}}$<$ \mbox{\hyperlink{class_airport}{Airport}} $>$ \texorpdfstring{$\ast$}{*}dest)
+\begin{DoxyCompactList}\small\item\em Finds the shortest path (least number of stops) between two airports. \end{DoxyCompactList}\item 
+std\+::set$<$ \mbox{\hyperlink{class_vertex}{Vertex}}$<$ \mbox{\hyperlink{class_airport}{Airport}} $>$ \texorpdfstring{$\ast$}{*} $>$ \mbox{\hyperlink{class_application_a1deaaca263906ae49ab5258e003eb622}{get\+Vertices\+Based\+On\+Input}} (std\+::pair$<$ std\+::string, std\+::string $>$ input)
+\begin{DoxyCompactList}\small\item\em Retrieves a set of airport vertices based on the specified input type and detail. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_application_a3a796734013ae79179bb8575ce55e3d7}{best\+Flight\+Opt\+Given\+Airports}} (std\+::set$<$ std\+::string $>$ \&airlines, \mbox{\hyperlink{class_vertex}{Vertex}}$<$ \mbox{\hyperlink{class_airport}{Airport}} $>$ \texorpdfstring{$\ast$}{*}src, \mbox{\hyperlink{class_vertex}{Vertex}}$<$ \mbox{\hyperlink{class_airport}{Airport}} $>$ \texorpdfstring{$\ast$}{*}dest)
+\begin{DoxyCompactList}\small\item\em Finds flight options from a source to a destination airport considering only specified airlines. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_application_a1d385f6f1aea6506d2abb95e7be9aaac}{best\+Flight\+Opt\+Max\+Airports}} (int max\+Airlines, \mbox{\hyperlink{class_vertex}{Vertex}}$<$ \mbox{\hyperlink{class_airport}{Airport}} $>$ \texorpdfstring{$\ast$}{*}src, \mbox{\hyperlink{class_vertex}{Vertex}}$<$ \mbox{\hyperlink{class_airport}{Airport}} $>$ \texorpdfstring{$\ast$}{*}dest)
+\begin{DoxyCompactList}\small\item\em Finds flight options from a source to a destination with a maximum number of airline changes allowed. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_vertex}{Vertex}}$<$ \mbox{\hyperlink{class_airport}{Airport}} $>$ \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_application_a65fb93cdaa5cab05c28b87396dbfd713}{get\+Vertex}} (std\+::string v, const \mbox{\hyperlink{class_graph}{Graph}}$<$ \mbox{\hyperlink{class_airport}{Airport}} $>$ \texorpdfstring{$\ast$}{*}g)
+\begin{DoxyCompactList}\small\item\em Retrieves a vertex from the graph based on the given airport identifier. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_vertex}{Vertex}}$<$ \mbox{\hyperlink{class_airport}{Airport}} $>$ \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_application_a949a82a11f495e5c5c3a6c32a47fb061}{get\+Vertex}} (std\+::string v)
+\begin{DoxyCompactList}\small\item\em Retrieves a vertex from the graph based on the given airport identifier. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_application_a85e7309ba045f65803552696dcc5894f}{check\+If\+Exists}} (const std\+::string \&code)
+\begin{DoxyCompactList}\small\item\em Checks if an airline with the given code exists in the graph. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Manages the main functionalities of the airport management system including graph operations and flight options. 
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_application_a22eb1b019be1c2919856c572796a8820}\label{class_application_a22eb1b019be1c2919856c572796a8820} 
+\index{Application@{Application}!articulationPoints@{articulationPoints}}
+\index{articulationPoints@{articulationPoints}!Application@{Application}}
+\doxysubsubsection{\texorpdfstring{articulationPoints()}{articulationPoints()}}
+{\footnotesize\ttfamily std\+::set$<$ \mbox{\hyperlink{class_airport}{Airport}} $>$ Application\+::articulation\+Points (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_graph}{Graph}}$<$ \mbox{\hyperlink{class_airport}{Airport}} $>$ \texorpdfstring{$\ast$}{*}}]{g }\end{DoxyParamCaption})}
+
+
+
+Finds articulation points in the graph, representing essential airports. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em g} & Pointer to the airport graph. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Set of essential airports. 
+\end{DoxyReturn}
+\Hypertarget{class_application_a3a796734013ae79179bb8575ce55e3d7}\label{class_application_a3a796734013ae79179bb8575ce55e3d7} 
+\index{Application@{Application}!bestFlightOptGivenAirports@{bestFlightOptGivenAirports}}
+\index{bestFlightOptGivenAirports@{bestFlightOptGivenAirports}!Application@{Application}}
+\doxysubsubsection{\texorpdfstring{bestFlightOptGivenAirports()}{bestFlightOptGivenAirports()}}
+{\footnotesize\ttfamily void Application\+::best\+Flight\+Opt\+Given\+Airports (\begin{DoxyParamCaption}\item[{std\+::set$<$ std\+::string $>$ \&}]{airlines,  }\item[{\mbox{\hyperlink{class_vertex}{Vertex}}$<$ \mbox{\hyperlink{class_airport}{Airport}} $>$ \texorpdfstring{$\ast$}{*}}]{src,  }\item[{\mbox{\hyperlink{class_vertex}{Vertex}}$<$ \mbox{\hyperlink{class_airport}{Airport}} $>$ \texorpdfstring{$\ast$}{*}}]{dest }\end{DoxyParamCaption})}
+
+
+
+Finds flight options from a source to a destination airport considering only specified airlines. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em airlines} & A set of airline codes to filter the flight options. \\
+\hline
+{\em src} & Pointer to the source airport vertex. \\
+\hline
+{\em dest} & Pointer to the destination airport vertex. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_application_a1d385f6f1aea6506d2abb95e7be9aaac}\label{class_application_a1d385f6f1aea6506d2abb95e7be9aaac} 
+\index{Application@{Application}!bestFlightOptMaxAirports@{bestFlightOptMaxAirports}}
+\index{bestFlightOptMaxAirports@{bestFlightOptMaxAirports}!Application@{Application}}
+\doxysubsubsection{\texorpdfstring{bestFlightOptMaxAirports()}{bestFlightOptMaxAirports()}}
+{\footnotesize\ttfamily void Application\+::best\+Flight\+Opt\+Max\+Airports (\begin{DoxyParamCaption}\item[{int}]{max\+Airlines,  }\item[{\mbox{\hyperlink{class_vertex}{Vertex}}$<$ \mbox{\hyperlink{class_airport}{Airport}} $>$ \texorpdfstring{$\ast$}{*}}]{src,  }\item[{\mbox{\hyperlink{class_vertex}{Vertex}}$<$ \mbox{\hyperlink{class_airport}{Airport}} $>$ \texorpdfstring{$\ast$}{*}}]{dest }\end{DoxyParamCaption})}
+
+
+
+Finds flight options from a source to a destination with a maximum number of airline changes allowed. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em max\+Airlines} & The maximum number of airlines allowed in a flight path. \\
+\hline
+{\em src} & Pointer to the source airport vertex. \\
+\hline
+{\em dest} & Pointer to the destination airport vertex. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_application_a85e7309ba045f65803552696dcc5894f}\label{class_application_a85e7309ba045f65803552696dcc5894f} 
+\index{Application@{Application}!checkIfExists@{checkIfExists}}
+\index{checkIfExists@{checkIfExists}!Application@{Application}}
+\doxysubsubsection{\texorpdfstring{checkIfExists()}{checkIfExists()}}
+{\footnotesize\ttfamily bool Application\+::check\+If\+Exists (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{code }\end{DoxyParamCaption})}
+
+
+
+Checks if an airline with the given code exists in the graph. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em code} & The airline code to check. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true If the airline exists. 
+
+false If the airline does not exist. 
+\end{DoxyReturn}
+\Hypertarget{class_application_a1d16161f32808241bbd195f44eb92f07}\label{class_application_a1d16161f32808241bbd195f44eb92f07} 
+\index{Application@{Application}!dfs\_art@{dfs\_art}}
+\index{dfs\_art@{dfs\_art}!Application@{Application}}
+\doxysubsubsection{\texorpdfstring{dfs\_art()}{dfs\_art()}}
+{\footnotesize\ttfamily void Application\+::dfs\+\_\+art (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_graph}{Graph}}$<$ \mbox{\hyperlink{class_airport}{Airport}} $>$ \texorpdfstring{$\ast$}{*}}]{g,  }\item[{\mbox{\hyperlink{class_vertex}{Vertex}}$<$ \mbox{\hyperlink{class_airport}{Airport}} $>$ \texorpdfstring{$\ast$}{*}}]{v,  }\item[{std\+::stack$<$ \mbox{\hyperlink{class_airport}{Airport}} $>$ \&}]{s,  }\item[{std\+::set$<$ \mbox{\hyperlink{class_airport}{Airport}} $>$ \&}]{l,  }\item[{int \&}]{i }\end{DoxyParamCaption})}
+
+
+
+Depth-\/first search algorithm to find articulation points. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em g} & Pointer to the airport graph. \\
+\hline
+{\em v} & Pointer to the vertex (airport). \\
+\hline
+{\em s} & Reference to a stack of airports. \\
+\hline
+{\em l} & Reference to a set of essential airports. \\
+\hline
+{\em i} & Integer for numbering vertices. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_application_a93eab4940e57d384c2b6c52874cd376c}\label{class_application_a93eab4940e57d384c2b6c52874cd376c} 
+\index{Application@{Application}!findAirportMaxX@{findAirportMaxX}}
+\index{findAirportMaxX@{findAirportMaxX}!Application@{Application}}
+\doxysubsubsection{\texorpdfstring{findAirportMaxX()}{findAirportMaxX()}}
+{\footnotesize\ttfamily void Application\+::find\+Airport\+MaxX (\begin{DoxyParamCaption}\item[{std\+::string}]{code,  }\item[{int}]{x,  }\item[{int}]{option }\end{DoxyParamCaption})}
+
+
+
+Finds airports reachable within a maximum number of stops from a specified airport. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em code} & The code of the airport. \\
+\hline
+{\em x} & Maximum number of stops. \\
+\hline
+{\em option} & Type of destination to find (airports, cities, countries). \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_application_ac0c435e0b9f13678a945a5c0a7be2fd6}\label{class_application_ac0c435e0b9f13678a945a5c0a7be2fd6} 
+\index{Application@{Application}!findAllDestinations@{findAllDestinations}}
+\index{findAllDestinations@{findAllDestinations}!Application@{Application}}
+\doxysubsubsection{\texorpdfstring{findAllDestinations()}{findAllDestinations()}}
+{\footnotesize\ttfamily void Application\+::find\+All\+Destinations (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{airport\+Code }\end{DoxyParamCaption})}
+
+
+
+Finds all destinations reachable from a specified airport. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em airport\+Code} & The code of the airport. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_application_a6a84f89d192c054855957ab17ac22140}\label{class_application_a6a84f89d192c054855957ab17ac22140} 
+\index{Application@{Application}!findShortestPath@{findShortestPath}}
+\index{findShortestPath@{findShortestPath}!Application@{Application}}
+\doxysubsubsection{\texorpdfstring{findShortestPath()}{findShortestPath()}}
+{\footnotesize\ttfamily std\+::vector$<$ \mbox{\hyperlink{class_airport}{Airport}} $>$ Application\+::find\+Shortest\+Path (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_vertex}{Vertex}}$<$ \mbox{\hyperlink{class_airport}{Airport}} $>$ \texorpdfstring{$\ast$}{*}}]{src,  }\item[{\mbox{\hyperlink{class_vertex}{Vertex}}$<$ \mbox{\hyperlink{class_airport}{Airport}} $>$ \texorpdfstring{$\ast$}{*}}]{dest }\end{DoxyParamCaption})}
+
+
+
+Finds the shortest path (least number of stops) between two airports. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em src} & Pointer to the source airport vertex. \\
+\hline
+{\em dest} & Pointer to the destination airport vertex. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+std\+::vector$<$\+Airport$>$ A vector of airports representing the path from source to destination. 
+\end{DoxyReturn}
+\Hypertarget{class_application_aa64adce3d21a1bcb787374b860313668}\label{class_application_aa64adce3d21a1bcb787374b860313668} 
+\index{Application@{Application}!getBestFlightOption@{getBestFlightOption}}
+\index{getBestFlightOption@{getBestFlightOption}!Application@{Application}}
+\doxysubsubsection{\texorpdfstring{getBestFlightOption()}{getBestFlightOption()}}
+{\footnotesize\ttfamily void Application\+::get\+Best\+Flight\+Option (\begin{DoxyParamCaption}\item[{std\+::pair$<$ std\+::string, std\+::string $>$}]{src,  }\item[{std\+::pair$<$ std\+::string, std\+::string $>$}]{dest }\end{DoxyParamCaption})}
+
+
+
+Finds and displays the best flight option(s) based on the given source and destination inputs. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em src} & A pair representing the source location\textquotesingle{}s type and identifier (e.\+g., airport code, name, city). \\
+\hline
+{\em dest} & A pair representing the destination location\textquotesingle{}s type and identifier. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_application_a533215d2b94f5cda9010b66924dd0ef7}\label{class_application_a533215d2b94f5cda9010b66924dd0ef7} 
+\index{Application@{Application}!getFlightsByAirline@{getFlightsByAirline}}
+\index{getFlightsByAirline@{getFlightsByAirline}!Application@{Application}}
+\doxysubsubsection{\texorpdfstring{getFlightsByAirline()}{getFlightsByAirline()}}
+{\footnotesize\ttfamily int Application\+::get\+Flights\+By\+Airline (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{airline\+Code }\end{DoxyParamCaption})}
+
+
+
+Gets the number of flights operated by a specified airline. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em airline\+Code} & The code of the airline. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Number of flights. 
+\end{DoxyReturn}
+\Hypertarget{class_application_aa1d09c8cecf5b5cc23fc1f52aa8ef14e}\label{class_application_aa1d09c8cecf5b5cc23fc1f52aa8ef14e} 
+\index{Application@{Application}!getFlightsByCity@{getFlightsByCity}}
+\index{getFlightsByCity@{getFlightsByCity}!Application@{Application}}
+\doxysubsubsection{\texorpdfstring{getFlightsByCity()}{getFlightsByCity()}}
+{\footnotesize\ttfamily int Application\+::get\+Flights\+By\+City (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{city\+Name }\end{DoxyParamCaption})}
+
+
+
+Gets the number of flights departing from a specified city. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em city\+Name} & The name of the city. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Number of flights. 
+\end{DoxyReturn}
+\Hypertarget{class_application_ad56b2e853477f3509217918017983780}\label{class_application_ad56b2e853477f3509217918017983780} 
+\index{Application@{Application}!getGlobalNumFlights@{getGlobalNumFlights}}
+\index{getGlobalNumFlights@{getGlobalNumFlights}!Application@{Application}}
+\doxysubsubsection{\texorpdfstring{getGlobalNumFlights()}{getGlobalNumFlights()}}
+{\footnotesize\ttfamily int Application\+::get\+Global\+Num\+Flights (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Gets the total number of flights in the graph. 
+
+\begin{DoxyReturn}{Returns}
+Total number of flights. 
+\end{DoxyReturn}
+\Hypertarget{class_application_a0ab51575503a4ca1decc668b2f7b45af}\label{class_application_a0ab51575503a4ca1decc668b2f7b45af} 
+\index{Application@{Application}!getKAirportsGreatestCap@{getKAirportsGreatestCap}}
+\index{getKAirportsGreatestCap@{getKAirportsGreatestCap}!Application@{Application}}
+\doxysubsubsection{\texorpdfstring{getKAirportsGreatestCap()}{getKAirportsGreatestCap()}}
+{\footnotesize\ttfamily void Application\+::get\+KAirports\+Greatest\+Cap (\begin{DoxyParamCaption}\item[{int}]{k }\end{DoxyParamCaption})}
+
+
+
+Finds the top K airports with the greatest capacity. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em k} & Number of airports to find. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_application_ae6a305318d51c9853361c10d64f178ef}\label{class_application_ae6a305318d51c9853361c10d64f178ef} 
+\index{Application@{Application}!getMaxPathBFS@{getMaxPathBFS}}
+\index{getMaxPathBFS@{getMaxPathBFS}!Application@{Application}}
+\doxysubsubsection{\texorpdfstring{getMaxPathBFS()}{getMaxPathBFS()}}
+{\footnotesize\ttfamily std\+::vector$<$ std\+::pair$<$ \mbox{\hyperlink{class_airport}{Airport}}, int $>$ $>$ Application\+::get\+Max\+Path\+BFS (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_vertex}{Vertex}}$<$ \mbox{\hyperlink{class_airport}{Airport}} $>$ \texorpdfstring{$\ast$}{*}}]{v,  }\item[{\mbox{\hyperlink{class_graph}{Graph}}$<$ \mbox{\hyperlink{class_airport}{Airport}} $>$ \texorpdfstring{$\ast$}{*}}]{g }\end{DoxyParamCaption})}
+
+
+
+Finds the maximum path from a specified vertex in the graph using BFS. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em v} & Pointer to the vertex (airport). \\
+\hline
+{\em g} & Pointer to the airport graph. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Vector of pairs containing airports and their respective distances. 
+\end{DoxyReturn}
+\Hypertarget{class_application_a91288f71aa78c68f6990e14930c0339c}\label{class_application_a91288f71aa78c68f6990e14930c0339c} 
+\index{Application@{Application}!getNumAirports@{getNumAirports}}
+\index{getNumAirports@{getNumAirports}!Application@{Application}}
+\doxysubsubsection{\texorpdfstring{getNumAirports()}{getNumAirports()}}
+{\footnotesize\ttfamily int Application\+::get\+Num\+Airports (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Gets the total number of airports in the graph. 
+
+\begin{DoxyReturn}{Returns}
+Total number of airports. 
+\end{DoxyReturn}
+\Hypertarget{class_application_a1db0310eb1907e2e7edc33d6b365989c}\label{class_application_a1db0310eb1907e2e7edc33d6b365989c} 
+\index{Application@{Application}!getOutFlights@{getOutFlights}}
+\index{getOutFlights@{getOutFlights}!Application@{Application}}
+\doxysubsubsection{\texorpdfstring{getOutFlights()}{getOutFlights()}}
+{\footnotesize\ttfamily int Application\+::get\+Out\+Flights (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{airport\+Code }\end{DoxyParamCaption}) const}
+
+
+
+Gets the number of outgoing flights from a specified airport. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em airport\+Code} & The code of the airport. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Number of outgoing flights. 
+\end{DoxyReturn}
+\Hypertarget{class_application_a7c803a486587676732b08ce6f17f776b}\label{class_application_a7c803a486587676732b08ce6f17f776b} 
+\index{Application@{Application}!getTotalFlights@{getTotalFlights}}
+\index{getTotalFlights@{getTotalFlights}!Application@{Application}}
+\doxysubsubsection{\texorpdfstring{getTotalFlights()}{getTotalFlights()}}
+{\footnotesize\ttfamily int Application\+::get\+Total\+Flights (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_graph}{Graph}}$<$ \mbox{\hyperlink{class_airport}{Airport}} $>$ \texorpdfstring{$\ast$}{*}}]{g,  }\item[{\mbox{\hyperlink{class_vertex}{Vertex}}$<$ \mbox{\hyperlink{class_airport}{Airport}} $>$ \texorpdfstring{$\ast$}{*}}]{v }\end{DoxyParamCaption})}
+
+
+
+Gets the total number of flights associated with a specified vertex (airport). 
+
+
+\begin{DoxyParams}{Parameters}
+{\em g} & Pointer to the airport graph. \\
+\hline
+{\em v} & Pointer to the vertex (airport). \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Total number of flights. 
+\end{DoxyReturn}
+\Hypertarget{class_application_ac6669dfc8ece0dd8c302bbd4fc1eeb43}\label{class_application_ac6669dfc8ece0dd8c302bbd4fc1eeb43} 
+\index{Application@{Application}!getUniqueAirlines@{getUniqueAirlines}}
+\index{getUniqueAirlines@{getUniqueAirlines}!Application@{Application}}
+\doxysubsubsection{\texorpdfstring{getUniqueAirlines()}{getUniqueAirlines()}}
+{\footnotesize\ttfamily int Application\+::get\+Unique\+Airlines (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{airport\+Code }\end{DoxyParamCaption}) const}
+
+
+
+Gets the number of unique airlines operating from a specified airport. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em airport\+Code} & The code of the airport. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Number of unique airlines. 
+\end{DoxyReturn}
+\Hypertarget{class_application_a9e3015db09698f1f56ef76337f44b76f}\label{class_application_a9e3015db09698f1f56ef76337f44b76f} 
+\index{Application@{Application}!getUniqueCountriesFromAirport@{getUniqueCountriesFromAirport}}
+\index{getUniqueCountriesFromAirport@{getUniqueCountriesFromAirport}!Application@{Application}}
+\doxysubsubsection{\texorpdfstring{getUniqueCountriesFromAirport()}{getUniqueCountriesFromAirport()}}
+{\footnotesize\ttfamily int Application\+::get\+Unique\+Countries\+From\+Airport (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{airport\+Code }\end{DoxyParamCaption})}
+
+
+
+Gets the number of unique countries directly reachable from a specified airport. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em airport\+Code} & The code of the airport. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Number of unique countries. 
+\end{DoxyReturn}
+\Hypertarget{class_application_a20158431690a39e735a1ed485f6853d7}\label{class_application_a20158431690a39e735a1ed485f6853d7} 
+\index{Application@{Application}!getUniqueCountriesFromCity@{getUniqueCountriesFromCity}}
+\index{getUniqueCountriesFromCity@{getUniqueCountriesFromCity}!Application@{Application}}
+\doxysubsubsection{\texorpdfstring{getUniqueCountriesFromCity()}{getUniqueCountriesFromCity()}}
+{\footnotesize\ttfamily int Application\+::get\+Unique\+Countries\+From\+City (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{city\+Name }\end{DoxyParamCaption})}
+
+
+
+Gets the number of unique countries directly reachable from a specified city. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em city\+Name} & The name of the city. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Number of unique countries. 
+\end{DoxyReturn}
+\Hypertarget{class_application_a949a82a11f495e5c5c3a6c32a47fb061}\label{class_application_a949a82a11f495e5c5c3a6c32a47fb061} 
+\index{Application@{Application}!getVertex@{getVertex}}
+\index{getVertex@{getVertex}!Application@{Application}}
+\doxysubsubsection{\texorpdfstring{getVertex()}{getVertex()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_vertex}{Vertex}}$<$ \mbox{\hyperlink{class_airport}{Airport}} $>$ \texorpdfstring{$\ast$}{*} Application\+::get\+Vertex (\begin{DoxyParamCaption}\item[{std\+::string}]{v }\end{DoxyParamCaption})}
+
+
+
+Retrieves a vertex from the graph based on the given airport identifier. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em v} & The identifier of the airport. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Vertex$<$\+Airport$>$\texorpdfstring{$\ast$}{*} Pointer to the corresponding airport vertex, if found; otherwise, nullptr. 
+\end{DoxyReturn}
+\Hypertarget{class_application_a65fb93cdaa5cab05c28b87396dbfd713}\label{class_application_a65fb93cdaa5cab05c28b87396dbfd713} 
+\index{Application@{Application}!getVertex@{getVertex}}
+\index{getVertex@{getVertex}!Application@{Application}}
+\doxysubsubsection{\texorpdfstring{getVertex()}{getVertex()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_vertex}{Vertex}}$<$ \mbox{\hyperlink{class_airport}{Airport}} $>$ \texorpdfstring{$\ast$}{*} Application\+::get\+Vertex (\begin{DoxyParamCaption}\item[{std\+::string}]{v,  }\item[{const \mbox{\hyperlink{class_graph}{Graph}}$<$ \mbox{\hyperlink{class_airport}{Airport}} $>$ \texorpdfstring{$\ast$}{*}}]{g }\end{DoxyParamCaption})}
+
+
+
+Retrieves a vertex from the graph based on the given airport identifier. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em v} & The identifier of the airport. \\
+\hline
+{\em g} & Pointer to the graph containing the airport vertices. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Vertex$<$\+Airport$>$\texorpdfstring{$\ast$}{*} Pointer to the corresponding airport vertex, if found; otherwise, nullptr. 
+\end{DoxyReturn}
+\Hypertarget{class_application_a1deaaca263906ae49ab5258e003eb622}\label{class_application_a1deaaca263906ae49ab5258e003eb622} 
+\index{Application@{Application}!getVerticesBasedOnInput@{getVerticesBasedOnInput}}
+\index{getVerticesBasedOnInput@{getVerticesBasedOnInput}!Application@{Application}}
+\doxysubsubsection{\texorpdfstring{getVerticesBasedOnInput()}{getVerticesBasedOnInput()}}
+{\footnotesize\ttfamily std\+::set$<$ \mbox{\hyperlink{class_vertex}{Vertex}}$<$ \mbox{\hyperlink{class_airport}{Airport}} $>$ \texorpdfstring{$\ast$}{*} $>$ Application\+::get\+Vertices\+Based\+On\+Input (\begin{DoxyParamCaption}\item[{std\+::pair$<$ std\+::string, std\+::string $>$}]{input }\end{DoxyParamCaption})}
+
+
+
+Retrieves a set of airport vertices based on the specified input type and detail. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em input} & A pair representing the type (e.\+g., code, name, city) and the detail (e.\+g., actual code or city name). \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+std\+::set\texorpdfstring{$<$}{<}Vertex$<$\+Airport$>$\texorpdfstring{$\ast$}{*}\texorpdfstring{$>$}{>} A set of vertices corresponding to the input criteria. 
+\end{DoxyReturn}
+\Hypertarget{class_application_aae0ef77d4ebd4dda320a8e7d92a95fad}\label{class_application_aae0ef77d4ebd4dda320a8e7d92a95fad} 
+\index{Application@{Application}!haversineDistance@{haversineDistance}}
+\index{haversineDistance@{haversineDistance}!Application@{Application}}
+\doxysubsubsection{\texorpdfstring{haversineDistance()}{haversineDistance()}}
+{\footnotesize\ttfamily double Application\+::haversine\+Distance (\begin{DoxyParamCaption}\item[{double}]{lat1,  }\item[{double}]{lon1,  }\item[{double}]{lat2,  }\item[{double}]{lon2 }\end{DoxyParamCaption})}
+
+
+
+Calculates the Haversine distance between two geographical points. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em lat1} & Latitude of the first point. \\
+\hline
+{\em lon1} & Longitude of the first point. \\
+\hline
+{\em lat2} & Latitude of the second point. \\
+\hline
+{\em lon2} & Longitude of the second point. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Haversine distance. 
+\end{DoxyReturn}
+\Hypertarget{class_application_a86cc93d306b053cf4e78491fa643dd66}\label{class_application_a86cc93d306b053cf4e78491fa643dd66} 
+\index{Application@{Application}!nodesAtLessDistanceBFS@{nodesAtLessDistanceBFS}}
+\index{nodesAtLessDistanceBFS@{nodesAtLessDistanceBFS}!Application@{Application}}
+\doxysubsubsection{\texorpdfstring{nodesAtLessDistanceBFS()}{nodesAtLessDistanceBFS()}}
+{\footnotesize\ttfamily std\+::vector$<$ \mbox{\hyperlink{class_airport}{Airport}} $>$ Application\+::nodes\+At\+Less\+Distance\+BFS (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_graph}{Graph}}$<$ \mbox{\hyperlink{class_airport}{Airport}} $>$ \texorpdfstring{$\ast$}{*}}]{g,  }\item[{const \mbox{\hyperlink{class_airport}{Airport}} \&}]{source,  }\item[{int}]{k }\end{DoxyParamCaption})}
+
+
+
+Finds nodes (airports) at a distance less than or equal to a given number of stops. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em g} & Pointer to the airport graph. \\
+\hline
+{\em source} & Source airport. \\
+\hline
+{\em k} & Maximum number of stops. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Vector of airports within the specified distance. 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/\mbox{\hyperlink{_application_8h}{Application.\+h}}\item 
+src/Application.\+cpp\end{DoxyCompactItemize}

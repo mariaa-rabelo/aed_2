@@ -1,0 +1,88 @@
+\doxysection{Menu Class Reference}
+\hypertarget{class_menu}{}\label{class_menu}\index{Menu@{Menu}}
+
+
+Manages the user interface and interactions for the airport management system.  
+
+
+
+
+{\ttfamily \#include $<$Menu.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_menu_ad466dd83355124a6ed958430450bfe94}\label{class_menu_ad466dd83355124a6ed958430450bfe94} 
+{\bfseries Menu} ()
+\begin{DoxyCompactList}\small\item\em Constructs the \doxylink{class_menu}{Menu} object and initializes the application. \end{DoxyCompactList}\item 
+\Hypertarget{class_menu_aa6ff784314cc009478562d9ab7a0af34}\label{class_menu_aa6ff784314cc009478562d9ab7a0af34} 
+void {\bfseries print} ()
+\begin{DoxyCompactList}\small\item\em Starts the menu display and user interaction loop. \end{DoxyCompactList}\item 
+\Hypertarget{class_menu_abbad10e862b5b4820bcf47b89e44b61b}\label{class_menu_abbad10e862b5b4820bcf47b89e44b61b} 
+void {\bfseries handle\+Global\+Stats} ()
+\begin{DoxyCompactList}\small\item\em Handles the display of global statistics. \end{DoxyCompactList}\item 
+\Hypertarget{class_menu_a185b746c23fcf53ea88c1f64b599639e}\label{class_menu_a185b746c23fcf53ea88c1f64b599639e} 
+void {\bfseries handle\+Airport\+Details} ()
+\begin{DoxyCompactList}\small\item\em Handles the details of a specific airport. \end{DoxyCompactList}\item 
+\Hypertarget{class_menu_aba4495b6ddb9e0528b955a5ab811d534}\label{class_menu_aba4495b6ddb9e0528b955a5ab811d534} 
+void {\bfseries handle\+City\+Or\+Airline\+Stats} ()
+\begin{DoxyCompactList}\small\item\em Handles statistics related to cities or airlines. \end{DoxyCompactList}\item 
+\Hypertarget{class_menu_a1a824f9a6bec9c23fda9822d247b7c90}\label{class_menu_a1a824f9a6bec9c23fda9822d247b7c90} 
+void {\bfseries handle\+Country\+Stats} ()
+\begin{DoxyCompactList}\small\item\em Handles statistics about countries served by an airport or city. \end{DoxyCompactList}\item 
+\Hypertarget{class_menu_a4f194f2a483792e18e95176d0b7a460f}\label{class_menu_a4f194f2a483792e18e95176d0b7a460f} 
+void {\bfseries handle\+Destinations\+Stats} ()
+\begin{DoxyCompactList}\small\item\em Handles information about destinations from a specific airport. \end{DoxyCompactList}\item 
+\Hypertarget{class_menu_a28ee132225b56106250d84ee8caa8e6e}\label{class_menu_a28ee132225b56106250d84ee8caa8e6e} 
+void {\bfseries handle\+Reachable\+In\+Max\+XStops} ()
+\begin{DoxyCompactList}\small\item\em Handles finding reachable destinations within a specified number of stops from an airport. \end{DoxyCompactList}\item 
+\Hypertarget{class_menu_a96957757ad5777c3cf4b21ce2676756e}\label{class_menu_a96957757ad5777c3cf4b21ce2676756e} 
+void {\bfseries handle\+Greatest\+Cap} ()
+\begin{DoxyCompactList}\small\item\em Handles finding the top K airports with the greatest capacity. \end{DoxyCompactList}\item 
+\Hypertarget{class_menu_a14497218fca228c57cd9bf6d45865c42}\label{class_menu_a14497218fca228c57cd9bf6d45865c42} 
+void {\bfseries handle\+Best\+Flight\+Option} ()
+\begin{DoxyCompactList}\small\item\em Handles finding the best flight option based on user criteria. \end{DoxyCompactList}\item 
+\Hypertarget{class_menu_a9251286428ceabcb12bc8055119e93dd}\label{class_menu_a9251286428ceabcb12bc8055119e93dd} 
+void {\bfseries handle\+Airlines\+FLight\+Options} ()
+\begin{DoxyCompactList}\small\item\em Handles flight options with specific airlines. \end{DoxyCompactList}\item 
+\Hypertarget{class_menu_ab70431c8f72f62ae85a86ab2fa2cfacf}\label{class_menu_ab70431c8f72f62ae85a86ab2fa2cfacf} 
+void {\bfseries handle\+Flight\+Option\+With\+Max\+Stops} ()
+\begin{DoxyCompactList}\small\item\em Handles finding flight options with a maximum number of stops. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static std\+::pair$<$ std\+::string, std\+::string $>$ \mbox{\hyperlink{class_menu_ad986bbce20fa65e2dd22c3d282b4c4ba}{select\+Options}} ()
+\begin{DoxyCompactList}\small\item\em Presents the user with different selection options and captures their choice. \end{DoxyCompactList}\item 
+\Hypertarget{class_menu_a138a343ae6a464efb656707b21c9963c}\label{class_menu_a138a343ae6a464efb656707b21c9963c} 
+static void {\bfseries list\+Menu} ()
+\begin{DoxyCompactList}\small\item\em Displays the main menu with various options for the user to choose from. \end{DoxyCompactList}\item 
+\Hypertarget{class_menu_a8efd30fa57e276332bbbeed9e50907c6}\label{class_menu_a8efd30fa57e276332bbbeed9e50907c6} 
+static void {\bfseries ask\+Return\+To\+Menu} ()
+\begin{DoxyCompactList}\small\item\em Presents the user with the option to return to the main menu or exit the application. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Manages the user interface and interactions for the airport management system. 
+
+This class provides methods to display different menus, handle user inputs, and invoke the corresponding functionalities in the \doxylink{class_application}{Application} class. 
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_menu_ad986bbce20fa65e2dd22c3d282b4c4ba}\label{class_menu_ad986bbce20fa65e2dd22c3d282b4c4ba} 
+\index{Menu@{Menu}!selectOptions@{selectOptions}}
+\index{selectOptions@{selectOptions}!Menu@{Menu}}
+\doxysubsubsection{\texorpdfstring{selectOptions()}{selectOptions()}}
+{\footnotesize\ttfamily std\+::pair$<$ std\+::string, std\+::string $>$ Menu\+::select\+Options (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Presents the user with different selection options and captures their choice. 
+
+\begin{DoxyReturn}{Returns}
+A pair of strings representing the type and detail of the selection. 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/\mbox{\hyperlink{_menu_8h}{Menu.\+h}}\item 
+src/Menu.\+cpp\end{DoxyCompactItemize}
