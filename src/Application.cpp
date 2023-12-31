@@ -97,7 +97,7 @@ int Application::getUniqueCountriesFromCity(const std::string& cityName) {
 }
 
 //func5
-void Application::findAllDestinations(const std::string airportCode) {
+void Application::findAllDestinations(const std::string& airportCode) {
     Vertex<Airport>* startVertex = g_airport.findVertex(airportCode);
     if (!startVertex) {
         std::cout << "Airport not found." << std::endl;
@@ -232,7 +232,6 @@ std::vector<Airport> Application::nodesAtLessDistanceBFS(const Graph<Airport> *g
 }
 
 //funcionalidade 7
-
 void Application::maximumTrip(){
     std::vector<std::pair<Airport,Airport>> res;
     std::map<Airport, std::vector<std::pair<Airport, int>>> paths;
@@ -253,23 +252,21 @@ void Application::maximumTrip(){
     int max = *max_element(max_pathsV.begin(), max_pathsV.end());
     //colocar em res todos os que têm max_lenght
     for (const auto& p : paths){
-        //cout <<"b: "<<endl;
-        //p.first.print();
-        //cout <<"endl: "<<endl;
         for (const auto& k : p.second){
-            //k.first.print();
             if (k.second == max){
                 res.emplace_back(p.first, k.first);
             }
         }
     }
-    std::cout << "res:"<<std::endl;
+    std::cout << "Longest trips available:"<<std::endl;
     for (const auto& p : res){
         std::cout <<"from:"<< std::endl;
         p.first.print();
         std::cout << "to: "<<std::endl;
         p.second.print();
+        std::cout <<std::endl;
     }
+    std::cout << "They have the maximum of " << max-1 << " flights" <<std::endl;
 }
 
 std::vector<std::pair<Airport, int>> Application::getMaxPathBFS( Vertex<Airport> *v, Graph<Airport> *g){

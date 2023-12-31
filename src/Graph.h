@@ -1,9 +1,14 @@
-//
-// Created by user on 05-Dec-23.
-//
+/**
+ * @file Graph.h
+ * @brief This file contains the template definitions for Graph, Vertex, and Edge classes.
+ *
+ * These classes are used to create and manage a graph data structure.
+ * Created by user on 05-Dec-23.
+ */
 
 #ifndef AED_2_GRAPH_H
 #define AED_2_GRAPH_H
+
 #include <unordered_map>
 #include <string>
 #include <vector>
@@ -13,24 +18,56 @@
 #include <set>
 #include "Airline.h"
 
-template <class T> class Edge;
-template <class T> class Graph;
 template <class T> class Vertex;
+template <class T> class Graph;
+template <class T> class Edge;
 
+/**
+ * @class Vertex
+ * @brief Represents a vertex in a graph.
+ * This class contains the information stored in a vertex, along with a list of outgoing edges
+ * (adjacency list). It also contains auxiliary fields for various graph algorithms.
+ *
+ * @tparam T The type of the content in the vertex.
+ */
 template <class T>
 class Vertex {
-    T info;                // content
-    std::vector<Edge<T> > adj;  // list of outgoing edges
-    bool visited;          // auxiliary field
-    bool processing;       // auxiliary field
-    int indegree;          // auxiliary field
-    int num;               // auxiliary field
-    int low;               // auxiliary field
+    T info;                            ///< Content of the vertex.
+    std::vector<Edge<T>> adj;          ///< List of outgoing edges (adjacency list).
+    bool visited{};                    ///< Auxiliary field to mark if the vertex has been visited.
+    bool processing{};                 ///< Auxiliary field to mark if the vertex is being processed.
+    int indegree{};                    ///< Auxiliary field to store the in-degree of the vertex.
+    int num{};                         ///< Auxiliary field used in various algorithms.
+    int low{};                         ///< Auxiliary field used in algorithms like Tarjan's.
 
+    /**
+     * @brief Adds an edge to this vertex.
+     *
+     * This method creates a new edge from this vertex to the specified destination vertex.
+     * The edge is also associated with a specific airline.
+     *
+     * @param dest The destination vertex of the edge.
+     * @param a The airline associated with the edge.
+     */
     void addEdge(Vertex<T> *dest, Airline *a);
+
+    /**
+     * @brief Removes an edge from this vertex.
+     *
+     * This method removes an outgoing edge from this vertex to the specified destination vertex.
+     * Returns true if the edge was successfully removed, false otherwise.
+     *
+     * @param d The destination vertex of the edge to remove.
+     * @return True if the edge was removed, false otherwise.
+     */
     bool removeEdgeTo(Vertex<T> *d);
+
 public:
-    Vertex(T in);
+    /**
+     * @brief Constructor to create a vertex with given content.
+     * @param in Content of the vertex.
+     */
+    explicit Vertex(T in);
     T getInfo() const;
     void setInfo(T in);
     bool isVisited() const;
@@ -53,23 +90,41 @@ public:
     void setLow(int low);
     bool operator<(const Vertex<T>& other) const;
 
-    friend class Graph<T>;
+    friend class Graph<T>; ///< Allows Graph<T> to access private members of Vertex<T>.
 };
 
+/**
+ * @class Edge
+ * @brief Template class representing an edge in a graph.
+ *
+ * @tparam T The type of content in the vertices that the edge connects.
+ */
 template <class T>
 class Edge {
+
     Vertex<T> * dest;      // destination vertex
     Airline* airline;         // edge weight
 public:
+    /**
+     * @brief Constructor to create an edge with a destination vertex and associated airline.
+     * @param d Destination vertex.
+     * @param a Airline associated with the edge.
+     */
     Edge(Vertex<T> *d, Airline *a);
     Vertex<T> *getDest() const;
     void setDest(Vertex<T> *dest);
     Airline* getAirline() const;
-    void setAirline(Airline airline);
+    void setAirline(const Airline& airline);
     friend class Graph<T>;
     friend class Vertex<T>;
 };
 
+/**
+ * @class Graph
+ * @brief Template class representing a graph.
+ *
+ * @tparam T The type of content in the vertices of the graph.
+ */
 template <class T>
 class Graph {
     std::vector<Vertex<T> *> vertexSet;      // vertex set
@@ -78,29 +133,36 @@ class Graph {
     std::list<std::list<T>> _list_sccs_;        // auxiliary field
 
     void dfsVisit(Vertex<T> *v,  std::vector<T> & res) const;
-    bool dfsIsDAG(Vertex<T> *v) const;
 public:
+
     Vertex<T> *findVertex(const T &in) const;
     Vertex<T> * findVertex(const std::string &code) const;
     int getNumVertex() const;
+
+    /**
+     * @brief Adds a vertex to the graph.
+     * @param in Content of the vertex to be added.
+     * @return True if the vertex was successfully added, false if it already exists.
+     */
     bool addVertex(const T &in);
     bool removeVertex(const T &in);
 
     Airline* findAirline(const std::string& code) const;
     bool addAirline(const Airline& airline);
 
+    /**
+     * @brief Adds an edge to the graph.
+     * @param sourc Content of the source vertex.
+     * @param dest Content of the destination vertex.
+     * @param airline Airline associated with the edge.
+     * @return True if the edge was successfully added, false if either vertex does not exist.
+     */
     bool addEdge(const T &sourc, const T &dest, Airline* airline);
     bool removeEdge(const T &sourc, const T &dest);
     int getTotalEdges() const;
 
     std::vector<Vertex<T> * > getVertexSet() const;
     std::vector<Airline*> getAirlines() const;
-    std::vector<T> dfs() const;
-    std::vector<T> dfs(const T & source) const;
-    std::vector<T> bfs(const T &source) const;
-    std::vector<T> topsort() const;
-    bool isDAG() const;
-
 };
 
 /****************** Constructors and functions ********************/
@@ -145,7 +207,7 @@ template<class T>
 void Vertex<T>::setProcessing(bool p) {
     Vertex::processing = p;
 }
-                                // operador <
+
 template<class T>
 bool Vertex<T>::operator<(const Vertex<T>& other) const{
     return this->getInfo() < other.getInfo();
@@ -166,8 +228,8 @@ Airline* Edge<T>::getAirline() const {
 }
 
 template<class T>
-void Edge<T>::setAirline(Airline airline) {
-    Edge::airline = airline;
+void Edge<T>::setAirline(const Airline& newAirline) {
+    Edge::airline = newAirline;
 }
 
 
@@ -211,8 +273,8 @@ int Vertex<T>::getIndegree() const {
 }
 
 template<class T>
-void Vertex<T>::setIndegree(int indegree) {
-    Vertex::indegree = indegree;
+void Vertex<T>::setIndegree(int ind) {
+    Vertex::indegree = ind;
 }
 
 template<class T>
@@ -221,8 +283,8 @@ int Vertex<T>::getNum() const {
 }
 
 template<class T>
-void Vertex<T>::setNum(int num) {
-    Vertex::num = num;
+void Vertex<T>::setNum(int n) {
+    Vertex::num = n;
 }
 
 template<class T>
@@ -231,8 +293,8 @@ int Vertex<T>::getLow() const {
 }
 
 template<class T>
-void Vertex<T>::setLow(int low) {
-    Vertex::low = low;
+void Vertex<T>::setLow(int l) {
+    Vertex::low = l;
 }
 
 template <class T>
@@ -246,8 +308,8 @@ const std::vector<Edge<T>> &Vertex<T>::getAdj() const {
 }
 
 template <class T>
-void Vertex<T>::setAdj(const std::vector<Edge<T>> &adj) {
-    Vertex::adj = adj;
+void Vertex<T>::setAdj(const std::vector<Edge<T>> &newAdj) {
+    Vertex::adj = newAdj;
 }
 
 
@@ -260,11 +322,10 @@ bool Graph<T>::addVertex(const T &in) {
     if ( findVertex(in) != nullptr)
         return false;
 
-    Vertex<T> *newVertex = new Vertex<T>(in);
+    auto *newVertex = new Vertex<T>(in);
     vertexSet.push_back(newVertex);
     return true;
 }
-
 
 /*
  * Adds an edge to a graph (this), given the contents of the source and
@@ -370,24 +431,6 @@ bool Graph<T>::removeVertex(const T &in) {
     return false;
 }
 
-
-/****************** DFS ********************/
-/*
- * Performs a depth-first search (dfs) traversal in a graph (this).
- * Returns a vector with the contents of the vertices by dfs order.
- * Follows the algorithm described in theoretical classes.
- */
-template <class T>
-std::vector<T> Graph<T>::dfs() const {
-    std::vector<T> res;
-    for (auto v : vertexSet)
-        v->visited = false;
-    for (auto v : vertexSet)
-        if (! v->visited)
-            dfsVisit(v, res);
-    return res;
-}
-
 /*
  * Auxiliary function that visits a vertex (v) and its adjacent, recursively.
  * Updates a parameter with the list of visited node contents.
@@ -403,152 +446,5 @@ void Graph<T>::dfsVisit(Vertex<T> *v, std::vector<T> & res) const {
     }
 }
 
-
-/****************** DFS ********************/
-/*
- * Performs a depth-first search (dfs) in a graph (this).
- * Returns a vector with the contents of the vertices by dfs order,
- * from the source node.
- */
-template <class T>
-std::vector<T> Graph<T>::dfs(const T & source) const {
-    std::vector<T> res;
-    auto s = findVertex(source);
-    if (s == nullptr)
-        return res;
-
-    for (auto v : vertexSet)
-        v->visited = false;
-
-    dfsVisit(s, res);
-    return res;
-}
-
-
-/****************** BFS ********************/
-/*
- * Performs a breadth-first search (bfs) in a graph (this), starting
- * from the vertex with the given source contents (source).
- * Returns a vector with the contents of the vertices by bfs order.
- */
-template <class T>
-std::vector<T> Graph<T>::bfs(const T & source) const {
-    std::vector<T> res;
-    auto s = findVertex(source);
-    if (s == nullptr)
-        return res;
-    std::queue<Vertex<T> *> q;
-    for (auto v : vertexSet)
-        v->visited = false;
-    q.push(s);
-    s->visited = true;
-    while (!q.empty()) {
-        auto v = q.front();
-        q.pop();
-        res.push_back(v->info);
-        for (auto & e : v->adj) {
-            auto w = e.dest;
-            if ( ! w->visited ) {
-                q.push(w);
-
-                w->visited = true;
-            }
-        }
-    }
-    return res;
-}
-
-
-/****************** isDAG  ********************/
-/*
- * Performs a depth-first search in a graph (this), to determine if the graph
- * is acyclic (acyclic directed graph or DAG).
- * During the search, a cycle is found if an edge connects to a vertex
- * that is being processed in the stack of recursive calls (see theoretical classes).
- * Returns true if the graph is acyclic, and false otherwise.
- */
-
-template <class T>
-bool Graph<T>::isDAG() const {
-    for (auto v : vertexSet) {
-        v->visited = false;
-        v->processing = false;
-    }
-    for (auto v : vertexSet)
-        if (! v->visited)
-            if ( ! dfsIsDAG(v) )
-                return false;
-    return true;
-}
-
-/**
- * Auxiliary function that visits a vertex (v) and its adjacent, recursively.
- * Returns false (not acyclic) if an edge to a vertex in the stack is found.
- */
-template <class T>
-bool Graph<T>::dfsIsDAG(Vertex<T> *v) const {
-    v->visited = true;
-    v->processing = true;
-    for (auto & e : v->adj) {
-        auto w = e.dest;
-        if (w->processing)
-            return false;
-        if (! w->visited)
-            if (! dfsIsDAG(w))
-                return false;
-    }
-    v->processing = false;
-    return true;
-}
-
-
-/****************** toposort ********************/
-/*
- * Performs a topological sorting of the vertices of a graph (this).
- * Returns a vector with the contents of the vertices by topological order.
- * If the graph has cycles, returns an empty vector.
- * Follows the algorithm described in theoretical classes.
- */
-
-template<class T>
-std::vector<T> Graph<T>::topsort() const {
-    std::vector<T> res;
-    std::queue<Vertex<T>*> q;
-
-    if (!isDAG()) return res;
-
-    // calculate incoming degree
-    for (auto v: vertexSet){
-        v->indegree=0;
-    }
-
-    for (auto v: vertexSet){
-        for (const Edge<T> &edge: v->getAdj()){
-            edge.dest->indegree++;
-        }
-    }
-
-    //queue of 0-indegree vertices
-    for (auto v: vertexSet){
-        if (v->indegree==0){
-            q.push(v);
-            //std::cout << v->getInfo() << std::endl;
-        }
-    }
-
-    //process vertices
-    while (!q.empty()){
-        auto front= q.front();
-        q.pop();
-        for (const Edge<T> &edge: front->getAdj()){
-            edge.dest->indegree--; //update indegree
-            if (edge.dest->indegree==0)
-                q.push(edge.dest); //update queue
-        }
-        res.push_back(front->getInfo());
-    }
-
-    return res;
-}
 
 #endif //AED_2_GRAPH_H
