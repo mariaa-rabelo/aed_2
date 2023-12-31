@@ -35,7 +35,6 @@ class Vertex {
     T info;                            ///< Content of the vertex.
     std::vector<Edge<T>> adj;          ///< List of outgoing edges (adjacency list).
     bool visited{};                    ///< Auxiliary field to mark if the vertex has been visited.
-    bool processing{};                 ///< Auxiliary field to mark if the vertex is being processed.
     int indegree{};                    ///< Auxiliary field to store the in-degree of the vertex.
     int num{};                         ///< Auxiliary field used in various algorithms.
     int low{};                         ///< Auxiliary field used in algorithms like Tarjan's.
@@ -64,30 +63,112 @@ class Vertex {
 
 public:
     /**
-     * @brief Constructor to create a vertex with given content.
-     * @param in Content of the vertex.
+     * @brief Constructs a Vertex object with the provided content.
+     *
+     * @param in The content to be stored in the vertex.
      */
     explicit Vertex(T in);
+
+    /**
+     * @brief Retrieves the content of this vertex.
+     *
+     * @return The content of the vertex.
+     */
     T getInfo() const;
+
+    /**
+     * @brief Sets the content of this vertex.
+     *
+     * @param in The new content to set for this vertex.
+     */
     void setInfo(T in);
+
+    /**
+     * @brief Checks if this vertex has been visited.
+     *
+     * @return True if the vertex has been visited, false otherwise.
+     */
     bool isVisited() const;
+
+    /**
+     * @brief Sets the visited status of this vertex.
+     *
+     * @param v The visited status to set.
+     */
     void setVisited(bool v);
-    bool isProcessing() const;
-    void setProcessing(bool p);
+
+    /**
+     * @brief Gets the adjacency list of this vertex.
+     *
+     * @return A constant reference to the vector of outgoing edges from this vertex.
+     */
     const std::vector<Edge<T>> &getAdj() const;
+
+    /**
+     * @brief Sets the adjacency list of this vertex.
+     *
+     * @param adj The new adjacency list to set.
+     */
     void setAdj(const std::vector<Edge<T>> &adj);
 
+    /**
+     * @brief Increases the indegree of this vertex by one.
+     */
     void increaseIndegree();
+
+    /**
+     * @brief Decreases the indegree of this vertex by one.
+     */
     void decreaseIndegree();
 
+    /**
+     * @brief Retrieves the indegree of this vertex.
+     *
+     * @return The indegree of the vertex.
+     */
     int getIndegree() const;
+
+    /**
+     * @brief Sets the indegree of this vertex.
+     *
+     * @param indegree The indegree value to set.
+     */
     void setIndegree(int indegree);
 
+    /**
+     * @brief Retrieves the 'num' value of this vertex.
+     *
+     * @return The 'num' value of the vertex.
+     */
     int getNum() const;
+
+    /**
+     * @brief Sets the 'num' value of this vertex.
+     *
+     * @param num The 'num' value to set.
+     */
     void setNum(int num);
 
+    /**
+     * @brief Retrieves the 'low' value of this vertex.
+     *
+     * @return The 'low' value of the vertex.
+     */
     int getLow() const;
+
+    /**
+     * @brief Sets the 'low' value of this vertex.
+     *
+     * @param low The 'low' value to set.
+     */
     void setLow(int low);
+
+    /**
+     * @brief Compares this vertex with another vertex based on their contents.
+     *
+     * @param other The vertex to compare with.
+     * @return True if this vertex is less than the other vertex, false otherwise.
+     */
     bool operator<(const Vertex<T>& other) const;
 
     friend class Graph<T>; ///< Allows Graph<T> to access private members of Vertex<T>.
@@ -97,46 +178,93 @@ public:
  * @class Edge
  * @brief Template class representing an edge in a graph.
  *
+ * This class models an edge in a graph, holding a pointer to the destination vertex
+ * and an associated airline object. It is used within the Graph class to represent
+ * connections between vertices.
+ *
  * @tparam T The type of content in the vertices that the edge connects.
  */
 template <class T>
 class Edge {
 
-    Vertex<T> * dest;      // destination vertex
-    Airline* airline;         // edge weight
+    Vertex<T> * dest;     ///< Destination vertex.
+    Airline* airline;     ///< Airline associated to the edge.
 public:
     /**
      * @brief Constructor to create an edge with a destination vertex and associated airline.
-     * @param d Destination vertex.
-     * @param a Airline associated with the edge.
+     * @param d Pointer to the destination vertex.
+     * @param a Pointer to the Airline object associated with the edge.
      */
     Edge(Vertex<T> *d, Airline *a);
+    /**
+     * @brief Retrieves the destination vertex of this edge.
+     *
+     * @return Pointer to the destination vertex.
+     */
     Vertex<T> *getDest() const;
+
+    /**
+     * @brief Sets the destination vertex of this edge.
+     *
+     * @param dest Pointer to the new destination vertex.
+     */
     void setDest(Vertex<T> *dest);
+
+    /**
+     * @brief Retrieves the airline associated with this edge.
+     *
+     * @return Pointer to the airline associated with the edge.
+     */
     Airline* getAirline() const;
+
+    /**
+     * @brief Sets the airline associated with this edge.
+     *
+     * @param airline The Airline object to associate with the edge.
+     */
     void setAirline(const Airline& airline);
-    friend class Graph<T>;
-    friend class Vertex<T>;
+
+    friend class Graph<T>; ///< Allows Graph<T> to access private members of Edge<T>.
+    friend class Vertex<T>; ///< Allows Vertex<T> to access private members of Edge<T>.
 };
 
 /**
  * @class Graph
  * @brief Template class representing a graph.
  *
+ * This class models a graph data structure, using a list of vertices and airlines.
+ * It provides functionalities for adding and removing vertices and edges, finding vertices and airlines,
+ * and querying various properties of the graph.
+ *
  * @tparam T The type of content in the vertices of the graph.
  */
 template <class T>
 class Graph {
-    std::vector<Vertex<T> *> vertexSet;      // vertex set
-    std::vector<Airline*> airlines;
-    std::stack<Vertex<T>> _stack_;           // auxiliary field
-    std::list<std::list<T>> _list_sccs_;        // auxiliary field
+    std::vector<Vertex<T> *> vertexSet;     ///< A vector that stores pointers to all the vertices in the graph.
+    std::vector<Airline*> airlines;         ///< A vector that stores pointers to all the airlines associated with the graph.
 
+    //TODO delete it? not being used ig
     void dfsVisit(Vertex<T> *v,  std::vector<T> & res) const;
 public:
 
+    /**
+    * @brief Finds a vertex in the graph with the given content.
+    * @param in The content to search for.
+    * @return Pointer to the vertex if found, nullptr otherwise.
+    */
     Vertex<T> *findVertex(const T &in) const;
+
+    /**
+     * @brief Finds a vertex in the graph based on a given code (assuming the vertex content has a 'getCode' method).
+     * @param code The code to search for.
+     * @return Pointer to the vertex if found, nullptr otherwise.
+     */
     Vertex<T> * findVertex(const std::string &code) const;
+
+    /**
+     * @brief Gets the number of vertices in the graph.
+     * @return The number of vertices.
+     */
     int getNumVertex() const;
 
     /**
@@ -145,23 +273,60 @@ public:
      * @return True if the vertex was successfully added, false if it already exists.
      */
     bool addVertex(const T &in);
+    /**
+     * @brief Removes the vertex with the specified content from the graph.
+     * @param in Content of the vertex to be removed.
+     * @return True if the vertex is removed successfully, false if it does not exist.
+     */
     bool removeVertex(const T &in);
 
+    /**
+     * @brief Finds an airline by its code.
+     * @param code The airline's code.
+     * @return Pointer to the airline if found, nullptr otherwise.
+     */
     Airline* findAirline(const std::string& code) const;
+
+    /**
+     * @brief Adds an airline to the graph.
+     * @param airline The airline to be added.
+     * @return True if the airline is added successfully, false if an airline with the same code already exists.
+     */
     bool addAirline(const Airline& airline);
 
     /**
-     * @brief Adds an edge to the graph.
+     * @brief Adds an edge between two vertices in the graph.
      * @param sourc Content of the source vertex.
      * @param dest Content of the destination vertex.
      * @param airline Airline associated with the edge.
-     * @return True if the edge was successfully added, false if either vertex does not exist.
+     * @return True if the edge is added successfully, false if either vertex does not exist.
      */
     bool addEdge(const T &sourc, const T &dest, Airline* airline);
+
+    /**
+     * @brief Removes an edge between two vertices in the graph.
+     * @param sourc Content of the source vertex.
+     * @param dest Content of the destination vertex.
+     * @return True if the edge is removed successfully, false if either vertex does not exist or the edge does not exist.
+     */
     bool removeEdge(const T &sourc, const T &dest);
+
+    /**
+     * @brief Gets the total number of edges in the graph.
+     * @return Total number of edges.
+     */
     int getTotalEdges() const;
 
+    /**
+     * @brief Gets the list of vertices in the graph.
+     * @return Vector of pointers to vertices.
+     */
     std::vector<Vertex<T> * > getVertexSet() const;
+
+    /**
+     * @brief Gets the list of airlines in the graph.
+     * @return Vector of pointers to airlines.
+     */
     std::vector<Airline*> getAirlines() const;
 };
 
@@ -196,16 +361,6 @@ T Vertex<T>::getInfo() const {
 template<class T>
 void Vertex<T>::setInfo(T in) {
     Vertex::info = in;
-}
-
-template<class T>
-bool Vertex<T>::isProcessing() const {
-    return processing;
-}
-
-template<class T>
-void Vertex<T>::setProcessing(bool p) {
-    Vertex::processing = p;
 }
 
 template<class T>
