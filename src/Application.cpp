@@ -309,29 +309,47 @@ int Application::getTotalFlights(const Graph<Airport> *g, Vertex<Airport> * v){
     Airport airport = v->getInfo();
     //outgoing
     int outgoing = v->getAdj().size();
-    std::cout << "vert:"<< v->getInfo().getCode()<< std::endl
-    << "indeg:"<< v->getIndegree()<<std::endl;
-    return v->getIndegree()+outgoing;
+    int incoming = 0;
+    for (auto ver : setVertex){
+        for (auto edg : ver->getAdj()){
+            if (edg.getDest() == v){
+                incoming++;
+            }
+        }
+    }
+    if (v->getInfo().getCode() == "ORD" || v->getInfo().getCode() == "PEK" || v->getInfo().getCode() == "LHR") {
+        std::cout << "vert:" << v->getInfo().getCode() << std::endl
+                  << "indeg:" << v->getIndegree() << std::endl
+                  << "out:" << outgoing << std::endl;
+    }
+    return incoming+outgoing;
 
 }
 void Application::getKAirportsGreatestCap(int k){
     std::vector<int> caps;
-    std::multimap<int, Airport> capacity;
+    //std::multimap<int, Airport> capacity;
+    std::vector<pair<int, Airport>> sum_flights;
     auto vertexSet = g_airport.getVertexSet();
     for (auto v : vertexSet){
         int vertCap = getTotalFlights(&g_airport, v);
         caps.push_back(vertCap);
-        capacity.emplace(vertCap, v->getInfo());
+        sum_flights.push_back(make_pair( vertCap,v->getInfo()));
     }
-    std::sort(caps.begin(), caps.end(), [](int a, int b) { return a > b; });
+    std::sort(sum_flights.begin(), sum_flights.end(), [](pair<int, Airport> a, pair<int, Airport> b) { return a.first > b.first; });
+    //std::sort(caps.begin(), caps.end(), [](int a, int b) { return a > b; });
+    std::cout << "Airports:" << "      Flights:" << std::endl;
     for (int i = 0; i < k; i++){
+        auto current = sum_flights[i];
+        std::cout << current.second.getCode() << ":     "<< current.first<<std::endl;
+    }
+    /*for (int i = 0; i < k; i++){
         auto it = capacity.find(caps[i]);
         if (it != capacity.end()){
             Airport airport = (*it).second;
             airport.print();
             capacity.erase(it);
         }
-    }
+    }*/
 }
 
 //funcionalidade 9
