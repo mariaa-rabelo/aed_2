@@ -196,6 +196,7 @@ public:
      */
     std::set<Vertex<Airport> *> getVerticesBasedOnInput(std::pair<std::string, std::string> input);
 
+
     /**
      * @brief Finds flight options from a source to a destination airport considering only specified airlines.
      *
@@ -238,6 +239,7 @@ public:
      * @return true If the airline exists.
      * @return false If the airline does not exist.
      */
+
     bool checkIfExists(const std::string& code);
 };
 #endif //AED_2_APPLICATION_H

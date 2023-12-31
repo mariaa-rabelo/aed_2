@@ -94,10 +94,12 @@ public:
      */
     void handleAirlinesFLightOptions();
 
+
     /**
-     * @brief Handles finding flight options with a maximum number of stops.
+     * @brief Handles finding flight options with a maximum number of airlines.
      */
-    void handleFlightOptionWithMaxStops();
+    void handleFlightOptionWithMaxAirlineNumber();
+
 
     /**
      * @brief Presents the user with the option to return to the main menu or exit the application.
