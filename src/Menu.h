@@ -26,7 +26,7 @@ public:
     void handleReachableInMaxXStops();
     void handleBestFlightOption();
     void handleAirlinesFLightOptions();
-    void handleFlightOptionWithMaxStops();
+    void handleFlightOptionWithMaxAirlineNumber();
 
     static void askReturnToMenu();
 

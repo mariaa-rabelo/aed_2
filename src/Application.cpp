@@ -200,7 +200,6 @@ std::vector<Airport> Application::nodesAtLessDistanceBFS(const Graph<Airport> *g
     int level = 0;
     std::queue<Vertex<Airport>*> vert;
     std::queue<Vertex<Airport>*> aux;
-    //cout<< "L";
     vert.push(v);
     while (level < k){
         while (!vert.empty()){
@@ -252,17 +251,14 @@ void Application::maximumTrip(){
     int max = *max_element(max_pathsV.begin(), max_pathsV.end());
     //colocar em res todos os que têm max_lenght
     for (const auto& p : paths){
-        //cout <<"b: "<<endl;
-        //p.first.print();
-        //cout <<"endl: "<<endl;
         for (const auto& k : p.second){
-            //k.first.print();
             if (k.second == max){
                 res.emplace_back(p.first, k.first);
             }
         }
     }
-    std::cout << "res:"<<std::endl;
+    std::cout << "total flights: " << max << endl
+    << "res:"<<std::endl;
     for (const auto& p : res){
         std::cout <<"from:"<< std::endl;
         p.first.print();
@@ -272,7 +268,6 @@ void Application::maximumTrip(){
 }
 
 std::vector<std::pair<Airport, int>> Application::getMaxPathBFS( Vertex<Airport> *v, Graph<Airport> *g){
-    //vector<pair<Vertex<Airport>, int>> res;
     std::vector<std::pair<Airport, int>> res;
     int level = 0;
     std::queue<Vertex<Airport>*> vert;
@@ -281,13 +276,9 @@ std::vector<std::pair<Airport, int>> Application::getMaxPathBFS( Vertex<Airport>
     v->setVisited(true);
     vert.push(v);
     while (!vert.empty()){
-        //cout << "h";
         while (!vert.empty()){
             Vertex<Airport> * current = vert.front();
             vert.pop();
-        //    cout << "being analized:" << endl;
-        //    current->getInfo().print();
-        //    cout << "adj:" << endl;
             for ( Edge<Airport> e : current->getAdj()) {
                 Vertex<Airport>* adj = e.getDest();
                 if (!adj->isVisited()) {
@@ -306,7 +297,6 @@ std::vector<std::pair<Airport, int>> Application::getMaxPathBFS( Vertex<Airport>
     }
     while (!final.empty()){
         Airport ar= final.front()->getInfo();
-        //Vertex<Airport> frontV = *vert.front();
         res.push_back(std::make_pair(ar, level));
         final.pop();
     }
@@ -465,7 +455,9 @@ void Application::getBestFlightOption(Vertex<Airport>* src, Vertex<Airport>* des
 }
 
 //bestFlightOption com filtros
+
 void Application::bestFlightOptGivenAirports(std::set<std::string>& airlines, Vertex<Airport>* src, Vertex<Airport>* dest ){
+
     auto new_g = flightOption.removeEdgeGivenAirline(&g_airport, airlines);
     auto srcV = getVertex(src->getInfo().getCode(), &new_g );
     auto destV = getVertex(dest->getInfo().getCode(), &new_g);
@@ -473,37 +465,54 @@ void Application::bestFlightOptGivenAirports(std::set<std::string>& airlines, Ve
         std::cout << "No options found!"<<std::endl;
         return;
     }
-    auto paths = flightOption.bfsFlightVisitFilter(&new_g, src, dest, airlines);
-    for (const auto& path : paths){
-        std::cout << "possible path:"<< std::endl;
-        for (const auto& airport : path){
-            airport.print();
+    auto paths = flightOption.bfsFlightVisitFilter(&new_g, srcV, destV);
+    cout << "ALL PATHS: "<<endl;
+    for ( stack<pair<Airport, basic_string<char>>> path : paths){
+        pair<Airport, std::string> new_pair(destV->getInfo(),"");
+        path.push(new_pair);
+        cout << "path:"<<endl;
+        while (!path.empty()){
+            cout << " airport: "<< path.top().first.getCode() << " Airline: "<< path.top().second << endl;
+            path.pop();
         }
     }
-    /*
-    auto paths = flightOption.getAllPaths(&g_airport, src, dest);
-    auto res = flightOption.flightsChoosenAirlines(&g_airport, paths, airlines);
 
-    cout << "ALL PATHS FOR "<< src->getInfo().getCode() << " TO " << dest->getInfo().getCode()<<endl;
-
-    for (auto path : res){
-        cout << "possible path:"<<endl;
-        for (auto vert : path){
-            vert->getInfo().print();
-        }
-    }
-    */
 }
 
 void Application::bestFlightOptMaxAirports(  int maxAirlines, Vertex<Airport>* src, Vertex<Airport>* dest){
+    /*
+    auto paths = flightOption.flightsMaxAirlineNumber(&g_airport, src, dest, maxAirlines);
+    if (paths.size() == 1 && paths[0].empty()){
+        cout << "Not possible to reach "<< dest->getInfo().getCode()
+        << " from "<< src->getInfo().getCode() << "in "<< maxAirlines << " trips, or less."<<endl;
+        return;
+    }
+    cout << "ALL PATHS: "<<endl;
+    for ( stack<pair<Airport, basic_string<char>>> path : paths){
+        pair<Airport, std::string> new_pair(dest->getInfo(),"");
+        path.push(new_pair);
+        cout << "path:"<<endl;
+        while (!path.empty()){
+            cout << " airport: "<< path.top().first.getCode() << " Airline: "<< path.top().second << endl;
+            path.pop();
+        }
+    }
+
+    */
     auto paths = flightOption.flights(&g_airport, src, dest);
     auto res = flightOption.flightsMaxAirlineNumber(&g_airport, paths, maxAirlines);
     for(const auto& possible_path : res){
         std::cout << "possible path:"<< std::endl;
         for (const auto& airport : possible_path){
-            airport.print();
+            if (airport.second == ""){
+                cout << "departure:"<< airport.first.getCode() <<endl;
+
+            }
+            else
+                cout << airport.first.getCode() << " ( " << airport.second<< " ) " <<endl;
         }
     }
+
 }
 
 //auxiliar
@@ -520,16 +529,6 @@ bool Application::checkIfExists(const std::string& code){
         if (airl->getCode() == code)
             return true;
     }
-    //auto setVertex = g_airport.getVertexSet();
-    //std::cout << "code:"<<code<< std::endl;
-    /*for (auto node: setVertex){
-        std::cout << "airlines in graph"<< std::endl;
-        for (auto e : node->getAdj()){
-            std::cout << e.getAirline()->getCode() << std::endl;
-            if (e.getAirline()->getCode() == code){
-                return true;
-            }
-        }
-    }*/
+
     return false;
 }

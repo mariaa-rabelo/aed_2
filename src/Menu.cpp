@@ -133,7 +133,7 @@ void Menu::print(){
                 askReturnToMenu();
                 break;
             case 12:
-                handleFlightOptionWithMaxStops();
+                handleFlightOptionWithMaxAirlineNumber();
                 askReturnToMenu();
                 break;
             default:
@@ -411,12 +411,12 @@ void Menu::handleAirlinesFLightOptions() {
         std::cout << "invalid airport"<< std::endl;
         return;
     }
-    app.bestFlightOptGivenAirports(airlines,src, dst );
+    app.bestFlightOptGivenAirports(airlines,src,dst);
 }
 
-void Menu::handleFlightOptionWithMaxStops() {
+void Menu::handleFlightOptionWithMaxAirlineNumber() {
     int max;
-    std::cout << "max trips"<< std::endl;
+    std::cout << "max airline number"<< std::endl;
     std::cin>> max;
     std::cout << "source airport code"<< std::endl;
     std::string airport;
@@ -429,6 +429,7 @@ void Menu::handleFlightOptionWithMaxStops() {
         std::cout << "invalid airport"<< std::endl;
         return;
     }
+
     app.bestFlightOptMaxAirports(max,src,dest);
 }
 
