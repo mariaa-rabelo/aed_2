@@ -193,7 +193,6 @@ std::vector<std::stack<std::pair<Airport, std::string>>> FlightOption::bfsFlight
 Graph<Airport>  FlightOption::removeEdgeGivenAirline(const Graph<Airport> *g, std::set<std::string>& airlines ){
     Graph<Airport> new_graph;
 
-
     for (auto v : g->getVertexSet()){
         for (auto edge : v->getAdj()){
             if (airlines.find(edge.getAirline()->getCode()) != airlines.end()){

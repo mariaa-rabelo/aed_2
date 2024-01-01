@@ -36,6 +36,14 @@ public:
     void run();
 
     /**
+     * @brief Getter for the graph of Application.
+     * @return The graph of airports.
+     */
+    const Graph<Airport>& getGraph() const {
+        return g_airport;
+    };
+
+    /**
      * @brief Gets the total number of airports in the graph.
      * @return Total number of airports.
      */
@@ -174,10 +182,15 @@ public:
     /**
      * @brief Finds and displays the best flight option(s) based on the given source and destination inputs.
      *
+     * @param g The graph to be searched for the best flight option
      * @param src A pair representing the source location's type and identifier (e.g., airport code, name, city).
      * @param dest A pair representing the destination location's type and identifier.
      */
-    void getBestFlightOption(std::pair<std::string, std::string> src, std::pair<std::string, std::string> dest);
+    void getBestFlightOption(const Graph<Airport> *g, std::pair<std::string, std::string> src, std::pair<std::string, std::string> dest);
+
+
+    void findAndDisplayBestPaths(const Graph<Airport> *g, const std::set<Vertex<Airport> *> &srcVertices,
+                                 const std::set<Vertex<Airport> *> &destVertices);
 
     /**
      * @brief Finds the shortest path (least number of stops) between two airports.
@@ -186,25 +199,26 @@ public:
      * @param dest Pointer to the destination airport vertex.
      * @return std::vector<Airport> A vector of airports representing the path from source to destination.
      */
-    std::vector<Airport> findShortestPath(Vertex<Airport> *src, Vertex<Airport> *dest);
+    std::vector<Airport> findShortestPath(const Graph<Airport> *g, Vertex<Airport> *src, Vertex<Airport> *dest);
 
     /**
      * @brief Retrieves a set of airport vertices based on the specified input type and detail.
      *
+     * @param g The graph to be searched for the vertices
      * @param input A pair representing the type (e.g., code, name, city) and the detail (e.g., actual code or city name).
      * @return std::set<Vertex<Airport>*> A set of vertices corresponding to the input criteria.
      */
-    std::set<Vertex<Airport> *> getVerticesBasedOnInput(std::pair<std::string, std::string> input);
+    std::set<Vertex<Airport> *> getVerticesBasedOnInput(const Graph<Airport> *g, std::pair<std::string, std::string> input);
 
 
     /**
      * @brief Finds flight options from a source to a destination airport considering only specified airlines.
      *
      * @param airlines A set of airline codes to filter the flight options.
-     * @param src Pointer to the source airport vertex.
-     * @param dest Pointer to the destination airport vertex.
+     * @param src A pair representing the source location's type and identifier (e.g., airport code, name, city).
+     * @param dest A pair representing the destination location's type and identifier.
      */
-    void bestFlightOptGivenAirports(std::set<std::string>& airlines, Vertex<Airport>* src, Vertex<Airport>* dest);
+    void bestFlightOptFilter(std::set<std::string>& airlines, std::pair<std::string, std::string> src, std::pair<std::string, std::string> dest);
 
     /**
      * @brief Finds flight options from a source to a destination with a maximum number of airline changes allowed.
@@ -214,15 +228,6 @@ public:
      * @param dest Pointer to the destination airport vertex.
      */
     void bestFlightOptMaxAirports(int maxAirlines, Vertex<Airport>* src, Vertex<Airport>* dest);
-
-    /**
-     * @brief Retrieves a vertex from the graph based on the given airport identifier.
-     *
-     * @param v The identifier of the airport.
-     * @param g Pointer to the graph containing the airport vertices.
-     * @return Vertex<Airport>* Pointer to the corresponding airport vertex, if found; otherwise, nullptr.
-     */
-    Vertex<Airport>* getVertex(std::string v, const Graph<Airport>* g);
 
     /**
      * @brief Retrieves a vertex from the graph based on the given airport identifier.
@@ -241,5 +246,7 @@ public:
      */
 
     bool checkIfExists(const std::string& code);
+
+
 };
 #endif //AED_2_APPLICATION_H
