@@ -138,7 +138,7 @@ void Application::findAllDestinations(const std::string& airportCode) {
 }
 
 // funcionalidade 6
-void Application::findAirportMaxX( std::string code, int x, int option){
+void Application::findAirportMaxX( const std::string& code, int x, int option){
     std::set<Airport> destinations;
     auto setVertex = g_airport.getVertexSet();
     bool flag = false;
@@ -234,7 +234,7 @@ void Application::maximumTrip(){
         for (auto v_ : verts){
             v_->setVisited(false);
         }
-        std::vector<std::pair<Airport, int>> max_path = getMaxPathBFS(v, &g_airport);
+        std::vector<std::pair<Airport, int>> max_path = getMaxPathBFS(v);
         for (const std::pair<Airport, int>& p : max_path){
             max_pathsV.push_back(p.second);
         }
@@ -243,7 +243,7 @@ void Application::maximumTrip(){
     }
     //encontrar lenght de max_path
     int max = *max_element(max_pathsV.begin(), max_pathsV.end());
-    //colocar em res todos os que têm max_lenght
+    //colocar em res todos os que têm max_length
     for (const auto& p : paths){
         for (const auto& k : p.second){
             if (k.second == max){
@@ -263,7 +263,7 @@ void Application::maximumTrip(){
     std::cout << "They have the maximum of " << max-1 << " flights" <<std::endl;
 }
 
-std::vector<std::pair<Airport, int>> Application::getMaxPathBFS( Vertex<Airport> *v, Graph<Airport> *g){
+std::vector<std::pair<Airport, int>> Application::getMaxPathBFS( Vertex<Airport> *v){
     std::vector<std::pair<Airport, int>> res;
     int level = 0;
     std::queue<Vertex<Airport>*> vert;
@@ -292,7 +292,7 @@ std::vector<std::pair<Airport, int>> Application::getMaxPathBFS( Vertex<Airport>
     }
     while (!final.empty()){
         Airport ar= final.front()->getInfo();
-        res.push_back(std::make_pair(ar, level));
+        res.emplace_back(ar, level);
         final.pop();
     }
     return res;
@@ -321,9 +321,9 @@ void Application::getKAirportsGreatestCap(int k){
     for (auto v : vertexSet){
         int vertCap = getTotalFlights(&g_airport, v);
         caps.push_back(vertCap);
-        sum_flights.push_back(std::make_pair( vertCap,v->getInfo()));
+        sum_flights.emplace_back( vertCap,v->getInfo());
     }
-    std::sort(sum_flights.begin(), sum_flights.end(), [](std::pair<int, Airport> a, std::pair<int, Airport> b) { return a.first > b.first; });
+    std::sort(sum_flights.begin(), sum_flights.end(), [](const std::pair<int, Airport>& a, const std::pair<int, Airport>& b) { return a.first > b.first; });
     std::cout << "Airports:" << "      Flights:" << std::endl;
     for (int i = 0; i < k; i++){
         auto current = sum_flights[i];
@@ -356,7 +356,7 @@ std::set<Airport> Application::articulationPoints(Graph<Airport> *g) {
     auto verts = g_->getVertexSet();
     for (auto n : verts){
         for (auto e : n->getAdj()){
-            g_->addEdge(e.getDest()->getInfo(), n->getInfo(), 0);
+            g_->addEdge(e.getDest()->getInfo(), n->getInfo(), nullptr);
         }
     }
 
@@ -428,7 +428,7 @@ void Application::bestFlightOptFilter(std::set<std::string>& airlines, std::pair
     new_g.findAndDisplayBestPaths(srcVertices, destVertices);
 }
 
-std::set<Vertex<Airport>*> Application::getVerticesBasedOnInput(Graph<Airport>* g, std::pair<std::string, std::string> input) {
+std::set<Vertex<Airport>*> Application::getVerticesBasedOnInput(Graph<Airport>* g, const std::pair<std::string, std::string>& input) {
     std::set<Vertex<Airport>*> vertices;
 
     if (input.first == "1") { // Airport code
@@ -490,7 +490,7 @@ void Application::bestFlightOptMaxAirports(  int maxAirlines, Vertex<Airport>* s
     for(const auto& possible_path : res){
         std::cout << "Possible path"<< std::endl;
         for (const auto& airport : possible_path){
-            if (airport.second == ""){
+            if (airport.second.empty()){
                 std::cout << "departure: "<< airport.first.getCode() <<std::endl;
             }
             else

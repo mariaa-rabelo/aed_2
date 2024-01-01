@@ -268,7 +268,7 @@ void Menu::handleReachableInMaxXStops() {
 }
 
 std::pair<std::string, std::string> Menu::selectOptions(){
-    std::cout << "0: cancel\n" <<std::endl
+    std::cout << "0: cancel\n"
               << "1: airport code"<< std::endl
               << "2: airport name"<< std::endl
               << "3: city name"<< std::endl
@@ -279,6 +279,11 @@ std::pair<std::string, std::string> Menu::selectOptions(){
 
     while (type < "0" || type > "4") {
         std::cout << "Invalid input, please choose a number between 0 and 4.\n";
+        std::cout << "0: cancel\n"
+                  << "1: airport code"<< std::endl
+                  << "2: airport name"<< std::endl
+                  << "3: city name"<< std::endl
+                  << "4: geographical coordinates\n";
         std::getline(std::cin, type);
     }
 

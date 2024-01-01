@@ -113,32 +113,7 @@ public:
      * @param adj The new adjacency list to set.
      */
     void setAdj(const std::vector<Edge<T>> &adj);
-
-    /**
-     * @brief Increases the indegree of this vertex by one.
-     */
-    void increaseIndegree();
-
-    /**
-     * @brief Decreases the indegree of this vertex by one.
-     */
-    void decreaseIndegree();
-
-    /**
-     * @brief Retrieves the indegree of this vertex.
-     *
-     * @return The indegree of the vertex.
-     */
-    int getIndegree() const;
-
-    /**
-     * @brief Sets the indegree of this vertex.
-     *
-     * @param indegree The indegree value to set.
-     */
-    void setIndegree(int indegree);
-
-    /**
+/**
      * @brief Retrieves the 'num' value of this vertex.
      *
      * @return The 'num' value of the vertex.

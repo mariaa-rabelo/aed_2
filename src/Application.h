@@ -36,14 +36,6 @@ public:
     void run();
 
     /**
-     * @brief Getter for the graph of Application.
-     * @return The graph of airports.
-     */
-    const Graph<Airport>& getGraph() const {
-        return g_airport;
-    };
-
-    /**
      * @brief Gets the total number of airports in the graph.
      * @return Total number of airports.
      */
@@ -109,7 +101,7 @@ public:
      * @param x Maximum number of stops.
      * @param option Type of destination to find (airports, cities, countries).
      */
-    void findAirportMaxX(std::string code, int x, int option);
+    void findAirportMaxX(const std::string& code, int x, int option);
 
     /**
      * @brief Finds nodes (airports) at a distance less than or equal to a given number of stops.
@@ -118,7 +110,7 @@ public:
      * @param k Maximum number of stops.
      * @return Vector of airports within the specified distance.
      */
-    std::vector<Airport> nodesAtLessDistanceBFS(const Graph<Airport> *g, const Airport &source, int k);
+    static std::vector<Airport> nodesAtLessDistanceBFS(const Graph<Airport> *g, const Airport &source, int k);
 
     /**
      * @brief Plans a maximum trip, finding the longest path in the graph.
@@ -128,10 +120,9 @@ public:
     /**
      * @brief Finds the maximum path from a specified vertex in the graph using BFS.
      * @param v Pointer to the vertex (airport).
-     * @param g Pointer to the airport graph.
      * @return Vector of pairs containing airports and their respective distances.
      */
-    std::vector<std::pair<Airport, int>> getMaxPathBFS(Vertex<Airport> *v, Graph<Airport> *g);
+    static std::vector<std::pair<Airport, int>> getMaxPathBFS(Vertex<Airport> *v);
 
     /**
      * @brief Gets the total number of flights associated with a specified vertex (airport).
@@ -139,7 +130,7 @@ public:
      * @param v Pointer to the vertex (airport).
      * @return Total number of flights.
      */
-    int getTotalFlights(const Graph<Airport> *g, Vertex<Airport> *v);
+    static int getTotalFlights(const Graph<Airport> *g, Vertex<Airport> *v);
 
     /**
      * @brief Finds the top K airports with the greatest capacity.
@@ -177,7 +168,7 @@ public:
      * @param lon2 Longitude of the second point.
      * @return Haversine distance.
      */
-    double haversineDistance(double lat1, double lon1, double lat2, double lon2);
+    static double haversineDistance(double lat1, double lon1, double lat2, double lon2);
 
     /**
      * @brief Finds and displays the best flight option(s) based on the given source and destination inputs.
@@ -195,7 +186,7 @@ public:
      * @param input A pair representing the type (e.g., code, name, city) and the detail (e.g., actual code or city name).
      * @return std::set<Vertex<Airport>*> A set of vertices corresponding to the input criteria.
      */
-    std::set<Vertex<Airport> *> getVerticesBasedOnInput(Graph<Airport> *g, std::pair<std::string, std::string> input);
+    static std::set<Vertex<Airport> *> getVerticesBasedOnInput(Graph<Airport> *g, const std::pair<std::string, std::string>& input);
 
 
     /**
@@ -231,9 +222,7 @@ public:
      * @return true If the airline exists.
      * @return false If the airline does not exist.
      */
-
     bool checkIfExists(const std::string& code);
-
 
 };
 #endif //AED_2_APPLICATION_H
