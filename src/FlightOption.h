@@ -30,17 +30,6 @@ public:
     FlightOption();
 
     /**
-     * @brief Helper method for DFS-based path finding.
-     *
-     * @param g Pointer to the graph representing airports and flights.
-     * @param source Pointer to the source airport vertex.
-     * @param dest Pointer to the destination airport vertex.
-     * @param path Reference to the current path being explored.
-     * @param all_paths Reference to set of all paths found.
-     * @return True if a path to the destination is found, otherwise false.
-     */
-    bool dfsFlightVisit(const Graph<Airport> *g, Vertex<Airport> *source, Vertex<Airport> *dest, std::vector<Vertex<Airport>*> &path, std::set<std::vector<Vertex<Airport>*>> &all_paths );
-    /**
      * @brief Filters paths based on a maximum number of airlines.
      *
      * @param g Pointer to the graph.
@@ -51,17 +40,6 @@ public:
     std::set<std::vector<std::pair<Airport,std::string>>> flightsMaxAirlineNumber(const Graph<Airport> *g, std::set<std::vector<Airport>>& paths, int maxAirlines);
 
     /**
-     * @brief Filters paths based on specified airlines using BFS.
-     *
-     * @param g Pointer to the graph.
-     * @param source Pointer to the source airport vertex.
-     * @param dest Pointer to the destination airport vertex.
-     * @param airlines Set of preferred airline codes.
-     * @return Vector of stacks containing all paths that meet the airline filter.
-     */
-    std::vector<std::stack<std::pair<Airport, std::string>>> bfsFlightVisitFilter(const Graph<Airport> *g, Vertex<Airport> *source,Vertex<Airport> *dest );
-
-    /**
      * @brief Finds all flight paths between two airports without filters.
      *
      * @param g Pointer to the graph.
@@ -69,8 +47,7 @@ public:
      * @param dest Pointer to the destination airport vertex.
      * @return Set of vectors containing all possible flight paths.
      */
-
-    std::set<std::vector<Airport>>  flights(const Graph<Airport> *g, Vertex<Airport>* src, Vertex<Airport>* dest);
+    std::set<std::vector<Airport>> flights(const Graph<Airport> *g, Vertex<Airport>* src, Vertex<Airport>* dest);
 
     /**
      * @brief BFS-based method to find all paths between two airports.
