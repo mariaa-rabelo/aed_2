@@ -35,7 +35,11 @@ int \mbox{\hyperlink{class_graph_a38aeb4fa45b3c5f3f71e01cc6de5e8b0}{get\+Total\+
 std\+::vector$<$ \mbox{\hyperlink{class_vertex}{Vertex}}$<$ T $>$ \texorpdfstring{$\ast$}{*} $>$ \mbox{\hyperlink{class_graph_a41624b03fcb6bd29e4df574a1ec58541}{get\+Vertex\+Set}} () const
 \begin{DoxyCompactList}\small\item\em Gets the list of vertices in the graph. \end{DoxyCompactList}\item 
 std\+::vector$<$ \mbox{\hyperlink{class_airline}{Airline}} \texorpdfstring{$\ast$}{*} $>$ \mbox{\hyperlink{class_graph_a46f41c4f02723836b6281ecc3a61ad94}{get\+Airlines}} () const
-\begin{DoxyCompactList}\small\item\em Gets the list of airlines in the graph. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Gets the list of airlines in the graph. \end{DoxyCompactList}\item 
+std\+::vector$<$ \mbox{\hyperlink{class_edge}{Edge}}$<$ \mbox{\hyperlink{class_airport}{Airport}} $>$ $>$ \mbox{\hyperlink{class_graph_a356804222c4fcdce7b205c9fff9f442a}{find\+Shortest\+Path}} (\mbox{\hyperlink{class_vertex}{Vertex}}$<$ \mbox{\hyperlink{class_airport}{Airport}} $>$ \texorpdfstring{$\ast$}{*}src, \mbox{\hyperlink{class_vertex}{Vertex}}$<$ \mbox{\hyperlink{class_airport}{Airport}} $>$ \texorpdfstring{$\ast$}{*}dest)
+\begin{DoxyCompactList}\small\item\em Finds the shortest path (least number of stops) between two airports. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_graph_aba03d6e5090c8c099e394c3eba21b023}{find\+And\+Display\+Best\+Paths}} (const std\+::set$<$ \mbox{\hyperlink{class_vertex}{Vertex}}$<$ \mbox{\hyperlink{class_airport}{Airport}} $>$ \texorpdfstring{$\ast$}{*} $>$ \&src\+Vertices, const std\+::set$<$ \mbox{\hyperlink{class_vertex}{Vertex}}$<$ \mbox{\hyperlink{class_airport}{Airport}} $>$ \texorpdfstring{$\ast$}{*} $>$ \&dest\+Vertices)
+\begin{DoxyCompactList}\small\item\em Finds and displays the best paths between sets of source and destination vertices. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
@@ -132,6 +136,47 @@ Finds an airline by its code.
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
 Pointer to the airline if found, nullptr otherwise. 
+\end{DoxyReturn}
+\Hypertarget{class_graph_aba03d6e5090c8c099e394c3eba21b023}\label{class_graph_aba03d6e5090c8c099e394c3eba21b023} 
+\index{Graph$<$ T $>$@{Graph$<$ T $>$}!findAndDisplayBestPaths@{findAndDisplayBestPaths}}
+\index{findAndDisplayBestPaths@{findAndDisplayBestPaths}!Graph$<$ T $>$@{Graph$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{findAndDisplayBestPaths()}{findAndDisplayBestPaths()}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+void \mbox{\hyperlink{class_graph}{Graph}}$<$ T $>$\+::find\+And\+Display\+Best\+Paths (\begin{DoxyParamCaption}\item[{const std\+::set$<$ \mbox{\hyperlink{class_vertex}{Vertex}}$<$ \mbox{\hyperlink{class_airport}{Airport}} $>$ \texorpdfstring{$\ast$}{*} $>$ \&}]{src\+Vertices,  }\item[{const std\+::set$<$ \mbox{\hyperlink{class_vertex}{Vertex}}$<$ \mbox{\hyperlink{class_airport}{Airport}} $>$ \texorpdfstring{$\ast$}{*} $>$ \&}]{dest\+Vertices }\end{DoxyParamCaption})}
+
+
+
+Finds and displays the best paths between sets of source and destination vertices. 
+
+This method explores all possible paths between the provided source and destination vertices and displays the best paths found. A "{}best path"{} is defined as one having the least number of stops between the source and the destination. The method is useful for identifying the most efficient routes in an airport graph.
+
+
+\begin{DoxyParams}{Parameters}
+{\em src\+Vertices} & Set of vertices representing source airports. Each vertex is a potential starting point. \\
+\hline
+{\em dest\+Vertices} & Set of vertices representing destination airports. Each vertex is a potential endpoint. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_graph_a356804222c4fcdce7b205c9fff9f442a}\label{class_graph_a356804222c4fcdce7b205c9fff9f442a} 
+\index{Graph$<$ T $>$@{Graph$<$ T $>$}!findShortestPath@{findShortestPath}}
+\index{findShortestPath@{findShortestPath}!Graph$<$ T $>$@{Graph$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{findShortestPath()}{findShortestPath()}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+std\+::vector$<$ \mbox{\hyperlink{class_edge}{Edge}}$<$ \mbox{\hyperlink{class_airport}{Airport}} $>$ $>$ \mbox{\hyperlink{class_graph}{Graph}}$<$ T $>$\+::find\+Shortest\+Path (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_vertex}{Vertex}}$<$ \mbox{\hyperlink{class_airport}{Airport}} $>$ \texorpdfstring{$\ast$}{*}}]{src,  }\item[{\mbox{\hyperlink{class_vertex}{Vertex}}$<$ \mbox{\hyperlink{class_airport}{Airport}} $>$ \texorpdfstring{$\ast$}{*}}]{dest }\end{DoxyParamCaption})}
+
+
+
+Finds the shortest path (least number of stops) between two airports. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em src} & Pointer to the source airport vertex. \\
+\hline
+{\em dest} & Pointer to the destination airport vertex. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+std\+::vector$<$\+Airport$>$ A vector of airports representing the path from source to destination. 
 \end{DoxyReturn}
 \Hypertarget{class_graph_afd8fcbc064425f874884e6d24f235225}\label{class_graph_afd8fcbc064425f874884e6d24f235225} 
 \index{Graph$<$ T $>$@{Graph$<$ T $>$}!findVertex@{findVertex}}

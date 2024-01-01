@@ -107,20 +107,6 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a53486fca517e4cdd1a6dd9b0fed9b265" id="r_a53486fca517e4cdd1a6dd9b0fed9b265"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a53486fca517e4cdd1a6dd9b0fed9b265">setAdj</a> (const std::vector&lt; <a class="el" href="class_edge.html">Edge</a>&lt; T &gt; &gt; &amp;adj)</td></tr>
 <tr class="memdesc:a53486fca517e4cdd1a6dd9b0fed9b265"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the adjacency list of this vertex.  <br /></td></tr>
 <tr class="separator:a53486fca517e4cdd1a6dd9b0fed9b265"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a954198262d6afe5ec21c765bd4348e67" id="r_a954198262d6afe5ec21c765bd4348e67"><td class="memItemLeft" align="right" valign="top"><a id="a954198262d6afe5ec21c765bd4348e67" name="a954198262d6afe5ec21c765bd4348e67"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>increaseIndegree</b> ()</td></tr>
-<tr class="memdesc:a954198262d6afe5ec21c765bd4348e67"><td class="mdescLeft">&#160;</td><td class="mdescRight">Increases the indegree of this vertex by one. <br /></td></tr>
-<tr class="separator:a954198262d6afe5ec21c765bd4348e67"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acc4ad8b49452b1f38aa45c4bde570ebf" id="r_acc4ad8b49452b1f38aa45c4bde570ebf"><td class="memItemLeft" align="right" valign="top"><a id="acc4ad8b49452b1f38aa45c4bde570ebf" name="acc4ad8b49452b1f38aa45c4bde570ebf"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>decreaseIndegree</b> ()</td></tr>
-<tr class="memdesc:acc4ad8b49452b1f38aa45c4bde570ebf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Decreases the indegree of this vertex by one. <br /></td></tr>
-<tr class="separator:acc4ad8b49452b1f38aa45c4bde570ebf"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac78980191ea1f9d22e6617e9e511b755" id="r_ac78980191ea1f9d22e6617e9e511b755"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac78980191ea1f9d22e6617e9e511b755">getIndegree</a> () const</td></tr>
-<tr class="memdesc:ac78980191ea1f9d22e6617e9e511b755"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieves the indegree of this vertex.  <br /></td></tr>
-<tr class="separator:ac78980191ea1f9d22e6617e9e511b755"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad1602c48fedae2d3d5a3949594dc5ab8" id="r_ad1602c48fedae2d3d5a3949594dc5ab8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad1602c48fedae2d3d5a3949594dc5ab8">setIndegree</a> (int indegree)</td></tr>
-<tr class="memdesc:ad1602c48fedae2d3d5a3949594dc5ab8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the indegree of this vertex.  <br /></td></tr>
-<tr class="separator:ad1602c48fedae2d3d5a3949594dc5ab8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab2916c006fa35b918910a2232095e785" id="r_ab2916c006fa35b918910a2232095e785"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab2916c006fa35b918910a2232095e785">getNum</a> () const</td></tr>
 <tr class="memdesc:ab2916c006fa35b918910a2232095e785"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieves the 'num' value of this vertex.  <br /></td></tr>
 <tr class="separator:ab2916c006fa35b918910a2232095e785"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -209,28 +195,6 @@ template&lt;class T &gt; </div>
 
 <p>Gets the adjacency list of this vertex. </p>
 <dl class="section return"><dt>Returns</dt><dd>A constant reference to the vector of outgoing edges from this vertex. </dd></dl>
-
-</div>
-</div>
-<a id="ac78980191ea1f9d22e6617e9e511b755" name="ac78980191ea1f9d22e6617e9e511b755"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac78980191ea1f9d22e6617e9e511b755">&#9670;&#160;</a></span>getIndegree()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class T &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">int <a class="el" href="class_vertex.html">Vertex</a>&lt; T &gt;::getIndegree </td>
-          <td>(</td>
-          <td class="paramname"><span class="paramname"></span></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Retrieves the indegree of this vertex. </p>
-<dl class="section return"><dt>Returns</dt><dd>The indegree of the vertex. </dd></dl>
 
 </div>
 </div>
@@ -371,33 +335,6 @@ template&lt;class T &gt; </div>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">adj</td><td>The new adjacency list to set. </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
-<a id="ad1602c48fedae2d3d5a3949594dc5ab8" name="ad1602c48fedae2d3d5a3949594dc5ab8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad1602c48fedae2d3d5a3949594dc5ab8">&#9670;&#160;</a></span>setIndegree()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class T &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">void <a class="el" href="class_vertex.html">Vertex</a>&lt; T &gt;::setIndegree </td>
-          <td>(</td>
-          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>indegree</em></span></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Sets the indegree of this vertex. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">indegree</td><td>The indegree value to set. </td></tr>
   </table>
   </dd>
 </dl>

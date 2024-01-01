@@ -121,6 +121,12 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a46f41c4f02723836b6281ecc3a61ad94" id="r_a46f41c4f02723836b6281ecc3a61ad94"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="class_airline.html">Airline</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a46f41c4f02723836b6281ecc3a61ad94">getAirlines</a> () const</td></tr>
 <tr class="memdesc:a46f41c4f02723836b6281ecc3a61ad94"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the list of airlines in the graph.  <br /></td></tr>
 <tr class="separator:a46f41c4f02723836b6281ecc3a61ad94"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a356804222c4fcdce7b205c9fff9f442a" id="r_a356804222c4fcdce7b205c9fff9f442a"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="class_edge.html">Edge</a>&lt; <a class="el" href="class_airport.html">Airport</a> &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a356804222c4fcdce7b205c9fff9f442a">findShortestPath</a> (<a class="el" href="class_vertex.html">Vertex</a>&lt; <a class="el" href="class_airport.html">Airport</a> &gt; *src, <a class="el" href="class_vertex.html">Vertex</a>&lt; <a class="el" href="class_airport.html">Airport</a> &gt; *dest)</td></tr>
+<tr class="memdesc:a356804222c4fcdce7b205c9fff9f442a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Finds the shortest path (least number of stops) between two airports.  <br /></td></tr>
+<tr class="separator:a356804222c4fcdce7b205c9fff9f442a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aba03d6e5090c8c099e394c3eba21b023" id="r_aba03d6e5090c8c099e394c3eba21b023"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aba03d6e5090c8c099e394c3eba21b023">findAndDisplayBestPaths</a> (const std::set&lt; <a class="el" href="class_vertex.html">Vertex</a>&lt; <a class="el" href="class_airport.html">Airport</a> &gt; * &gt; &amp;srcVertices, const std::set&lt; <a class="el" href="class_vertex.html">Vertex</a>&lt; <a class="el" href="class_airport.html">Airport</a> &gt; * &gt; &amp;destVertices)</td></tr>
+<tr class="memdesc:aba03d6e5090c8c099e394c3eba21b023"><td class="mdescLeft">&#160;</td><td class="mdescRight">Finds and displays the best paths between sets of source and destination vertices.  <br /></td></tr>
+<tr class="separator:aba03d6e5090c8c099e394c3eba21b023"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><div class="compoundTemplParams">template&lt;class T&gt;<br />
@@ -253,6 +259,72 @@ template&lt;class T &gt; </div>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Pointer to the airline if found, nullptr otherwise. </dd></dl>
+
+</div>
+</div>
+<a id="aba03d6e5090c8c099e394c3eba21b023" name="aba03d6e5090c8c099e394c3eba21b023"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aba03d6e5090c8c099e394c3eba21b023">&#9670;&#160;</a></span>findAndDisplayBestPaths()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="class_graph.html">Graph</a>&lt; T &gt;::findAndDisplayBestPaths </td>
+          <td>(</td>
+          <td class="paramtype">const std::set&lt; <a class="el" href="class_vertex.html">Vertex</a>&lt; <a class="el" href="class_airport.html">Airport</a> &gt; * &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>srcVertices</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::set&lt; <a class="el" href="class_vertex.html">Vertex</a>&lt; <a class="el" href="class_airport.html">Airport</a> &gt; * &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>destVertices</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Finds and displays the best paths between sets of source and destination vertices. </p>
+<p>This method explores all possible paths between the provided source and destination vertices and displays the best paths found. A "best path" is defined as one having the least number of stops between the source and the destination. The method is useful for identifying the most efficient routes in an airport graph.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">srcVertices</td><td>Set of vertices representing source airports. Each vertex is a potential starting point. </td></tr>
+    <tr><td class="paramname">destVertices</td><td>Set of vertices representing destination airports. Each vertex is a potential endpoint. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a356804222c4fcdce7b205c9fff9f442a" name="a356804222c4fcdce7b205c9fff9f442a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a356804222c4fcdce7b205c9fff9f442a">&#9670;&#160;</a></span>findShortestPath()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt; <a class="el" href="class_edge.html">Edge</a>&lt; <a class="el" href="class_airport.html">Airport</a> &gt; &gt; <a class="el" href="class_graph.html">Graph</a>&lt; T &gt;::findShortestPath </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_vertex.html">Vertex</a>&lt; <a class="el" href="class_airport.html">Airport</a> &gt; *</td>          <td class="paramname"><span class="paramname"><em>src</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="class_vertex.html">Vertex</a>&lt; <a class="el" href="class_airport.html">Airport</a> &gt; *</td>          <td class="paramname"><span class="paramname"><em>dest</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Finds the shortest path (least number of stops) between two airports. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">src</td><td>Pointer to the source airport vertex. </td></tr>
+    <tr><td class="paramname">dest</td><td>Pointer to the destination airport vertex. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>std::vector&lt;Airport&gt; A vector of airports representing the path from source to destination. </dd></dl>
 
 </div>
 </div>

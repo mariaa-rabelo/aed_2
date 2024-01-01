@@ -89,21 +89,9 @@ Public Member Functions</h2></td></tr>
 &#160;</td><td class="memItemRight" valign="bottom"><b>FlightOption</b> ()</td></tr>
 <tr class="memdesc:a17093808eeaa005ce5bd372a5688e37c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a <a class="el" href="class_flight_option.html" title="Class for finding flight options between airports, with or without certain filters.">FlightOption</a> object. <br /></td></tr>
 <tr class="separator:a17093808eeaa005ce5bd372a5688e37c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a461202ced99def03659bb1eb66b28728" id="r_a461202ced99def03659bb1eb66b28728"><td class="memItemLeft" align="right" valign="top">std::set&lt; std::vector&lt; <a class="el" href="class_vertex.html">Vertex</a>&lt; <a class="el" href="class_airport.html">Airport</a> &gt; * &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a461202ced99def03659bb1eb66b28728">getAllPaths</a> (const <a class="el" href="class_graph.html">Graph</a>&lt; <a class="el" href="class_airport.html">Airport</a> &gt; *g, <a class="el" href="class_vertex.html">Vertex</a>&lt; <a class="el" href="class_airport.html">Airport</a> &gt; *source, <a class="el" href="class_vertex.html">Vertex</a>&lt; <a class="el" href="class_airport.html">Airport</a> &gt; *dest)</td></tr>
-<tr class="memdesc:a461202ced99def03659bb1eb66b28728"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets all possible paths between two airports in a graph.  <br /></td></tr>
-<tr class="separator:a461202ced99def03659bb1eb66b28728"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac9897eb8bf9d436a2094073a86bc3a42" id="r_ac9897eb8bf9d436a2094073a86bc3a42"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac9897eb8bf9d436a2094073a86bc3a42">dfsFlightVisit</a> (const <a class="el" href="class_graph.html">Graph</a>&lt; <a class="el" href="class_airport.html">Airport</a> &gt; *g, <a class="el" href="class_vertex.html">Vertex</a>&lt; <a class="el" href="class_airport.html">Airport</a> &gt; *source, <a class="el" href="class_vertex.html">Vertex</a>&lt; <a class="el" href="class_airport.html">Airport</a> &gt; *dest, std::vector&lt; <a class="el" href="class_vertex.html">Vertex</a>&lt; <a class="el" href="class_airport.html">Airport</a> &gt; * &gt; &amp;path, std::set&lt; std::vector&lt; <a class="el" href="class_vertex.html">Vertex</a>&lt; <a class="el" href="class_airport.html">Airport</a> &gt; * &gt; &gt; &amp;all_paths)</td></tr>
-<tr class="memdesc:ac9897eb8bf9d436a2094073a86bc3a42"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper method for DFS-based path finding.  <br /></td></tr>
-<tr class="separator:ac9897eb8bf9d436a2094073a86bc3a42"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8325c94a72da79cd90e09a50a002f769" id="r_a8325c94a72da79cd90e09a50a002f769"><td class="memItemLeft" align="right" valign="top">std::set&lt; std::vector&lt; <a class="el" href="class_vertex.html">Vertex</a>&lt; <a class="el" href="class_airport.html">Airport</a> &gt; * &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a8325c94a72da79cd90e09a50a002f769">flightsChoosenAirlines</a> (const <a class="el" href="class_graph.html">Graph</a>&lt; <a class="el" href="class_airport.html">Airport</a> &gt; *g, std::set&lt; std::vector&lt; <a class="el" href="class_vertex.html">Vertex</a>&lt; <a class="el" href="class_airport.html">Airport</a> &gt; * &gt; &gt; &amp;paths, std::set&lt; std::string &gt; &amp;airlines)</td></tr>
-<tr class="memdesc:a8325c94a72da79cd90e09a50a002f769"><td class="mdescLeft">&#160;</td><td class="mdescRight">Filters paths based on specified airlines.  <br /></td></tr>
-<tr class="separator:a8325c94a72da79cd90e09a50a002f769"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac02d1d66fe29c5fecbaab84749b1f964" id="r_ac02d1d66fe29c5fecbaab84749b1f964"><td class="memItemLeft" align="right" valign="top">std::set&lt; std::vector&lt; <a class="el" href="class_airport.html">Airport</a> &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac02d1d66fe29c5fecbaab84749b1f964">flightsMaxAirlineNumber</a> (const <a class="el" href="class_graph.html">Graph</a>&lt; <a class="el" href="class_airport.html">Airport</a> &gt; *g, std::set&lt; std::vector&lt; <a class="el" href="class_airport.html">Airport</a> &gt; &gt; &amp;paths, int maxAirlines)</td></tr>
-<tr class="memdesc:ac02d1d66fe29c5fecbaab84749b1f964"><td class="mdescLeft">&#160;</td><td class="mdescRight">Filters paths based on a maximum number of airlines.  <br /></td></tr>
-<tr class="separator:ac02d1d66fe29c5fecbaab84749b1f964"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a47004b567ba0135224af91a1dfec6a6e" id="r_a47004b567ba0135224af91a1dfec6a6e"><td class="memItemLeft" align="right" valign="top">std::set&lt; std::vector&lt; <a class="el" href="class_airport.html">Airport</a> &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a47004b567ba0135224af91a1dfec6a6e">bfsFlightVisitFilter</a> (const <a class="el" href="class_graph.html">Graph</a>&lt; <a class="el" href="class_airport.html">Airport</a> &gt; *g, <a class="el" href="class_vertex.html">Vertex</a>&lt; <a class="el" href="class_airport.html">Airport</a> &gt; *source, <a class="el" href="class_vertex.html">Vertex</a>&lt; <a class="el" href="class_airport.html">Airport</a> &gt; *dest, std::set&lt; std::string &gt; &amp;airlines)</td></tr>
-<tr class="memdesc:a47004b567ba0135224af91a1dfec6a6e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Filters paths based on specified airlines using BFS.  <br /></td></tr>
-<tr class="separator:a47004b567ba0135224af91a1dfec6a6e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab3ea8b7bfd2a98c96e0fc16e60876454" id="r_ab3ea8b7bfd2a98c96e0fc16e60876454"><td class="memItemLeft" align="right" valign="top">std::set&lt; std::vector&lt; std::pair&lt; <a class="el" href="class_airport.html">Airport</a>, std::string &gt; &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab3ea8b7bfd2a98c96e0fc16e60876454">flightsMaxAirlineNumber</a> (const <a class="el" href="class_graph.html">Graph</a>&lt; <a class="el" href="class_airport.html">Airport</a> &gt; *g, std::set&lt; std::vector&lt; <a class="el" href="class_airport.html">Airport</a> &gt; &gt; &amp;paths, int maxAirlines)</td></tr>
+<tr class="memdesc:ab3ea8b7bfd2a98c96e0fc16e60876454"><td class="mdescLeft">&#160;</td><td class="mdescRight">Filters paths based on a maximum number of airlines.  <br /></td></tr>
+<tr class="separator:ab3ea8b7bfd2a98c96e0fc16e60876454"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa2d63355ae20a950b270332638677e9d" id="r_aa2d63355ae20a950b270332638677e9d"><td class="memItemLeft" align="right" valign="top">std::set&lt; std::vector&lt; <a class="el" href="class_airport.html">Airport</a> &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa2d63355ae20a950b270332638677e9d">flights</a> (const <a class="el" href="class_graph.html">Graph</a>&lt; <a class="el" href="class_airport.html">Airport</a> &gt; *g, <a class="el" href="class_vertex.html">Vertex</a>&lt; <a class="el" href="class_airport.html">Airport</a> &gt; *src, <a class="el" href="class_vertex.html">Vertex</a>&lt; <a class="el" href="class_airport.html">Airport</a> &gt; *dest)</td></tr>
 <tr class="memdesc:aa2d63355ae20a950b270332638677e9d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Finds all flight paths between two airports without filters.  <br /></td></tr>
 <tr class="separator:aa2d63355ae20a950b270332638677e9d"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -155,98 +143,6 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a47004b567ba0135224af91a1dfec6a6e" name="a47004b567ba0135224af91a1dfec6a6e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a47004b567ba0135224af91a1dfec6a6e">&#9670;&#160;</a></span>bfsFlightVisitFilter()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">std::set&lt; std::vector&lt; <a class="el" href="class_airport.html">Airport</a> &gt; &gt; FlightOption::bfsFlightVisitFilter </td>
-          <td>(</td>
-          <td class="paramtype">const <a class="el" href="class_graph.html">Graph</a>&lt; <a class="el" href="class_airport.html">Airport</a> &gt; *</td>          <td class="paramname"><span class="paramname"><em>g</em>, </span></td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="class_vertex.html">Vertex</a>&lt; <a class="el" href="class_airport.html">Airport</a> &gt; *</td>          <td class="paramname"><span class="paramname"><em>source</em>, </span></td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="class_vertex.html">Vertex</a>&lt; <a class="el" href="class_airport.html">Airport</a> &gt; *</td>          <td class="paramname"><span class="paramname"><em>dest</em>, </span></td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">std::set&lt; std::string &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>airlines</em></span>&#160;)</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Filters paths based on specified airlines using BFS. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">g</td><td>Pointer to the graph. </td></tr>
-    <tr><td class="paramname">source</td><td>Pointer to the source airport vertex. </td></tr>
-    <tr><td class="paramname">dest</td><td>Pointer to the destination airport vertex. </td></tr>
-    <tr><td class="paramname">airlines</td><td>Set of preferred airline codes. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>Set of vectors containing all paths that meet the airline filter. </dd></dl>
-
-</div>
-</div>
-<a id="ac9897eb8bf9d436a2094073a86bc3a42" name="ac9897eb8bf9d436a2094073a86bc3a42"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac9897eb8bf9d436a2094073a86bc3a42">&#9670;&#160;</a></span>dfsFlightVisit()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool FlightOption::dfsFlightVisit </td>
-          <td>(</td>
-          <td class="paramtype">const <a class="el" href="class_graph.html">Graph</a>&lt; <a class="el" href="class_airport.html">Airport</a> &gt; *</td>          <td class="paramname"><span class="paramname"><em>g</em>, </span></td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="class_vertex.html">Vertex</a>&lt; <a class="el" href="class_airport.html">Airport</a> &gt; *</td>          <td class="paramname"><span class="paramname"><em>source</em>, </span></td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="class_vertex.html">Vertex</a>&lt; <a class="el" href="class_airport.html">Airport</a> &gt; *</td>          <td class="paramname"><span class="paramname"><em>dest</em>, </span></td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">std::vector&lt; <a class="el" href="class_vertex.html">Vertex</a>&lt; <a class="el" href="class_airport.html">Airport</a> &gt; * &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>path</em>, </span></td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">std::set&lt; std::vector&lt; <a class="el" href="class_vertex.html">Vertex</a>&lt; <a class="el" href="class_airport.html">Airport</a> &gt; * &gt; &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>all_paths</em></span>&#160;)</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Helper method for DFS-based path finding. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">g</td><td>Pointer to the graph representing airports and flights. </td></tr>
-    <tr><td class="paramname">source</td><td>Pointer to the source airport vertex. </td></tr>
-    <tr><td class="paramname">dest</td><td>Pointer to the destination airport vertex. </td></tr>
-    <tr><td class="paramname">path</td><td>Reference to the current path being explored. </td></tr>
-    <tr><td class="paramname">all_paths</td><td>Reference to set of all paths found. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>True if a path to the destination is found, otherwise false. </dd></dl>
-
-</div>
-</div>
 <a id="aa2d63355ae20a950b270332638677e9d" name="aa2d63355ae20a950b270332638677e9d"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aa2d63355ae20a950b270332638677e9d">&#9670;&#160;</a></span>flights()</h2>
 
@@ -284,51 +180,14 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a8325c94a72da79cd90e09a50a002f769" name="a8325c94a72da79cd90e09a50a002f769"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8325c94a72da79cd90e09a50a002f769">&#9670;&#160;</a></span>flightsChoosenAirlines()</h2>
+<a id="ab3ea8b7bfd2a98c96e0fc16e60876454" name="ab3ea8b7bfd2a98c96e0fc16e60876454"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab3ea8b7bfd2a98c96e0fc16e60876454">&#9670;&#160;</a></span>flightsMaxAirlineNumber()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">std::set&lt; std::vector&lt; <a class="el" href="class_vertex.html">Vertex</a>&lt; <a class="el" href="class_airport.html">Airport</a> &gt; * &gt; &gt; FlightOption::flightsChoosenAirlines </td>
-          <td>(</td>
-          <td class="paramtype">const <a class="el" href="class_graph.html">Graph</a>&lt; <a class="el" href="class_airport.html">Airport</a> &gt; *</td>          <td class="paramname"><span class="paramname"><em>g</em>, </span></td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">std::set&lt; std::vector&lt; <a class="el" href="class_vertex.html">Vertex</a>&lt; <a class="el" href="class_airport.html">Airport</a> &gt; * &gt; &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>paths</em>, </span></td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">std::set&lt; std::string &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>airlines</em></span>&#160;)</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Filters paths based on specified airlines. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">g</td><td>Pointer to the graph. </td></tr>
-    <tr><td class="paramname">paths</td><td>Set of all possible paths. </td></tr>
-    <tr><td class="paramname">airlines</td><td>Set of preferred airline codes. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>Set of paths that only use the specified airlines. </dd></dl>
-
-</div>
-</div>
-<a id="ac02d1d66fe29c5fecbaab84749b1f964" name="ac02d1d66fe29c5fecbaab84749b1f964"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac02d1d66fe29c5fecbaab84749b1f964">&#9670;&#160;</a></span>flightsMaxAirlineNumber()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">std::set&lt; std::vector&lt; <a class="el" href="class_airport.html">Airport</a> &gt; &gt; FlightOption::flightsMaxAirlineNumber </td>
+          <td class="memname">std::set&lt; std::vector&lt; std::pair&lt; <a class="el" href="class_airport.html">Airport</a>, std::string &gt; &gt; &gt; FlightOption::flightsMaxAirlineNumber </td>
           <td>(</td>
           <td class="paramtype">const <a class="el" href="class_graph.html">Graph</a>&lt; <a class="el" href="class_airport.html">Airport</a> &gt; *</td>          <td class="paramname"><span class="paramname"><em>g</em>, </span></td>
         </tr>
@@ -355,43 +214,6 @@ Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Set of paths that meet the airline number constraint. </dd></dl>
-
-</div>
-</div>
-<a id="a461202ced99def03659bb1eb66b28728" name="a461202ced99def03659bb1eb66b28728"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a461202ced99def03659bb1eb66b28728">&#9670;&#160;</a></span>getAllPaths()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">std::set&lt; std::vector&lt; <a class="el" href="class_vertex.html">Vertex</a>&lt; <a class="el" href="class_airport.html">Airport</a> &gt; * &gt; &gt; FlightOption::getAllPaths </td>
-          <td>(</td>
-          <td class="paramtype">const <a class="el" href="class_graph.html">Graph</a>&lt; <a class="el" href="class_airport.html">Airport</a> &gt; *</td>          <td class="paramname"><span class="paramname"><em>g</em>, </span></td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="class_vertex.html">Vertex</a>&lt; <a class="el" href="class_airport.html">Airport</a> &gt; *</td>          <td class="paramname"><span class="paramname"><em>source</em>, </span></td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="class_vertex.html">Vertex</a>&lt; <a class="el" href="class_airport.html">Airport</a> &gt; *</td>          <td class="paramname"><span class="paramname"><em>dest</em></span>&#160;)</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Gets all possible paths between two airports in a graph. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">g</td><td>Pointer to the graph representing airports and flights. </td></tr>
-    <tr><td class="paramname">source</td><td>Pointer to the source airport vertex. </td></tr>
-    <tr><td class="paramname">dest</td><td>Pointer to the destination airport vertex. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>Set of vectors containing all possible paths (as Vertex&lt;Airport&gt;*). </dd></dl>
 
 </div>
 </div>

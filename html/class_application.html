@@ -73,6 +73,7 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pub-static-methods">Static Public Member Functions</a> &#124;
 <a href="class_application-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">Application Class Reference</div></div>
 </div><!--header-->
@@ -120,22 +121,13 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>run</b> ()</td></tr>
 <tr class="memitem:ac0c435e0b9f13678a945a5c0a7be2fd6" id="r_ac0c435e0b9f13678a945a5c0a7be2fd6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac0c435e0b9f13678a945a5c0a7be2fd6">findAllDestinations</a> (const std::string &amp;airportCode)</td></tr>
 <tr class="memdesc:ac0c435e0b9f13678a945a5c0a7be2fd6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Finds all destinations reachable from a specified airport.  <br /></td></tr>
 <tr class="separator:ac0c435e0b9f13678a945a5c0a7be2fd6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a93eab4940e57d384c2b6c52874cd376c" id="r_a93eab4940e57d384c2b6c52874cd376c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a93eab4940e57d384c2b6c52874cd376c">findAirportMaxX</a> (std::string code, int x, int option)</td></tr>
-<tr class="memdesc:a93eab4940e57d384c2b6c52874cd376c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Finds airports reachable within a maximum number of stops from a specified airport.  <br /></td></tr>
-<tr class="separator:a93eab4940e57d384c2b6c52874cd376c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a86cc93d306b053cf4e78491fa643dd66" id="r_a86cc93d306b053cf4e78491fa643dd66"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="class_airport.html">Airport</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a86cc93d306b053cf4e78491fa643dd66">nodesAtLessDistanceBFS</a> (const <a class="el" href="class_graph.html">Graph</a>&lt; <a class="el" href="class_airport.html">Airport</a> &gt; *g, const <a class="el" href="class_airport.html">Airport</a> &amp;source, int k)</td></tr>
-<tr class="memdesc:a86cc93d306b053cf4e78491fa643dd66"><td class="mdescLeft">&#160;</td><td class="mdescRight">Finds nodes (airports) at a distance less than or equal to a given number of stops.  <br /></td></tr>
-<tr class="separator:a86cc93d306b053cf4e78491fa643dd66"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a105048007568bae473df8d1fb94915f7" id="r_a105048007568bae473df8d1fb94915f7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a105048007568bae473df8d1fb94915f7">findAirportMaxX</a> (const std::string &amp;code, int x, int option)</td></tr>
+<tr class="memdesc:a105048007568bae473df8d1fb94915f7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Finds airports reachable within a maximum number of stops from a specified airport.  <br /></td></tr>
+<tr class="separator:a105048007568bae473df8d1fb94915f7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae6b0b23d587485f7f369b9da5c8d0956" id="r_ae6b0b23d587485f7f369b9da5c8d0956"><td class="memItemLeft" align="right" valign="top"><a id="ae6b0b23d587485f7f369b9da5c8d0956" name="ae6b0b23d587485f7f369b9da5c8d0956"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>maximumTrip</b> ()</td></tr>
 <tr class="memdesc:ae6b0b23d587485f7f369b9da5c8d0956"><td class="mdescLeft">&#160;</td><td class="mdescRight">Plans a maximum trip, finding the longest path in the graph. <br /></td></tr>
 <tr class="separator:ae6b0b23d587485f7f369b9da5c8d0956"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae6a305318d51c9853361c10d64f178ef" id="r_ae6a305318d51c9853361c10d64f178ef"><td class="memItemLeft" align="right" valign="top">std::vector&lt; std::pair&lt; <a class="el" href="class_airport.html">Airport</a>, int &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae6a305318d51c9853361c10d64f178ef">getMaxPathBFS</a> (<a class="el" href="class_vertex.html">Vertex</a>&lt; <a class="el" href="class_airport.html">Airport</a> &gt; *v, <a class="el" href="class_graph.html">Graph</a>&lt; <a class="el" href="class_airport.html">Airport</a> &gt; *g)</td></tr>
-<tr class="memdesc:ae6a305318d51c9853361c10d64f178ef"><td class="mdescLeft">&#160;</td><td class="mdescRight">Finds the maximum path from a specified vertex in the graph using BFS.  <br /></td></tr>
-<tr class="separator:ae6a305318d51c9853361c10d64f178ef"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7c803a486587676732b08ce6f17f776b" id="r_a7c803a486587676732b08ce6f17f776b"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7c803a486587676732b08ce6f17f776b">getTotalFlights</a> (const <a class="el" href="class_graph.html">Graph</a>&lt; <a class="el" href="class_airport.html">Airport</a> &gt; *g, <a class="el" href="class_vertex.html">Vertex</a>&lt; <a class="el" href="class_airport.html">Airport</a> &gt; *v)</td></tr>
-<tr class="memdesc:a7c803a486587676732b08ce6f17f776b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the total number of flights associated with a specified vertex (airport).  <br /></td></tr>
-<tr class="separator:a7c803a486587676732b08ce6f17f776b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0ab51575503a4ca1decc668b2f7b45af" id="r_a0ab51575503a4ca1decc668b2f7b45af"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0ab51575503a4ca1decc668b2f7b45af">getKAirportsGreatestCap</a> (int k)</td></tr>
 <tr class="memdesc:a0ab51575503a4ca1decc668b2f7b45af"><td class="mdescLeft">&#160;</td><td class="mdescRight">Finds the top K airports with the greatest capacity.  <br /></td></tr>
 <tr class="separator:a0ab51575503a4ca1decc668b2f7b45af"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -149,33 +141,39 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>maximumTrip</b> ()</t
 void&#160;</td><td class="memItemRight" valign="bottom"><b>essentialAirports</b> ()</td></tr>
 <tr class="memdesc:aba1a28d6689d2311b0f2990e6a530840"><td class="mdescLeft">&#160;</td><td class="mdescRight">Identifies essential airports in the network. <br /></td></tr>
 <tr class="separator:aba1a28d6689d2311b0f2990e6a530840"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aae0ef77d4ebd4dda320a8e7d92a95fad" id="r_aae0ef77d4ebd4dda320a8e7d92a95fad"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aae0ef77d4ebd4dda320a8e7d92a95fad">haversineDistance</a> (double lat1, double lon1, double lat2, double lon2)</td></tr>
-<tr class="memdesc:aae0ef77d4ebd4dda320a8e7d92a95fad"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculates the Haversine distance between two geographical points.  <br /></td></tr>
-<tr class="separator:aae0ef77d4ebd4dda320a8e7d92a95fad"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa64adce3d21a1bcb787374b860313668" id="r_aa64adce3d21a1bcb787374b860313668"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa64adce3d21a1bcb787374b860313668">getBestFlightOption</a> (std::pair&lt; std::string, std::string &gt; src, std::pair&lt; std::string, std::string &gt; dest)</td></tr>
 <tr class="memdesc:aa64adce3d21a1bcb787374b860313668"><td class="mdescLeft">&#160;</td><td class="mdescRight">Finds and displays the best flight option(s) based on the given source and destination inputs.  <br /></td></tr>
 <tr class="separator:aa64adce3d21a1bcb787374b860313668"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6a84f89d192c054855957ab17ac22140" id="r_a6a84f89d192c054855957ab17ac22140"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="class_airport.html">Airport</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a6a84f89d192c054855957ab17ac22140">findShortestPath</a> (<a class="el" href="class_vertex.html">Vertex</a>&lt; <a class="el" href="class_airport.html">Airport</a> &gt; *src, <a class="el" href="class_vertex.html">Vertex</a>&lt; <a class="el" href="class_airport.html">Airport</a> &gt; *dest)</td></tr>
-<tr class="memdesc:a6a84f89d192c054855957ab17ac22140"><td class="mdescLeft">&#160;</td><td class="mdescRight">Finds the shortest path (least number of stops) between two airports.  <br /></td></tr>
-<tr class="separator:a6a84f89d192c054855957ab17ac22140"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1deaaca263906ae49ab5258e003eb622" id="r_a1deaaca263906ae49ab5258e003eb622"><td class="memItemLeft" align="right" valign="top">std::set&lt; <a class="el" href="class_vertex.html">Vertex</a>&lt; <a class="el" href="class_airport.html">Airport</a> &gt; * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1deaaca263906ae49ab5258e003eb622">getVerticesBasedOnInput</a> (std::pair&lt; std::string, std::string &gt; input)</td></tr>
-<tr class="memdesc:a1deaaca263906ae49ab5258e003eb622"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieves a set of airport vertices based on the specified input type and detail.  <br /></td></tr>
-<tr class="separator:a1deaaca263906ae49ab5258e003eb622"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3a796734013ae79179bb8575ce55e3d7" id="r_a3a796734013ae79179bb8575ce55e3d7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3a796734013ae79179bb8575ce55e3d7">bestFlightOptGivenAirports</a> (std::set&lt; std::string &gt; &amp;airlines, <a class="el" href="class_vertex.html">Vertex</a>&lt; <a class="el" href="class_airport.html">Airport</a> &gt; *src, <a class="el" href="class_vertex.html">Vertex</a>&lt; <a class="el" href="class_airport.html">Airport</a> &gt; *dest)</td></tr>
-<tr class="memdesc:a3a796734013ae79179bb8575ce55e3d7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Finds flight options from a source to a destination airport considering only specified airlines.  <br /></td></tr>
-<tr class="separator:a3a796734013ae79179bb8575ce55e3d7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8f2469fdcc10feaadfa3518d83ad9337" id="r_a8f2469fdcc10feaadfa3518d83ad9337"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a8f2469fdcc10feaadfa3518d83ad9337">bestFlightOptFilter</a> (std::set&lt; std::string &gt; &amp;airlines, std::pair&lt; std::string, std::string &gt; src, std::pair&lt; std::string, std::string &gt; dest)</td></tr>
+<tr class="memdesc:a8f2469fdcc10feaadfa3518d83ad9337"><td class="mdescLeft">&#160;</td><td class="mdescRight">Finds flight options from a source to a destination airport considering only specified airlines.  <br /></td></tr>
+<tr class="separator:a8f2469fdcc10feaadfa3518d83ad9337"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1d385f6f1aea6506d2abb95e7be9aaac" id="r_a1d385f6f1aea6506d2abb95e7be9aaac"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1d385f6f1aea6506d2abb95e7be9aaac">bestFlightOptMaxAirports</a> (int maxAirlines, <a class="el" href="class_vertex.html">Vertex</a>&lt; <a class="el" href="class_airport.html">Airport</a> &gt; *src, <a class="el" href="class_vertex.html">Vertex</a>&lt; <a class="el" href="class_airport.html">Airport</a> &gt; *dest)</td></tr>
 <tr class="memdesc:a1d385f6f1aea6506d2abb95e7be9aaac"><td class="mdescLeft">&#160;</td><td class="mdescRight">Finds flight options from a source to a destination with a maximum number of airline changes allowed.  <br /></td></tr>
 <tr class="separator:a1d385f6f1aea6506d2abb95e7be9aaac"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a65fb93cdaa5cab05c28b87396dbfd713" id="r_a65fb93cdaa5cab05c28b87396dbfd713"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_vertex.html">Vertex</a>&lt; <a class="el" href="class_airport.html">Airport</a> &gt; *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a65fb93cdaa5cab05c28b87396dbfd713">getVertex</a> (std::string v, const <a class="el" href="class_graph.html">Graph</a>&lt; <a class="el" href="class_airport.html">Airport</a> &gt; *g)</td></tr>
-<tr class="memdesc:a65fb93cdaa5cab05c28b87396dbfd713"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieves a vertex from the graph based on the given airport identifier.  <br /></td></tr>
-<tr class="separator:a65fb93cdaa5cab05c28b87396dbfd713"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a949a82a11f495e5c5c3a6c32a47fb061" id="r_a949a82a11f495e5c5c3a6c32a47fb061"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_vertex.html">Vertex</a>&lt; <a class="el" href="class_airport.html">Airport</a> &gt; *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a949a82a11f495e5c5c3a6c32a47fb061">getVertex</a> (std::string v)</td></tr>
 <tr class="memdesc:a949a82a11f495e5c5c3a6c32a47fb061"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieves a vertex from the graph based on the given airport identifier.  <br /></td></tr>
 <tr class="separator:a949a82a11f495e5c5c3a6c32a47fb061"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a85e7309ba045f65803552696dcc5894f" id="r_a85e7309ba045f65803552696dcc5894f"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a85e7309ba045f65803552696dcc5894f">checkIfExists</a> (const std::string &amp;code)</td></tr>
 <tr class="memdesc:a85e7309ba045f65803552696dcc5894f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if an airline with the given code exists in the graph.  <br /></td></tr>
 <tr class="separator:a85e7309ba045f65803552696dcc5894f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
+Static Public Member Functions</h2></td></tr>
+<tr class="memitem:a86cc93d306b053cf4e78491fa643dd66" id="r_a86cc93d306b053cf4e78491fa643dd66"><td class="memItemLeft" align="right" valign="top">static std::vector&lt; <a class="el" href="class_airport.html">Airport</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a86cc93d306b053cf4e78491fa643dd66">nodesAtLessDistanceBFS</a> (const <a class="el" href="class_graph.html">Graph</a>&lt; <a class="el" href="class_airport.html">Airport</a> &gt; *g, const <a class="el" href="class_airport.html">Airport</a> &amp;source, int k)</td></tr>
+<tr class="memdesc:a86cc93d306b053cf4e78491fa643dd66"><td class="mdescLeft">&#160;</td><td class="mdescRight">Finds nodes (airports) at a distance less than or equal to a given number of stops.  <br /></td></tr>
+<tr class="separator:a86cc93d306b053cf4e78491fa643dd66"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af6f5c89b29c7ea685de71fed4cb22834" id="r_af6f5c89b29c7ea685de71fed4cb22834"><td class="memItemLeft" align="right" valign="top">static std::vector&lt; std::pair&lt; <a class="el" href="class_airport.html">Airport</a>, int &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af6f5c89b29c7ea685de71fed4cb22834">getMaxPathBFS</a> (<a class="el" href="class_vertex.html">Vertex</a>&lt; <a class="el" href="class_airport.html">Airport</a> &gt; *v)</td></tr>
+<tr class="memdesc:af6f5c89b29c7ea685de71fed4cb22834"><td class="mdescLeft">&#160;</td><td class="mdescRight">Finds the maximum path from a specified vertex in the graph using BFS.  <br /></td></tr>
+<tr class="separator:af6f5c89b29c7ea685de71fed4cb22834"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7c803a486587676732b08ce6f17f776b" id="r_a7c803a486587676732b08ce6f17f776b"><td class="memItemLeft" align="right" valign="top">static int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7c803a486587676732b08ce6f17f776b">getTotalFlights</a> (const <a class="el" href="class_graph.html">Graph</a>&lt; <a class="el" href="class_airport.html">Airport</a> &gt; *g, <a class="el" href="class_vertex.html">Vertex</a>&lt; <a class="el" href="class_airport.html">Airport</a> &gt; *v)</td></tr>
+<tr class="memdesc:a7c803a486587676732b08ce6f17f776b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the total number of flights associated with a specified vertex (airport).  <br /></td></tr>
+<tr class="separator:a7c803a486587676732b08ce6f17f776b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aae0ef77d4ebd4dda320a8e7d92a95fad" id="r_aae0ef77d4ebd4dda320a8e7d92a95fad"><td class="memItemLeft" align="right" valign="top">static double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aae0ef77d4ebd4dda320a8e7d92a95fad">haversineDistance</a> (double lat1, double lon1, double lat2, double lon2)</td></tr>
+<tr class="memdesc:aae0ef77d4ebd4dda320a8e7d92a95fad"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculates the Haversine distance between two geographical points.  <br /></td></tr>
+<tr class="separator:aae0ef77d4ebd4dda320a8e7d92a95fad"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa9840ef62ca2385b77d5890fe1a15857" id="r_aa9840ef62ca2385b77d5890fe1a15857"><td class="memItemLeft" align="right" valign="top">static std::set&lt; <a class="el" href="class_vertex.html">Vertex</a>&lt; <a class="el" href="class_airport.html">Airport</a> &gt; * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa9840ef62ca2385b77d5890fe1a15857">getVerticesBasedOnInput</a> (<a class="el" href="class_graph.html">Graph</a>&lt; <a class="el" href="class_airport.html">Airport</a> &gt; *g, const std::pair&lt; std::string, std::string &gt; &amp;input)</td></tr>
+<tr class="memdesc:aa9840ef62ca2385b77d5890fe1a15857"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieves a set of airport vertices based on the specified input type and detail.  <br /></td></tr>
+<tr class="separator:aa9840ef62ca2385b77d5890fe1a15857"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Manages the main functionalities of the airport management system including graph operations and flight options. </p>
@@ -206,26 +204,26 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>essentialAirports</b>
 
 </div>
 </div>
-<a id="a3a796734013ae79179bb8575ce55e3d7" name="a3a796734013ae79179bb8575ce55e3d7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3a796734013ae79179bb8575ce55e3d7">&#9670;&#160;</a></span>bestFlightOptGivenAirports()</h2>
+<a id="a8f2469fdcc10feaadfa3518d83ad9337" name="a8f2469fdcc10feaadfa3518d83ad9337"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8f2469fdcc10feaadfa3518d83ad9337">&#9670;&#160;</a></span>bestFlightOptFilter()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void Application::bestFlightOptGivenAirports </td>
+          <td class="memname">void Application::bestFlightOptFilter </td>
           <td>(</td>
           <td class="paramtype">std::set&lt; std::string &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>airlines</em>, </span></td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="class_vertex.html">Vertex</a>&lt; <a class="el" href="class_airport.html">Airport</a> &gt; *</td>          <td class="paramname"><span class="paramname"><em>src</em>, </span></td>
+          <td class="paramtype">std::pair&lt; std::string, std::string &gt;</td>          <td class="paramname"><span class="paramname"><em>src</em>, </span></td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="class_vertex.html">Vertex</a>&lt; <a class="el" href="class_airport.html">Airport</a> &gt; *</td>          <td class="paramname"><span class="paramname"><em>dest</em></span>&#160;)</td>
+          <td class="paramtype">std::pair&lt; std::string, std::string &gt;</td>          <td class="paramname"><span class="paramname"><em>dest</em></span>&#160;)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -234,8 +232,8 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>essentialAirports</b>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">airlines</td><td>A set of airline codes to filter the flight options. </td></tr>
-    <tr><td class="paramname">src</td><td>Pointer to the source airport vertex. </td></tr>
-    <tr><td class="paramname">dest</td><td>Pointer to the destination airport vertex. </td></tr>
+    <tr><td class="paramname">src</td><td>A pair representing the source location's type and identifier (e.g., airport code, name, city). </td></tr>
+    <tr><td class="paramname">dest</td><td>A pair representing the destination location's type and identifier. </td></tr>
   </table>
   </dd>
 </dl>
@@ -354,8 +352,8 @@ false If the airline does not exist. </dd></dl>
 
 </div>
 </div>
-<a id="a93eab4940e57d384c2b6c52874cd376c" name="a93eab4940e57d384c2b6c52874cd376c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a93eab4940e57d384c2b6c52874cd376c">&#9670;&#160;</a></span>findAirportMaxX()</h2>
+<a id="a105048007568bae473df8d1fb94915f7" name="a105048007568bae473df8d1fb94915f7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a105048007568bae473df8d1fb94915f7">&#9670;&#160;</a></span>findAirportMaxX()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -363,7 +361,7 @@ false If the airline does not exist. </dd></dl>
         <tr>
           <td class="memname">void Application::findAirportMaxX </td>
           <td>(</td>
-          <td class="paramtype">std::string</td>          <td class="paramname"><span class="paramname"><em>code</em>, </span></td>
+          <td class="paramtype">const std::string &amp;</td>          <td class="paramname"><span class="paramname"><em>code</em>, </span></td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -415,37 +413,6 @@ false If the airline does not exist. </dd></dl>
 
 </div>
 </div>
-<a id="a6a84f89d192c054855957ab17ac22140" name="a6a84f89d192c054855957ab17ac22140"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6a84f89d192c054855957ab17ac22140">&#9670;&#160;</a></span>findShortestPath()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">std::vector&lt; <a class="el" href="class_airport.html">Airport</a> &gt; Application::findShortestPath </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="class_vertex.html">Vertex</a>&lt; <a class="el" href="class_airport.html">Airport</a> &gt; *</td>          <td class="paramname"><span class="paramname"><em>src</em>, </span></td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="class_vertex.html">Vertex</a>&lt; <a class="el" href="class_airport.html">Airport</a> &gt; *</td>          <td class="paramname"><span class="paramname"><em>dest</em></span>&#160;)</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Finds the shortest path (least number of stops) between two airports. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">src</td><td>Pointer to the source airport vertex. </td></tr>
-    <tr><td class="paramname">dest</td><td>Pointer to the destination airport vertex. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>std::vector&lt;Airport&gt; A vector of airports representing the path from source to destination. </dd></dl>
-
-</div>
-</div>
 <a id="aa64adce3d21a1bcb787374b860313668" name="aa64adce3d21a1bcb787374b860313668"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aa64adce3d21a1bcb787374b860313668">&#9670;&#160;</a></span>getBestFlightOption()</h2>
 
@@ -468,6 +435,7 @@ false If the airline does not exist. </dd></dl>
 <p>Finds and displays the best flight option(s) based on the given source and destination inputs. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
+    <tr><td class="paramname">g</td><td>The graph to be searched for the best flight option </td></tr>
     <tr><td class="paramname">src</td><td>A pair representing the source location's type and identifier (e.g., airport code, name, city). </td></tr>
     <tr><td class="paramname">dest</td><td>A pair representing the destination location's type and identifier. </td></tr>
   </table>
@@ -573,30 +541,33 @@ false If the airline does not exist. </dd></dl>
 
 </div>
 </div>
-<a id="ae6a305318d51c9853361c10d64f178ef" name="ae6a305318d51c9853361c10d64f178ef"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae6a305318d51c9853361c10d64f178ef">&#9670;&#160;</a></span>getMaxPathBFS()</h2>
+<a id="af6f5c89b29c7ea685de71fed4cb22834" name="af6f5c89b29c7ea685de71fed4cb22834"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af6f5c89b29c7ea685de71fed4cb22834">&#9670;&#160;</a></span>getMaxPathBFS()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">std::vector&lt; std::pair&lt; <a class="el" href="class_airport.html">Airport</a>, int &gt; &gt; Application::getMaxPathBFS </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="class_vertex.html">Vertex</a>&lt; <a class="el" href="class_airport.html">Airport</a> &gt; *</td>          <td class="paramname"><span class="paramname"><em>v</em>, </span></td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
+          <td class="paramtype"><a class="el" href="class_vertex.html">Vertex</a>&lt; <a class="el" href="class_airport.html">Airport</a> &gt; *</td>          <td class="paramname"><span class="paramname"><em>v</em></span></td><td>)</td>
           <td></td>
-          <td class="paramtype"><a class="el" href="class_graph.html">Graph</a>&lt; <a class="el" href="class_airport.html">Airport</a> &gt; *</td>          <td class="paramname"><span class="paramname"><em>g</em></span>&#160;)</td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
 <p>Finds the maximum path from a specified vertex in the graph using BFS. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">v</td><td>Pointer to the vertex (airport). </td></tr>
-    <tr><td class="paramname">g</td><td>Pointer to the airport graph. </td></tr>
   </table>
   </dd>
 </dl>
@@ -655,6 +626,9 @@ false If the airline does not exist. </dd></dl>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">int Application::getTotalFlights </td>
@@ -667,6 +641,11 @@ false If the airline does not exist. </dd></dl>
           <td class="paramtype"><a class="el" href="class_vertex.html">Vertex</a>&lt; <a class="el" href="class_airport.html">Airport</a> &gt; *</td>          <td class="paramname"><span class="paramname"><em>v</em></span>&#160;)</td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
 <p>Gets the total number of flights associated with a specified vertex (airport). </p>
@@ -760,7 +739,7 @@ false If the airline does not exist. </dd></dl>
 </div>
 </div>
 <a id="a949a82a11f495e5c5c3a6c32a47fb061" name="a949a82a11f495e5c5c3a6c32a47fb061"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a949a82a11f495e5c5c3a6c32a47fb061">&#9670;&#160;</a></span>getVertex() <span class="overload">[1/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a949a82a11f495e5c5c3a6c32a47fb061">&#9670;&#160;</a></span>getVertex()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -785,55 +764,37 @@ false If the airline does not exist. </dd></dl>
 
 </div>
 </div>
-<a id="a65fb93cdaa5cab05c28b87396dbfd713" name="a65fb93cdaa5cab05c28b87396dbfd713"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a65fb93cdaa5cab05c28b87396dbfd713">&#9670;&#160;</a></span>getVertex() <span class="overload">[2/2]</span></h2>
+<a id="aa9840ef62ca2385b77d5890fe1a15857" name="aa9840ef62ca2385b77d5890fe1a15857"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa9840ef62ca2385b77d5890fe1a15857">&#9670;&#160;</a></span>getVerticesBasedOnInput()</h2>
 
 <div class="memitem">
 <div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_vertex.html">Vertex</a>&lt; <a class="el" href="class_airport.html">Airport</a> &gt; * Application::getVertex </td>
-          <td>(</td>
-          <td class="paramtype">std::string</td>          <td class="paramname"><span class="paramname"><em>v</em>, </span></td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="class_graph.html">Graph</a>&lt; <a class="el" href="class_airport.html">Airport</a> &gt; *</td>          <td class="paramname"><span class="paramname"><em>g</em></span>&#160;)</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Retrieves a vertex from the graph based on the given airport identifier. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">v</td><td>The identifier of the airport. </td></tr>
-    <tr><td class="paramname">g</td><td>Pointer to the graph containing the airport vertices. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>Vertex&lt;Airport&gt;* Pointer to the corresponding airport vertex, if found; otherwise, nullptr. </dd></dl>
-
-</div>
-</div>
-<a id="a1deaaca263906ae49ab5258e003eb622" name="a1deaaca263906ae49ab5258e003eb622"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1deaaca263906ae49ab5258e003eb622">&#9670;&#160;</a></span>getVerticesBasedOnInput()</h2>
-
-<div class="memitem">
-<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">std::set&lt; <a class="el" href="class_vertex.html">Vertex</a>&lt; <a class="el" href="class_airport.html">Airport</a> &gt; * &gt; Application::getVerticesBasedOnInput </td>
           <td>(</td>
-          <td class="paramtype">std::pair&lt; std::string, std::string &gt;</td>          <td class="paramname"><span class="paramname"><em>input</em></span></td><td>)</td>
+          <td class="paramtype"><a class="el" href="class_graph.html">Graph</a>&lt; <a class="el" href="class_airport.html">Airport</a> &gt; *</td>          <td class="paramname"><span class="paramname"><em>g</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">const std::pair&lt; std::string, std::string &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>input</em></span>&#160;)</td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
 <p>Retrieves a set of airport vertices based on the specified input type and detail. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
+    <tr><td class="paramname">g</td><td>The graph to be searched for the vertices </td></tr>
     <tr><td class="paramname">input</td><td>A pair representing the type (e.g., code, name, city) and the detail (e.g., actual code or city name). </td></tr>
   </table>
   </dd>
@@ -847,6 +808,9 @@ false If the airline does not exist. </dd></dl>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">double Application::haversineDistance </td>
@@ -869,6 +833,11 @@ false If the airline does not exist. </dd></dl>
           <td class="paramtype">double</td>          <td class="paramname"><span class="paramname"><em>lon2</em></span>&#160;)</td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
 <p>Calculates the Haversine distance between two geographical points. </p>
@@ -890,6 +859,9 @@ false If the airline does not exist. </dd></dl>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">std::vector&lt; <a class="el" href="class_airport.html">Airport</a> &gt; Application::nodesAtLessDistanceBFS </td>
@@ -907,6 +879,11 @@ false If the airline does not exist. </dd></dl>
           <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>k</em></span>&#160;)</td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
 <p>Finds nodes (airports) at a distance less than or equal to a given number of stops. </p>

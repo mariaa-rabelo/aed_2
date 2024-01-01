@@ -6,7 +6,7 @@ var searchData=
   ['handlecityorairlinestats_3',['handleCityOrAirlineStats',['../class_menu.html#aba4495b6ddb9e0528b955a5ab811d534',1,'Menu']]],
   ['handlecountrystats_4',['handleCountryStats',['../class_menu.html#a1a824f9a6bec9c23fda9822d247b7c90',1,'Menu']]],
   ['handledestinationsstats_5',['handleDestinationsStats',['../class_menu.html#a4f194f2a483792e18e95176d0b7a460f',1,'Menu']]],
-  ['handleflightoptionwithmaxstops_6',['handleFlightOptionWithMaxStops',['../class_menu.html#ab70431c8f72f62ae85a86ab2fa2cfacf',1,'Menu']]],
+  ['handleflightoptionwithmaxairlinenumber_6',['handleFlightOptionWithMaxAirlineNumber',['../class_menu.html#a95a31e84e39096bd413d9f1d20023480',1,'Menu']]],
   ['handleglobalstats_7',['handleGlobalStats',['../class_menu.html#abbad10e862b5b4820bcf47b89e44b61b',1,'Menu']]],
   ['handlegreatestcap_8',['handleGreatestCap',['../class_menu.html#a96957757ad5777c3cf4b21ce2676756e',1,'Menu']]],
   ['handlereachableinmaxxstops_9',['handleReachableInMaxXStops',['../class_menu.html#a28ee132225b56106250d84ee8caa8e6e',1,'Menu']]],

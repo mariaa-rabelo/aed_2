@@ -15,16 +15,8 @@ Class for finding flight options between airports, with or without certain filte
 \Hypertarget{class_flight_option_a17093808eeaa005ce5bd372a5688e37c}\label{class_flight_option_a17093808eeaa005ce5bd372a5688e37c} 
 {\bfseries Flight\+Option} ()
 \begin{DoxyCompactList}\small\item\em Constructs a \doxylink{class_flight_option}{Flight\+Option} object. \end{DoxyCompactList}\item 
-std\+::set$<$ std\+::vector$<$ \mbox{\hyperlink{class_vertex}{Vertex}}$<$ \mbox{\hyperlink{class_airport}{Airport}} $>$ \texorpdfstring{$\ast$}{*} $>$ $>$ \mbox{\hyperlink{class_flight_option_a461202ced99def03659bb1eb66b28728}{get\+All\+Paths}} (const \mbox{\hyperlink{class_graph}{Graph}}$<$ \mbox{\hyperlink{class_airport}{Airport}} $>$ \texorpdfstring{$\ast$}{*}g, \mbox{\hyperlink{class_vertex}{Vertex}}$<$ \mbox{\hyperlink{class_airport}{Airport}} $>$ \texorpdfstring{$\ast$}{*}source, \mbox{\hyperlink{class_vertex}{Vertex}}$<$ \mbox{\hyperlink{class_airport}{Airport}} $>$ \texorpdfstring{$\ast$}{*}dest)
-\begin{DoxyCompactList}\small\item\em Gets all possible paths between two airports in a graph. \end{DoxyCompactList}\item 
-bool \mbox{\hyperlink{class_flight_option_ac9897eb8bf9d436a2094073a86bc3a42}{dfs\+Flight\+Visit}} (const \mbox{\hyperlink{class_graph}{Graph}}$<$ \mbox{\hyperlink{class_airport}{Airport}} $>$ \texorpdfstring{$\ast$}{*}g, \mbox{\hyperlink{class_vertex}{Vertex}}$<$ \mbox{\hyperlink{class_airport}{Airport}} $>$ \texorpdfstring{$\ast$}{*}source, \mbox{\hyperlink{class_vertex}{Vertex}}$<$ \mbox{\hyperlink{class_airport}{Airport}} $>$ \texorpdfstring{$\ast$}{*}dest, std\+::vector$<$ \mbox{\hyperlink{class_vertex}{Vertex}}$<$ \mbox{\hyperlink{class_airport}{Airport}} $>$ \texorpdfstring{$\ast$}{*} $>$ \&path, std\+::set$<$ std\+::vector$<$ \mbox{\hyperlink{class_vertex}{Vertex}}$<$ \mbox{\hyperlink{class_airport}{Airport}} $>$ \texorpdfstring{$\ast$}{*} $>$ $>$ \&all\+\_\+paths)
-\begin{DoxyCompactList}\small\item\em Helper method for DFS-\/based path finding. \end{DoxyCompactList}\item 
-std\+::set$<$ std\+::vector$<$ \mbox{\hyperlink{class_vertex}{Vertex}}$<$ \mbox{\hyperlink{class_airport}{Airport}} $>$ \texorpdfstring{$\ast$}{*} $>$ $>$ \mbox{\hyperlink{class_flight_option_a8325c94a72da79cd90e09a50a002f769}{flights\+Choosen\+Airlines}} (const \mbox{\hyperlink{class_graph}{Graph}}$<$ \mbox{\hyperlink{class_airport}{Airport}} $>$ \texorpdfstring{$\ast$}{*}g, std\+::set$<$ std\+::vector$<$ \mbox{\hyperlink{class_vertex}{Vertex}}$<$ \mbox{\hyperlink{class_airport}{Airport}} $>$ \texorpdfstring{$\ast$}{*} $>$ $>$ \&paths, std\+::set$<$ std\+::string $>$ \&airlines)
-\begin{DoxyCompactList}\small\item\em Filters paths based on specified airlines. \end{DoxyCompactList}\item 
-std\+::set$<$ std\+::vector$<$ \mbox{\hyperlink{class_airport}{Airport}} $>$ $>$ \mbox{\hyperlink{class_flight_option_ac02d1d66fe29c5fecbaab84749b1f964}{flights\+Max\+Airline\+Number}} (const \mbox{\hyperlink{class_graph}{Graph}}$<$ \mbox{\hyperlink{class_airport}{Airport}} $>$ \texorpdfstring{$\ast$}{*}g, std\+::set$<$ std\+::vector$<$ \mbox{\hyperlink{class_airport}{Airport}} $>$ $>$ \&paths, int max\+Airlines)
+std\+::set$<$ std\+::vector$<$ std\+::pair$<$ \mbox{\hyperlink{class_airport}{Airport}}, std\+::string $>$ $>$ $>$ \mbox{\hyperlink{class_flight_option_ab3ea8b7bfd2a98c96e0fc16e60876454}{flights\+Max\+Airline\+Number}} (const \mbox{\hyperlink{class_graph}{Graph}}$<$ \mbox{\hyperlink{class_airport}{Airport}} $>$ \texorpdfstring{$\ast$}{*}g, std\+::set$<$ std\+::vector$<$ \mbox{\hyperlink{class_airport}{Airport}} $>$ $>$ \&paths, int max\+Airlines)
 \begin{DoxyCompactList}\small\item\em Filters paths based on a maximum number of airlines. \end{DoxyCompactList}\item 
-std\+::set$<$ std\+::vector$<$ \mbox{\hyperlink{class_airport}{Airport}} $>$ $>$ \mbox{\hyperlink{class_flight_option_a47004b567ba0135224af91a1dfec6a6e}{bfs\+Flight\+Visit\+Filter}} (const \mbox{\hyperlink{class_graph}{Graph}}$<$ \mbox{\hyperlink{class_airport}{Airport}} $>$ \texorpdfstring{$\ast$}{*}g, \mbox{\hyperlink{class_vertex}{Vertex}}$<$ \mbox{\hyperlink{class_airport}{Airport}} $>$ \texorpdfstring{$\ast$}{*}source, \mbox{\hyperlink{class_vertex}{Vertex}}$<$ \mbox{\hyperlink{class_airport}{Airport}} $>$ \texorpdfstring{$\ast$}{*}dest, std\+::set$<$ std\+::string $>$ \&airlines)
-\begin{DoxyCompactList}\small\item\em Filters paths based on specified airlines using BFS. \end{DoxyCompactList}\item 
 std\+::set$<$ std\+::vector$<$ \mbox{\hyperlink{class_airport}{Airport}} $>$ $>$ \mbox{\hyperlink{class_flight_option_aa2d63355ae20a950b270332638677e9d}{flights}} (const \mbox{\hyperlink{class_graph}{Graph}}$<$ \mbox{\hyperlink{class_airport}{Airport}} $>$ \texorpdfstring{$\ast$}{*}g, \mbox{\hyperlink{class_vertex}{Vertex}}$<$ \mbox{\hyperlink{class_airport}{Airport}} $>$ \texorpdfstring{$\ast$}{*}src, \mbox{\hyperlink{class_vertex}{Vertex}}$<$ \mbox{\hyperlink{class_airport}{Airport}} $>$ \texorpdfstring{$\ast$}{*}dest)
 \begin{DoxyCompactList}\small\item\em Finds all flight paths between two airports without filters. \end{DoxyCompactList}\item 
 std\+::set$<$ std\+::vector$<$ \mbox{\hyperlink{class_airport}{Airport}} $>$ $>$ \mbox{\hyperlink{class_flight_option_a7a76ec840f2946cbb82df69d81c298b5}{bfs\+Flight\+Visit}} (const \mbox{\hyperlink{class_graph}{Graph}}$<$ \mbox{\hyperlink{class_airport}{Airport}} $>$ \texorpdfstring{$\ast$}{*}g, \mbox{\hyperlink{class_vertex}{Vertex}}$<$ \mbox{\hyperlink{class_airport}{Airport}} $>$ \texorpdfstring{$\ast$}{*}source, \mbox{\hyperlink{class_vertex}{Vertex}}$<$ \mbox{\hyperlink{class_airport}{Airport}} $>$ \texorpdfstring{$\ast$}{*}dest)
@@ -61,56 +53,6 @@ BFS-\/based method to find all paths between two airports.
 \begin{DoxyReturn}{Returns}
 Set of vectors containing all paths found using BFS. 
 \end{DoxyReturn}
-\Hypertarget{class_flight_option_a47004b567ba0135224af91a1dfec6a6e}\label{class_flight_option_a47004b567ba0135224af91a1dfec6a6e} 
-\index{FlightOption@{FlightOption}!bfsFlightVisitFilter@{bfsFlightVisitFilter}}
-\index{bfsFlightVisitFilter@{bfsFlightVisitFilter}!FlightOption@{FlightOption}}
-\doxysubsubsection{\texorpdfstring{bfsFlightVisitFilter()}{bfsFlightVisitFilter()}}
-{\footnotesize\ttfamily std\+::set$<$ std\+::vector$<$ \mbox{\hyperlink{class_airport}{Airport}} $>$ $>$ Flight\+Option\+::bfs\+Flight\+Visit\+Filter (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_graph}{Graph}}$<$ \mbox{\hyperlink{class_airport}{Airport}} $>$ \texorpdfstring{$\ast$}{*}}]{g,  }\item[{\mbox{\hyperlink{class_vertex}{Vertex}}$<$ \mbox{\hyperlink{class_airport}{Airport}} $>$ \texorpdfstring{$\ast$}{*}}]{source,  }\item[{\mbox{\hyperlink{class_vertex}{Vertex}}$<$ \mbox{\hyperlink{class_airport}{Airport}} $>$ \texorpdfstring{$\ast$}{*}}]{dest,  }\item[{std\+::set$<$ std\+::string $>$ \&}]{airlines }\end{DoxyParamCaption})}
-
-
-
-Filters paths based on specified airlines using BFS. 
-
-
-\begin{DoxyParams}{Parameters}
-{\em g} & Pointer to the graph. \\
-\hline
-{\em source} & Pointer to the source airport vertex. \\
-\hline
-{\em dest} & Pointer to the destination airport vertex. \\
-\hline
-{\em airlines} & Set of preferred airline codes. \\
-\hline
-\end{DoxyParams}
-\begin{DoxyReturn}{Returns}
-Set of vectors containing all paths that meet the airline filter. 
-\end{DoxyReturn}
-\Hypertarget{class_flight_option_ac9897eb8bf9d436a2094073a86bc3a42}\label{class_flight_option_ac9897eb8bf9d436a2094073a86bc3a42} 
-\index{FlightOption@{FlightOption}!dfsFlightVisit@{dfsFlightVisit}}
-\index{dfsFlightVisit@{dfsFlightVisit}!FlightOption@{FlightOption}}
-\doxysubsubsection{\texorpdfstring{dfsFlightVisit()}{dfsFlightVisit()}}
-{\footnotesize\ttfamily bool Flight\+Option\+::dfs\+Flight\+Visit (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_graph}{Graph}}$<$ \mbox{\hyperlink{class_airport}{Airport}} $>$ \texorpdfstring{$\ast$}{*}}]{g,  }\item[{\mbox{\hyperlink{class_vertex}{Vertex}}$<$ \mbox{\hyperlink{class_airport}{Airport}} $>$ \texorpdfstring{$\ast$}{*}}]{source,  }\item[{\mbox{\hyperlink{class_vertex}{Vertex}}$<$ \mbox{\hyperlink{class_airport}{Airport}} $>$ \texorpdfstring{$\ast$}{*}}]{dest,  }\item[{std\+::vector$<$ \mbox{\hyperlink{class_vertex}{Vertex}}$<$ \mbox{\hyperlink{class_airport}{Airport}} $>$ \texorpdfstring{$\ast$}{*} $>$ \&}]{path,  }\item[{std\+::set$<$ std\+::vector$<$ \mbox{\hyperlink{class_vertex}{Vertex}}$<$ \mbox{\hyperlink{class_airport}{Airport}} $>$ \texorpdfstring{$\ast$}{*} $>$ $>$ \&}]{all\+\_\+paths }\end{DoxyParamCaption})}
-
-
-
-Helper method for DFS-\/based path finding. 
-
-
-\begin{DoxyParams}{Parameters}
-{\em g} & Pointer to the graph representing airports and flights. \\
-\hline
-{\em source} & Pointer to the source airport vertex. \\
-\hline
-{\em dest} & Pointer to the destination airport vertex. \\
-\hline
-{\em path} & Reference to the current path being explored. \\
-\hline
-{\em all\+\_\+paths} & Reference to set of all paths found. \\
-\hline
-\end{DoxyParams}
-\begin{DoxyReturn}{Returns}
-True if a path to the destination is found, otherwise false. 
-\end{DoxyReturn}
 \Hypertarget{class_flight_option_aa2d63355ae20a950b270332638677e9d}\label{class_flight_option_aa2d63355ae20a950b270332638677e9d} 
 \index{FlightOption@{FlightOption}!flights@{flights}}
 \index{flights@{flights}!FlightOption@{FlightOption}}
@@ -133,33 +75,11 @@ Finds all flight paths between two airports without filters.
 \begin{DoxyReturn}{Returns}
 Set of vectors containing all possible flight paths. 
 \end{DoxyReturn}
-\Hypertarget{class_flight_option_a8325c94a72da79cd90e09a50a002f769}\label{class_flight_option_a8325c94a72da79cd90e09a50a002f769} 
-\index{FlightOption@{FlightOption}!flightsChoosenAirlines@{flightsChoosenAirlines}}
-\index{flightsChoosenAirlines@{flightsChoosenAirlines}!FlightOption@{FlightOption}}
-\doxysubsubsection{\texorpdfstring{flightsChoosenAirlines()}{flightsChoosenAirlines()}}
-{\footnotesize\ttfamily std\+::set$<$ std\+::vector$<$ \mbox{\hyperlink{class_vertex}{Vertex}}$<$ \mbox{\hyperlink{class_airport}{Airport}} $>$ \texorpdfstring{$\ast$}{*} $>$ $>$ Flight\+Option\+::flights\+Choosen\+Airlines (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_graph}{Graph}}$<$ \mbox{\hyperlink{class_airport}{Airport}} $>$ \texorpdfstring{$\ast$}{*}}]{g,  }\item[{std\+::set$<$ std\+::vector$<$ \mbox{\hyperlink{class_vertex}{Vertex}}$<$ \mbox{\hyperlink{class_airport}{Airport}} $>$ \texorpdfstring{$\ast$}{*} $>$ $>$ \&}]{paths,  }\item[{std\+::set$<$ std\+::string $>$ \&}]{airlines }\end{DoxyParamCaption})}
-
-
-
-Filters paths based on specified airlines. 
-
-
-\begin{DoxyParams}{Parameters}
-{\em g} & Pointer to the graph. \\
-\hline
-{\em paths} & Set of all possible paths. \\
-\hline
-{\em airlines} & Set of preferred airline codes. \\
-\hline
-\end{DoxyParams}
-\begin{DoxyReturn}{Returns}
-Set of paths that only use the specified airlines. 
-\end{DoxyReturn}
-\Hypertarget{class_flight_option_ac02d1d66fe29c5fecbaab84749b1f964}\label{class_flight_option_ac02d1d66fe29c5fecbaab84749b1f964} 
+\Hypertarget{class_flight_option_ab3ea8b7bfd2a98c96e0fc16e60876454}\label{class_flight_option_ab3ea8b7bfd2a98c96e0fc16e60876454} 
 \index{FlightOption@{FlightOption}!flightsMaxAirlineNumber@{flightsMaxAirlineNumber}}
 \index{flightsMaxAirlineNumber@{flightsMaxAirlineNumber}!FlightOption@{FlightOption}}
 \doxysubsubsection{\texorpdfstring{flightsMaxAirlineNumber()}{flightsMaxAirlineNumber()}}
-{\footnotesize\ttfamily std\+::set$<$ std\+::vector$<$ \mbox{\hyperlink{class_airport}{Airport}} $>$ $>$ Flight\+Option\+::flights\+Max\+Airline\+Number (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_graph}{Graph}}$<$ \mbox{\hyperlink{class_airport}{Airport}} $>$ \texorpdfstring{$\ast$}{*}}]{g,  }\item[{std\+::set$<$ std\+::vector$<$ \mbox{\hyperlink{class_airport}{Airport}} $>$ $>$ \&}]{paths,  }\item[{int}]{max\+Airlines }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily std\+::set$<$ std\+::vector$<$ std\+::pair$<$ \mbox{\hyperlink{class_airport}{Airport}}, std\+::string $>$ $>$ $>$ Flight\+Option\+::flights\+Max\+Airline\+Number (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_graph}{Graph}}$<$ \mbox{\hyperlink{class_airport}{Airport}} $>$ \texorpdfstring{$\ast$}{*}}]{g,  }\item[{std\+::set$<$ std\+::vector$<$ \mbox{\hyperlink{class_airport}{Airport}} $>$ $>$ \&}]{paths,  }\item[{int}]{max\+Airlines }\end{DoxyParamCaption})}
 
 
 
@@ -176,28 +96,6 @@ Filters paths based on a maximum number of airlines.
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
 Set of paths that meet the airline number constraint. 
-\end{DoxyReturn}
-\Hypertarget{class_flight_option_a461202ced99def03659bb1eb66b28728}\label{class_flight_option_a461202ced99def03659bb1eb66b28728} 
-\index{FlightOption@{FlightOption}!getAllPaths@{getAllPaths}}
-\index{getAllPaths@{getAllPaths}!FlightOption@{FlightOption}}
-\doxysubsubsection{\texorpdfstring{getAllPaths()}{getAllPaths()}}
-{\footnotesize\ttfamily std\+::set$<$ std\+::vector$<$ \mbox{\hyperlink{class_vertex}{Vertex}}$<$ \mbox{\hyperlink{class_airport}{Airport}} $>$ \texorpdfstring{$\ast$}{*} $>$ $>$ Flight\+Option\+::get\+All\+Paths (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_graph}{Graph}}$<$ \mbox{\hyperlink{class_airport}{Airport}} $>$ \texorpdfstring{$\ast$}{*}}]{g,  }\item[{\mbox{\hyperlink{class_vertex}{Vertex}}$<$ \mbox{\hyperlink{class_airport}{Airport}} $>$ \texorpdfstring{$\ast$}{*}}]{source,  }\item[{\mbox{\hyperlink{class_vertex}{Vertex}}$<$ \mbox{\hyperlink{class_airport}{Airport}} $>$ \texorpdfstring{$\ast$}{*}}]{dest }\end{DoxyParamCaption})}
-
-
-
-Gets all possible paths between two airports in a graph. 
-
-
-\begin{DoxyParams}{Parameters}
-{\em g} & Pointer to the graph representing airports and flights. \\
-\hline
-{\em source} & Pointer to the source airport vertex. \\
-\hline
-{\em dest} & Pointer to the destination airport vertex. \\
-\hline
-\end{DoxyParams}
-\begin{DoxyReturn}{Returns}
-Set of vectors containing all possible paths (as Vertex$<$\+Airport$>$\texorpdfstring{$\ast$}{*}). 
 \end{DoxyReturn}
 \Hypertarget{class_flight_option_a6e5a97366fa8d31480bd41657225af5c}\label{class_flight_option_a6e5a97366fa8d31480bd41657225af5c} 
 \index{FlightOption@{FlightOption}!removeEdgeGivenAirline@{removeEdgeGivenAirline}}

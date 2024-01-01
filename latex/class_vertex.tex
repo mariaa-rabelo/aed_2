@@ -26,16 +26,6 @@ const std\+::vector$<$ \mbox{\hyperlink{class_edge}{Edge}}$<$ T $>$ $>$ \& \mbox
 \begin{DoxyCompactList}\small\item\em Gets the adjacency list of this vertex. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{class_vertex_a53486fca517e4cdd1a6dd9b0fed9b265}{set\+Adj}} (const std\+::vector$<$ \mbox{\hyperlink{class_edge}{Edge}}$<$ T $>$ $>$ \&adj)
 \begin{DoxyCompactList}\small\item\em Sets the adjacency list of this vertex. \end{DoxyCompactList}\item 
-\Hypertarget{class_vertex_a954198262d6afe5ec21c765bd4348e67}\label{class_vertex_a954198262d6afe5ec21c765bd4348e67} 
-void {\bfseries increase\+Indegree} ()
-\begin{DoxyCompactList}\small\item\em Increases the indegree of this vertex by one. \end{DoxyCompactList}\item 
-\Hypertarget{class_vertex_acc4ad8b49452b1f38aa45c4bde570ebf}\label{class_vertex_acc4ad8b49452b1f38aa45c4bde570ebf} 
-void {\bfseries decrease\+Indegree} ()
-\begin{DoxyCompactList}\small\item\em Decreases the indegree of this vertex by one. \end{DoxyCompactList}\item 
-int \mbox{\hyperlink{class_vertex_ac78980191ea1f9d22e6617e9e511b755}{get\+Indegree}} () const
-\begin{DoxyCompactList}\small\item\em Retrieves the indegree of this vertex. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{class_vertex_ad1602c48fedae2d3d5a3949594dc5ab8}{set\+Indegree}} (int indegree)
-\begin{DoxyCompactList}\small\item\em Sets the indegree of this vertex. \end{DoxyCompactList}\item 
 int \mbox{\hyperlink{class_vertex_ab2916c006fa35b918910a2232095e785}{get\+Num}} () const
 \begin{DoxyCompactList}\small\item\em Retrieves the \textquotesingle{}num\textquotesingle{} value of this vertex. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{class_vertex_a7eecd09188d8f959b1c0ac9332c14218}{set\+Num}} (int num)
@@ -99,20 +89,6 @@ Gets the adjacency list of this vertex.
 
 \begin{DoxyReturn}{Returns}
 A constant reference to the vector of outgoing edges from this vertex. 
-\end{DoxyReturn}
-\Hypertarget{class_vertex_ac78980191ea1f9d22e6617e9e511b755}\label{class_vertex_ac78980191ea1f9d22e6617e9e511b755} 
-\index{Vertex$<$ T $>$@{Vertex$<$ T $>$}!getIndegree@{getIndegree}}
-\index{getIndegree@{getIndegree}!Vertex$<$ T $>$@{Vertex$<$ T $>$}}
-\doxysubsubsection{\texorpdfstring{getIndegree()}{getIndegree()}}
-{\footnotesize\ttfamily template$<$class T $>$ \\
-int \mbox{\hyperlink{class_vertex}{Vertex}}$<$ T $>$\+::get\+Indegree (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
-
-
-
-Retrieves the indegree of this vertex. 
-
-\begin{DoxyReturn}{Returns}
-The indegree of the vertex. 
 \end{DoxyReturn}
 \Hypertarget{class_vertex_a48eae2f7af2362634adab02b7b2dbec6}\label{class_vertex_a48eae2f7af2362634adab02b7b2dbec6} 
 \index{Vertex$<$ T $>$@{Vertex$<$ T $>$}!getInfo@{getInfo}}
@@ -203,22 +179,6 @@ Sets the adjacency list of this vertex.
 
 \begin{DoxyParams}{Parameters}
 {\em adj} & The new adjacency list to set. \\
-\hline
-\end{DoxyParams}
-\Hypertarget{class_vertex_ad1602c48fedae2d3d5a3949594dc5ab8}\label{class_vertex_ad1602c48fedae2d3d5a3949594dc5ab8} 
-\index{Vertex$<$ T $>$@{Vertex$<$ T $>$}!setIndegree@{setIndegree}}
-\index{setIndegree@{setIndegree}!Vertex$<$ T $>$@{Vertex$<$ T $>$}}
-\doxysubsubsection{\texorpdfstring{setIndegree()}{setIndegree()}}
-{\footnotesize\ttfamily template$<$class T $>$ \\
-void \mbox{\hyperlink{class_vertex}{Vertex}}$<$ T $>$\+::set\+Indegree (\begin{DoxyParamCaption}\item[{int}]{indegree }\end{DoxyParamCaption})}
-
-
-
-Sets the indegree of this vertex. 
-
-
-\begin{DoxyParams}{Parameters}
-{\em indegree} & The indegree value to set. \\
 \hline
 \end{DoxyParams}
 \Hypertarget{class_vertex_a68c9c8792b2752b7540e2f8c14f686a4}\label{class_vertex_a68c9c8792b2752b7540e2f8c14f686a4} 

@@ -42,42 +42,40 @@
 \DoxyCodeLine{00091\ }
 \DoxyCodeLine{00096\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_application_ac0c435e0b9f13678a945a5c0a7be2fd6}{findAllDestinations}}(\textcolor{keyword}{const}\ std::string\&\ airportCode);}
 \DoxyCodeLine{00097\ }
-\DoxyCodeLine{00104\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_application_a93eab4940e57d384c2b6c52874cd376c}{findAirportMaxX}}(std::string\ code,\ \textcolor{keywordtype}{int}\ x,\ \textcolor{keywordtype}{int}\ option);}
+\DoxyCodeLine{00104\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_application_a105048007568bae473df8d1fb94915f7}{findAirportMaxX}}(\textcolor{keyword}{const}\ std::string\&\ code,\ \textcolor{keywordtype}{int}\ x,\ \textcolor{keywordtype}{int}\ option);}
 \DoxyCodeLine{00105\ }
-\DoxyCodeLine{00113\ \ \ \ \ std::vector<Airport>\ \mbox{\hyperlink{class_application_a86cc93d306b053cf4e78491fa643dd66}{nodesAtLessDistanceBFS}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_graph}{Graph<Airport>}}\ *g,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_airport}{Airport}}\ \&source,\ \textcolor{keywordtype}{int}\ k);}
+\DoxyCodeLine{00113\ \ \ \ \ \textcolor{keyword}{static}\ std::vector<Airport>\ \mbox{\hyperlink{class_application_a86cc93d306b053cf4e78491fa643dd66}{nodesAtLessDistanceBFS}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_graph}{Graph<Airport>}}\ *g,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_airport}{Airport}}\ \&source,\ \textcolor{keywordtype}{int}\ k);}
 \DoxyCodeLine{00114\ }
 \DoxyCodeLine{00118\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_application_ae6b0b23d587485f7f369b9da5c8d0956}{maximumTrip}}();}
 \DoxyCodeLine{00119\ }
-\DoxyCodeLine{00126\ \ \ \ \ std::vector<std::pair<Airport,\ int>>\ \mbox{\hyperlink{class_application_ae6a305318d51c9853361c10d64f178ef}{getMaxPathBFS}}(\mbox{\hyperlink{class_vertex}{Vertex<Airport>}}\ *v,\ \mbox{\hyperlink{class_graph}{Graph<Airport>}}\ *g);}
-\DoxyCodeLine{00127\ }
-\DoxyCodeLine{00134\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_application_a7c803a486587676732b08ce6f17f776b}{getTotalFlights}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_graph}{Graph<Airport>}}\ *g,\ \mbox{\hyperlink{class_vertex}{Vertex<Airport>}}\ *v);}
-\DoxyCodeLine{00135\ }
-\DoxyCodeLine{00140\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_application_a0ab51575503a4ca1decc668b2f7b45af}{getKAirportsGreatestCap}}(\textcolor{keywordtype}{int}\ k);}
-\DoxyCodeLine{00141\ }
-\DoxyCodeLine{00147\ \ \ \ \ std::set<Airport>\ \mbox{\hyperlink{class_application_a22eb1b019be1c2919856c572796a8820}{articulationPoints}}(\mbox{\hyperlink{class_graph}{Graph<Airport>}}\ *g);}
-\DoxyCodeLine{00148\ }
-\DoxyCodeLine{00157\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_application_a1d16161f32808241bbd195f44eb92f07}{dfs\_art}}(\mbox{\hyperlink{class_graph}{Graph<Airport>}}\ *g,\ \mbox{\hyperlink{class_vertex}{Vertex<Airport>}}\ *v,\ std::stack<Airport>\ \&s,\ std::set<Airport>\ \&l,\ \textcolor{keywordtype}{int}\ \&i);}
-\DoxyCodeLine{00158\ }
-\DoxyCodeLine{00162\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_application_aba1a28d6689d2311b0f2990e6a530840}{essentialAirports}}();}
-\DoxyCodeLine{00163\ }
-\DoxyCodeLine{00172\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_application_aae0ef77d4ebd4dda320a8e7d92a95fad}{haversineDistance}}(\textcolor{keywordtype}{double}\ lat1,\ \textcolor{keywordtype}{double}\ lon1,\ \textcolor{keywordtype}{double}\ lat2,\ \textcolor{keywordtype}{double}\ lon2);}
-\DoxyCodeLine{00173\ }
+\DoxyCodeLine{00125\ \ \ \ \ \textcolor{keyword}{static}\ std::vector<std::pair<Airport,\ int>>\ \mbox{\hyperlink{class_application_af6f5c89b29c7ea685de71fed4cb22834}{getMaxPathBFS}}(\mbox{\hyperlink{class_vertex}{Vertex<Airport>}}\ *v);}
+\DoxyCodeLine{00126\ }
+\DoxyCodeLine{00133\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_application_a7c803a486587676732b08ce6f17f776b}{getTotalFlights}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_graph}{Graph<Airport>}}\ *g,\ \mbox{\hyperlink{class_vertex}{Vertex<Airport>}}\ *v);}
+\DoxyCodeLine{00134\ }
+\DoxyCodeLine{00139\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_application_a0ab51575503a4ca1decc668b2f7b45af}{getKAirportsGreatestCap}}(\textcolor{keywordtype}{int}\ k);}
+\DoxyCodeLine{00140\ }
+\DoxyCodeLine{00146\ \ \ \ \ std::set<Airport>\ \mbox{\hyperlink{class_application_a22eb1b019be1c2919856c572796a8820}{articulationPoints}}(\mbox{\hyperlink{class_graph}{Graph<Airport>}}\ *g);}
+\DoxyCodeLine{00147\ }
+\DoxyCodeLine{00156\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_application_a1d16161f32808241bbd195f44eb92f07}{dfs\_art}}(\mbox{\hyperlink{class_graph}{Graph<Airport>}}\ *g,\ \mbox{\hyperlink{class_vertex}{Vertex<Airport>}}\ *v,\ std::stack<Airport>\ \&s,\ std::set<Airport>\ \&l,\ \textcolor{keywordtype}{int}\ \&i);}
+\DoxyCodeLine{00157\ }
+\DoxyCodeLine{00161\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_application_aba1a28d6689d2311b0f2990e6a530840}{essentialAirports}}();}
+\DoxyCodeLine{00162\ }
+\DoxyCodeLine{00171\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_application_aae0ef77d4ebd4dda320a8e7d92a95fad}{haversineDistance}}(\textcolor{keywordtype}{double}\ lat1,\ \textcolor{keywordtype}{double}\ lon1,\ \textcolor{keywordtype}{double}\ lat2,\ \textcolor{keywordtype}{double}\ lon2);}
+\DoxyCodeLine{00172\ }
 \DoxyCodeLine{00180\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_application_aa64adce3d21a1bcb787374b860313668}{getBestFlightOption}}(std::pair<std::string,\ std::string>\ src,\ std::pair<std::string,\ std::string>\ dest);}
 \DoxyCodeLine{00181\ }
-\DoxyCodeLine{00189\ \ \ \ \ std::vector<Airport>\ \mbox{\hyperlink{class_application_a6a84f89d192c054855957ab17ac22140}{findShortestPath}}(\mbox{\hyperlink{class_vertex}{Vertex<Airport>}}\ *src,\ \mbox{\hyperlink{class_vertex}{Vertex<Airport>}}\ *dest);}
+\DoxyCodeLine{00189\ \ \ \ \ \textcolor{keyword}{static}\ std::set<Vertex<Airport>\ *>\ \mbox{\hyperlink{class_application_aa9840ef62ca2385b77d5890fe1a15857}{getVerticesBasedOnInput}}(\mbox{\hyperlink{class_graph}{Graph<Airport>}}\ *g,\ \textcolor{keyword}{const}\ std::pair<std::string,\ std::string>\&\ input);}
 \DoxyCodeLine{00190\ }
-\DoxyCodeLine{00197\ \ \ \ \ std::set<Vertex<Airport>\ *>\ \mbox{\hyperlink{class_application_a1deaaca263906ae49ab5258e003eb622}{getVerticesBasedOnInput}}(std::pair<std::string,\ std::string>\ input);}
-\DoxyCodeLine{00198\ }
-\DoxyCodeLine{00206\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_application_a3a796734013ae79179bb8575ce55e3d7}{bestFlightOptGivenAirports}}(std::set<std::string>\&\ airlines,\ \mbox{\hyperlink{class_vertex}{Vertex<Airport>}}*\ src,\ \mbox{\hyperlink{class_vertex}{Vertex<Airport>}}*\ dest);}
-\DoxyCodeLine{00207\ }
-\DoxyCodeLine{00215\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_application_a1d385f6f1aea6506d2abb95e7be9aaac}{bestFlightOptMaxAirports}}(\textcolor{keywordtype}{int}\ maxAirlines,\ \mbox{\hyperlink{class_vertex}{Vertex<Airport>}}*\ src,\ \mbox{\hyperlink{class_vertex}{Vertex<Airport>}}*\ dest);}
-\DoxyCodeLine{00216\ }
-\DoxyCodeLine{00224\ \ \ \ \ \mbox{\hyperlink{class_vertex}{Vertex<Airport>}}*\ \mbox{\hyperlink{class_application_a65fb93cdaa5cab05c28b87396dbfd713}{getVertex}}(std::string\ v,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_graph}{Graph<Airport>}}*\ g);}
-\DoxyCodeLine{00225\ }
-\DoxyCodeLine{00232\ \ \ \ \ \mbox{\hyperlink{class_vertex}{Vertex<Airport>}}*\ \mbox{\hyperlink{class_application_a65fb93cdaa5cab05c28b87396dbfd713}{getVertex}}(std::string\ v);}
-\DoxyCodeLine{00233\ }
-\DoxyCodeLine{00241\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_application_a85e7309ba045f65803552696dcc5894f}{checkIfExists}}(\textcolor{keyword}{const}\ std::string\&\ code);}
-\DoxyCodeLine{00242\ \};}
-\DoxyCodeLine{00243\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//AED\_2\_APPLICATION\_H}}
+\DoxyCodeLine{00191\ }
+\DoxyCodeLine{00199\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_application_a8f2469fdcc10feaadfa3518d83ad9337}{bestFlightOptFilter}}(std::set<std::string>\&\ airlines,\ std::pair<std::string,\ std::string>\ src,\ std::pair<std::string,\ std::string>\ dest);}
+\DoxyCodeLine{00200\ }
+\DoxyCodeLine{00208\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_application_a1d385f6f1aea6506d2abb95e7be9aaac}{bestFlightOptMaxAirports}}(\textcolor{keywordtype}{int}\ maxAirlines,\ \mbox{\hyperlink{class_vertex}{Vertex<Airport>}}*\ src,\ \mbox{\hyperlink{class_vertex}{Vertex<Airport>}}*\ dest);}
+\DoxyCodeLine{00209\ }
+\DoxyCodeLine{00216\ \ \ \ \ \mbox{\hyperlink{class_vertex}{Vertex<Airport>}}*\ \mbox{\hyperlink{class_application_a949a82a11f495e5c5c3a6c32a47fb061}{getVertex}}(std::string\ v);}
+\DoxyCodeLine{00217\ }
+\DoxyCodeLine{00225\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_application_a85e7309ba045f65803552696dcc5894f}{checkIfExists}}(\textcolor{keyword}{const}\ std::string\&\ code);}
+\DoxyCodeLine{00226\ }
+\DoxyCodeLine{00227\ \};}
+\DoxyCodeLine{00228\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//AED\_2\_APPLICATION\_H}}
 
 \end{DoxyCode}
