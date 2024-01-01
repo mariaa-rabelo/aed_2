@@ -113,7 +113,8 @@ public:
      * @param adj The new adjacency list to set.
      */
     void setAdj(const std::vector<Edge<T>> &adj);
-/**
+
+    /**
      * @brief Retrieves the 'num' value of this vertex.
      *
      * @return The 'num' value of the vertex.
@@ -315,7 +316,17 @@ public:
      */
     std::vector<Edge<Airport>> findShortestPath(Vertex<Airport>* src, Vertex<Airport>* dest);
 
-    //TODO doxygen for it
+    /**
+     * @brief Finds and displays the best paths between sets of source and destination vertices.
+     *
+     * This method explores all possible paths between the provided source and destination vertices and
+     * displays the best paths found. A "best path" is defined as one having the least number of stops
+     * between the source and the destination. The method is useful for identifying the most efficient routes
+     * in an airport graph.
+     *
+     * @param srcVertices Set of vertices representing source airports. Each vertex is a potential starting point.
+     * @param destVertices Set of vertices representing destination airports. Each vertex is a potential endpoint.
+     */
     void findAndDisplayBestPaths(const std::set<Vertex<Airport>*>& srcVertices, const std::set<Vertex<Airport>*>& destVertices);
 };
 
