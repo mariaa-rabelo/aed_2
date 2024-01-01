@@ -268,21 +268,23 @@ void Menu::handleReachableInMaxXStops() {
 }
 
 std::pair<std::string, std::string> Menu::selectOptions(){
-    std::cout << "1: airport code"<< std::endl
+    std::cout << "0: cancel\n" <<std::endl
+              << "1: airport code"<< std::endl
               << "2: airport name"<< std::endl
               << "3: city name"<< std::endl
-              << "4: geographical coordinates\n"
-              << "5: cancel\n";
+              << "4: geographical coordinates\n";
 
     std::string type, detail;
     std::getline(std::cin, type);
 
-    while (type < "1" || type > "5") {
-        std::cout << "Invalid input, please choose a number between 1 and 5.\n";
+    while (type < "0" || type > "4") {
+        std::cout << "Invalid input, please choose a number between 0 and 4.\n";
         std::getline(std::cin, type);
     }
 
     switch (std::stoi(type)) {
+        case 0:
+            return std::make_pair("cancel", "");
         case 1:
             std::cout << "airport's code:"<<std::endl;
             break;
@@ -301,8 +303,6 @@ std::pair<std::string, std::string> Menu::selectOptions(){
             detail = (latitude + " " + longitude);
             return std::make_pair(type, detail);
         }
-        case 5:
-            return std::make_pair("cancel", "");
     }
 
     std::getline(std::cin, detail);
@@ -348,12 +348,12 @@ void Menu::handleAirlinesFLightOptions() {
 
 void Menu::handleFlightOptionWithMaxAirlineNumber() {
     std::string maxInput;
-    std::cout << "max airline number"<< std::endl;
+    std::cout << "Max desired airline number: "<< std::endl;
     std::getline(std::cin, maxInput);
 
     int max = std::stoi(maxInput);
 
-    std::cout << "source airport code(eg, BSB): "<< std::endl;
+    std::cout << "source airport code (eg, BSB): "<< std::endl;
     std::string airport;
     std::getline(std::cin, airport);
     auto src = app.getVertex(airport);

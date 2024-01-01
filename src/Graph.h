@@ -200,9 +200,6 @@ public:
      */
     Edge(Vertex<T> *d, Airline *a);
 
-    //TOdo DOXYGEN
-    Edge(const Edge<T>& other);
-
     /**
      * @brief Retrieves the destination vertex of this edge.
      *
@@ -354,9 +351,6 @@ Vertex<T>::Vertex(T in): info(in) {}
 
 template <class T>
 Edge<T>::Edge(Vertex<T> *d, Airline* a): dest(d), airline(a) {}
-
-template <class T>
-Edge<T>::Edge(const Edge<T>& other) : dest(other.dest), airline(other.airline) {}
 
 template <class T>
 int Graph<T>::getNumVertex() const {
@@ -590,7 +584,6 @@ std::vector<Edge<Airport>> Graph<T>::findShortestPath(Vertex<Airport>* src, Vert
     //para cada vertice, seu predecessor no caminho mais curto
     std::map<Vertex<Airport>*, Vertex<Airport>*> predecessors;
 
-    //std::map<Vertex<Airport>*, Edge<Airport>> edgeTo;
     // entre src ate cada outro airport
     std::map<Vertex<Airport>*, int> distances;
     std::queue<Vertex<Airport>*> queue;
@@ -615,23 +608,26 @@ std::vector<Edge<Airport>> Graph<T>::findShortestPath(Vertex<Airport>* src, Vert
                 queue.push(neighbor);
                 distances[neighbor] = distances[current] + 1;
                 predecessors[neighbor] = current;
-      //          edgeTo[neighbor] =edge;
             }
         }
     }
 
     std::vector<Edge<Airport>> path;
     if (distances[dest] != std::numeric_limits<int>::max()) {
-        for (Vertex<Airport>* at = dest; at != src; at = predecessors[at]) {
-        //    path.push_back(edgeTo[at]);
-            for (const Edge<Airport>& edge : at->getAdj()) {
-                if (edge.getDest() == predecessors[at]) {
+        Vertex<Airport>* current = dest;
+        while (current != src) {
+            Vertex<Airport>* prev = predecessors[current];
+            for (const Edge<Airport>& edge : prev->getAdj()) {
+                if (edge.getDest() == current) {
                     path.push_back(edge);
                     break;
                 }
             }
+            current = prev;
         }
         std::reverse(path.begin(), path.end());
+    } else {
+        std::cout << "No path found between this source and destination :(" << std::endl;
     }
     return path;
 }
@@ -659,16 +655,14 @@ void Graph<T>::findAndDisplayBestPaths(const std::set<Vertex<Airport>*>& srcVert
     for (const auto& path : bestPaths) {
         std::cout << "Path with " << minStops << " stops: " << std::endl;
         for (const auto& edge : path) {
-            std::cout << "flying to: " << edge.getDest()->getInfo().getCode()
+            std::cout << "Flight to " << edge.getDest()->getInfo().getCode()
+                      << " (" << edge.getDest()->getInfo().getCity() << ") "
                       << " with airline " << edge.getAirline()->getCode()
-                      << " " << edge.getAirline()->getCallsign()
+                      << " (" << edge.getAirline()->getCallsign() << ")"
                       << std::endl;
         }
         std::cout << std::endl;
     }
 }
-
-
-
 
 #endif //AED_2_GRAPH_H

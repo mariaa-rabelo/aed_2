@@ -488,11 +488,10 @@ void Application::bestFlightOptMaxAirports(  int maxAirlines, Vertex<Airport>* s
     auto paths = flightOption.flights(&g_airport, src, dest);
     auto res = flightOption.flightsMaxAirlineNumber(&g_airport, paths, maxAirlines);
     for(const auto& possible_path : res){
-        std::cout << "possible path:"<< std::endl;
+        std::cout << "Possible path"<< std::endl;
         for (const auto& airport : possible_path){
             if (airport.second == ""){
-                std::cout << "departure:"<< airport.first.getCode() <<std::endl;
-
+                std::cout << "departure: "<< airport.first.getCode() <<std::endl;
             }
             else
                 std::cout << airport.first.getCode() << " ( " << airport.second<< " ) " <<std::endl;
