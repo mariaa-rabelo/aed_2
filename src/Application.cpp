@@ -316,7 +316,6 @@ int Application::getTotalFlights(const Graph<Airport> *g, Vertex<Airport> * v){
 }
 void Application::getKAirportsGreatestCap(int k){
     std::vector<int> caps;
-    //std::multimap<int, Airport> capacity;
     std::vector<std::pair<int, Airport>> sum_flights;
     auto vertexSet = g_airport.getVertexSet();
     for (auto v : vertexSet){
@@ -325,7 +324,6 @@ void Application::getKAirportsGreatestCap(int k){
         sum_flights.push_back(std::make_pair( vertCap,v->getInfo()));
     }
     std::sort(sum_flights.begin(), sum_flights.end(), [](std::pair<int, Airport> a, std::pair<int, Airport> b) { return a.first > b.first; });
-    //std::sort(caps.begin(), caps.end(), [](int a, int b) { return a > b; });
     std::cout << "Airports:" << "      Flights:" << std::endl;
     for (int i = 0; i < k; i++){
         auto current = sum_flights[i];
@@ -351,13 +349,17 @@ std::set<Airport> Application::articulationPoints(Graph<Airport> *g) {
 
     if (g->getVertexSet().empty())
         return res;
+
     auto g_ = g;
+
+    //add opposite edges
     auto verts = g_->getVertexSet();
     for (auto n : verts){
         for (auto e : n->getAdj()){
             g_->addEdge(e.getDest()->getInfo(), n->getInfo(), 0);
         }
     }
+
     for (auto v : verts){
         v->setVisited(false);
         v->setLow(0);
@@ -410,42 +412,12 @@ void Application::dfs_art(Graph<Airport> *g, Vertex<Airport> *v, std::stack<Airp
     s.pop();
 }
 
-// Novo método para encontrar e exibir os melhores caminhos
-void Application::findAndDisplayBestPaths(const Graph<Airport> *g, const std::set<Vertex<Airport>*>& srcVertices, const std::set<Vertex<Airport>*>& destVertices) {
-    std::vector<std::vector<Airport>> bestPaths;
-    int minStops = std::numeric_limits<int>::max();
-
-    for (auto srcVertex : srcVertices) {
-        for (auto destVertex : destVertices) {
-            auto path = findShortestPath(g, srcVertex, destVertex);
-            int stops = path.size() - 2;
-
-            if (stops < minStops) {
-                minStops = stops;
-                bestPaths.clear();
-                bestPaths.push_back(path);
-            } else if (stops == minStops) {
-                bestPaths.push_back(path);
-            }
-        }
-    }
-
-    for (const auto& path : bestPaths) {
-        std::cout << "Path with " << minStops << " stops: ";
-        for (const auto& airport : path) {
-            std::cout << airport.getCode() << " ";
-        }
-        std::cout << std::endl;
-    }
+void Application::getBestFlightOption(std::pair<std::string, std::string> src, std::pair<std::string, std::string> dest){
+    auto srcVertices = getVerticesBasedOnInput(&g_airport, src);
+    auto destVertices = getVerticesBasedOnInput(&g_airport, dest);
+    g_airport.findAndDisplayBestPaths(srcVertices, destVertices);
+    //findAndDisplayBestPaths(g, srcVertices, destVertices);
 }
-
-// Método getBestFlightOption atualizado
-void Application::getBestFlightOption(const Graph<Airport> *g, std::pair<std::string, std::string> src, std::pair<std::string, std::string> dest){
-    auto srcVertices = getVerticesBasedOnInput(g, src);
-    auto destVertices = getVerticesBasedOnInput(g, dest);
-    findAndDisplayBestPaths(g, srcVertices, destVertices);
-}
-
 
 void Application::bestFlightOptFilter(std::set<std::string>& airlines, std::pair<std::string, std::string> src, std::pair<std::string, std::string> dest){
     auto new_g = flightOption.removeEdgeGivenAirline(&g_airport, airlines);
@@ -453,10 +425,10 @@ void Application::bestFlightOptFilter(std::set<std::string>& airlines, std::pair
     auto srcVertices = getVerticesBasedOnInput(&new_g, src);
     auto destVertices = getVerticesBasedOnInput(&new_g,dest);
 
-    findAndDisplayBestPaths(&new_g, srcVertices, destVertices);
+    new_g.findAndDisplayBestPaths(srcVertices, destVertices);
 }
 
-std::set<Vertex<Airport>*> Application::getVerticesBasedOnInput(const Graph<Airport> *g, std::pair<std::string, std::string> input) {
+std::set<Vertex<Airport>*> Application::getVerticesBasedOnInput(Graph<Airport>* g, std::pair<std::string, std::string> input) {
     std::set<Vertex<Airport>*> vertices;
 
     if (input.first == "1") { // Airport code
@@ -510,48 +482,6 @@ double Application::haversineDistance(double lat1, double lon1, double lat2, dou
     double c = 2 * atan2(sqrt(a), sqrt(1-a));
     return earthRadiusKm * c;
 }
-
-std::vector<Airport> Application::findShortestPath(const Graph<Airport> *g, Vertex<Airport>* src, Vertex<Airport>* dest) {
-    //para cada vertice, seu predecessor no caminho mais curto
-    std::map<Vertex<Airport>*, Vertex<Airport>*> predecessors;
-    // entre src ate cada outro airport
-    std::map<Vertex<Airport>*, int> distances;
-    std::queue<Vertex<Airport>*> queue;
-
-    for (auto& vertex : g->getVertexSet()) {
-        distances[vertex] = std::numeric_limits<int>::max();
-        vertex->setVisited(false);
-    }
-
-    distances[src] = 0;
-    queue.push(src);
-    src->setVisited(true);
-
-    while (!queue.empty()) {
-        Vertex<Airport>* current = queue.front();
-        queue.pop();
-
-        for (const Edge<Airport>& edge : current->getAdj()) {
-            Vertex<Airport>* neighbor = edge.getDest();
-            if (!neighbor->isVisited()) {
-                neighbor->setVisited(true);
-                queue.push(neighbor);
-                distances[neighbor] = distances[current] + 1;
-                predecessors[neighbor] = current;
-            }
-        }
-    }
-
-    std::vector<Airport> path;
-    if (distances[dest] != std::numeric_limits<int>::max()) {
-        for (Vertex<Airport>* at = dest; at != nullptr; at = predecessors[at]) {
-            path.push_back(at->getInfo());
-        }
-        std::reverse(path.begin(), path.end());
-    }
-    return path;
-}
-
 
 void Application::bestFlightOptMaxAirports(  int maxAirlines, Vertex<Airport>* src, Vertex<Airport>* dest){
 

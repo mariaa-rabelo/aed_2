@@ -16,6 +16,10 @@
 #include <list>
 #include <queue>
 #include <set>
+#include <map>
+#include <limits>
+#include <algorithm>
+#include <iostream>
 #include "Airline.h"
 
 template <class T> class Vertex;
@@ -34,10 +38,9 @@ template <class T>
 class Vertex {
     T info;                            ///< Content of the vertex.
     std::vector<Edge<T>> adj;          ///< List of outgoing edges (adjacency list).
-    bool visited{};                    ///< Auxiliary field to mark if the vertex has been visited.
-    int indegree{};                    ///< Auxiliary field to store the in-degree of the vertex.
-    int num{};                         ///< Auxiliary field used in various algorithms.
-    int low{};                         ///< Auxiliary field used in algorithms like Tarjan's.
+    bool visited;                    ///< Auxiliary field to mark if the vertex has been visited.
+    int num;                         ///< Auxiliary field used in various algorithms.
+    int low;                         ///< Auxiliary field used in algorithms like Tarjan's.
 
     /**
      * @brief Adds an edge to this vertex.
@@ -196,6 +199,10 @@ public:
      * @param a Pointer to the Airline object associated with the edge.
      */
     Edge(Vertex<T> *d, Airline *a);
+
+    //TOdo DOXYGEN
+    Edge(const Edge<T>& other);
+
     /**
      * @brief Retrieves the destination vertex of this edge.
      *
@@ -243,8 +250,6 @@ class Graph {
     std::vector<Vertex<T> *> vertexSet;     ///< A vector that stores pointers to all the vertices in the graph.
     std::vector<Airline*> airlines;         ///< A vector that stores pointers to all the airlines associated with the graph.
 
-    //TODO delete it? not being used ig
-    void dfsVisit(Vertex<T> *v,  std::vector<T> & res) const;
 public:
 
     /**
@@ -328,6 +333,18 @@ public:
      * @return Vector of pointers to airlines.
      */
     std::vector<Airline*> getAirlines() const;
+
+    /**
+     * @brief Finds the shortest path (least number of stops) between two airports.
+     *
+     * @param src Pointer to the source airport vertex.
+     * @param dest Pointer to the destination airport vertex.
+     * @return std::vector<Airport> A vector of airports representing the path from source to destination.
+     */
+    std::vector<Edge<Airport>> findShortestPath(Vertex<Airport>* src, Vertex<Airport>* dest);
+
+    //TODO doxygen for it
+    void findAndDisplayBestPaths(const std::set<Vertex<Airport>*>& srcVertices, const std::set<Vertex<Airport>*>& destVertices);
 };
 
 /****************** Constructors and functions ********************/
@@ -338,6 +355,8 @@ Vertex<T>::Vertex(T in): info(in) {}
 template <class T>
 Edge<T>::Edge(Vertex<T> *d, Airline* a): dest(d), airline(a) {}
 
+template <class T>
+Edge<T>::Edge(const Edge<T>& other) : dest(other.dest), airline(other.airline) {}
 
 template <class T>
 int Graph<T>::getNumVertex() const {
@@ -414,25 +433,6 @@ bool Vertex<T>::isVisited() const {
 }
 
 template<class T>
-void Vertex<T>::increaseIndegree(){
-    indegree++;
-}
-template<class T>
-void Vertex<T>::decreaseIndegree(){
-    indegree--;
-}
-
-template<class T>
-int Vertex<T>::getIndegree() const {
-    return indegree;
-}
-
-template<class T>
-void Vertex<T>::setIndegree(int ind) {
-    Vertex::indegree = ind;
-}
-
-template<class T>
 int Vertex<T>::getNum() const {
     return num;
 }
@@ -504,7 +504,6 @@ bool Graph<T>::addEdge(const T &sourc, const T &dest, Airline* airline) {
 template <class T>
 void Vertex<T>::addEdge(Vertex<T> *d, Airline *a) {
     adj.push_back(Edge<T>(d, a));
-    d->increaseIndegree();
 }
 
 
@@ -586,20 +585,90 @@ bool Graph<T>::removeVertex(const T &in) {
     return false;
 }
 
-/*
- * Auxiliary function that visits a vertex (v) and its adjacent, recursively.
- * Updates a parameter with the list of visited node contents.
- */
 template <class T>
-void Graph<T>::dfsVisit(Vertex<T> *v, std::vector<T> & res) const {
-    v->visited = true;
-    res.push_back(v->info);
-    for (auto & e : v->adj) {
-        auto w = e.dest;
-        if ( ! w->visited)
-            dfsVisit(w, res);
+std::vector<Edge<Airport>> Graph<T>::findShortestPath(Vertex<Airport>* src, Vertex<Airport>* dest) {
+    //para cada vertice, seu predecessor no caminho mais curto
+    std::map<Vertex<Airport>*, Vertex<Airport>*> predecessors;
+
+    //std::map<Vertex<Airport>*, Edge<Airport>> edgeTo;
+    // entre src ate cada outro airport
+    std::map<Vertex<Airport>*, int> distances;
+    std::queue<Vertex<Airport>*> queue;
+
+    for (auto& vertex : vertexSet) {
+        distances[vertex] = std::numeric_limits<int>::max();
+        vertex->setVisited(false);
+    }
+
+    distances[src] = 0;
+    queue.push(src);
+    src->setVisited(true);
+
+    while (!queue.empty()) {
+        Vertex<Airport>* current = queue.front();
+        queue.pop();
+
+        for (const Edge<Airport>& edge : current->getAdj()) {
+            Vertex<Airport>* neighbor = edge.getDest();
+            if (!neighbor->isVisited()) {
+                neighbor->setVisited(true);
+                queue.push(neighbor);
+                distances[neighbor] = distances[current] + 1;
+                predecessors[neighbor] = current;
+      //          edgeTo[neighbor] =edge;
+            }
+        }
+    }
+
+    std::vector<Edge<Airport>> path;
+    if (distances[dest] != std::numeric_limits<int>::max()) {
+        for (Vertex<Airport>* at = dest; at != src; at = predecessors[at]) {
+        //    path.push_back(edgeTo[at]);
+            for (const Edge<Airport>& edge : at->getAdj()) {
+                if (edge.getDest() == predecessors[at]) {
+                    path.push_back(edge);
+                    break;
+                }
+            }
+        }
+        std::reverse(path.begin(), path.end());
+    }
+    return path;
+}
+
+template <class T>
+void Graph<T>::findAndDisplayBestPaths(const std::set<Vertex<Airport>*>& srcVertices, const std::set<Vertex<Airport>*>& destVertices) {
+    std::vector<std::vector<Edge<Airport>>> bestPaths;
+    int minStops = std::numeric_limits<int>::max();
+
+    for (auto srcVertex : srcVertices) {
+        for (auto destVertex : destVertices) {
+            std::vector<Edge<Airport>> path = findShortestPath(srcVertex, destVertex);
+            int stops = path.size() - 1;
+
+            if (stops < minStops) {
+                minStops = stops;
+                bestPaths.clear();
+                bestPaths.push_back(path);
+            } else if (stops == minStops) {
+                bestPaths.push_back(path);
+            }
+        }
+    }
+
+    for (const auto& path : bestPaths) {
+        std::cout << "Path with " << minStops << " stops: " << std::endl;
+        for (const auto& edge : path) {
+            std::cout << "flying to: " << edge.getDest()->getInfo().getCode()
+                      << " with airline " << edge.getAirline()->getCode()
+                      << " " << edge.getAirline()->getCallsign()
+                      << std::endl;
+        }
+        std::cout << std::endl;
     }
 }
+
+
 
 
 #endif //AED_2_GRAPH_H

@@ -186,20 +186,7 @@ public:
      * @param src A pair representing the source location's type and identifier (e.g., airport code, name, city).
      * @param dest A pair representing the destination location's type and identifier.
      */
-    void getBestFlightOption(const Graph<Airport> *g, std::pair<std::string, std::string> src, std::pair<std::string, std::string> dest);
-
-
-    void findAndDisplayBestPaths(const Graph<Airport> *g, const std::set<Vertex<Airport> *> &srcVertices,
-                                 const std::set<Vertex<Airport> *> &destVertices);
-
-    /**
-     * @brief Finds the shortest path (least number of stops) between two airports.
-     *
-     * @param src Pointer to the source airport vertex.
-     * @param dest Pointer to the destination airport vertex.
-     * @return std::vector<Airport> A vector of airports representing the path from source to destination.
-     */
-    std::vector<Airport> findShortestPath(const Graph<Airport> *g, Vertex<Airport> *src, Vertex<Airport> *dest);
+    void getBestFlightOption(std::pair<std::string, std::string> src, std::pair<std::string, std::string> dest);
 
     /**
      * @brief Retrieves a set of airport vertices based on the specified input type and detail.
@@ -208,7 +195,7 @@ public:
      * @param input A pair representing the type (e.g., code, name, city) and the detail (e.g., actual code or city name).
      * @return std::set<Vertex<Airport>*> A set of vertices corresponding to the input criteria.
      */
-    std::set<Vertex<Airport> *> getVerticesBasedOnInput(const Graph<Airport> *g, std::pair<std::string, std::string> input);
+    std::set<Vertex<Airport> *> getVerticesBasedOnInput(Graph<Airport> *g, std::pair<std::string, std::string> input);
 
 
     /**

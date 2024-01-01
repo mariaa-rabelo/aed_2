@@ -318,7 +318,7 @@ void Menu::handleBestFlightOption() {
     auto destination = selectOptions();
     if (destination.first == "cancel") return;
 
-    app.getBestFlightOption(&app.getGraph(),  source, destination);
+    app.getBestFlightOption(source, destination);
 }
 
 void Menu::handleAirlinesFLightOptions() {
