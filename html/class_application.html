@@ -126,7 +126,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>run</b> ()</td></tr>
 <tr class="separator:a105048007568bae473df8d1fb94915f7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae6b0b23d587485f7f369b9da5c8d0956" id="r_ae6b0b23d587485f7f369b9da5c8d0956"><td class="memItemLeft" align="right" valign="top"><a id="ae6b0b23d587485f7f369b9da5c8d0956" name="ae6b0b23d587485f7f369b9da5c8d0956"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>maximumTrip</b> ()</td></tr>
-<tr class="memdesc:ae6b0b23d587485f7f369b9da5c8d0956"><td class="mdescLeft">&#160;</td><td class="mdescRight">Plans a maximum trip, finding the longest path in the graph. <br /></td></tr>
+<tr class="memdesc:ae6b0b23d587485f7f369b9da5c8d0956"><td class="mdescLeft">&#160;</td><td class="mdescRight">Plans a maximum trip, finding the longest path in the graph. @time_complexity O(V*(V+E)) - Iterates through each vertex and performs BFS for each. <br /></td></tr>
 <tr class="separator:ae6b0b23d587485f7f369b9da5c8d0956"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0ab51575503a4ca1decc668b2f7b45af" id="r_a0ab51575503a4ca1decc668b2f7b45af"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0ab51575503a4ca1decc668b2f7b45af">getKAirportsGreatestCap</a> (int k)</td></tr>
 <tr class="memdesc:a0ab51575503a4ca1decc668b2f7b45af"><td class="mdescLeft">&#160;</td><td class="mdescRight">Finds the top K airports with the greatest capacity.  <br /></td></tr>
@@ -269,7 +269,7 @@ Static Public Member Functions</h2></td></tr>
   <table class="params">
     <tr><td class="paramname">maxAirlines</td><td>The maximum number of airlines allowed in a flight path. </td></tr>
     <tr><td class="paramname">src</td><td>Pointer to the source airport vertex. </td></tr>
-    <tr><td class="paramname">dest</td><td>Pointer to the destination airport vertex. </td></tr>
+    <tr><td class="paramname">dest</td><td>Pointer to the destination airport vertex. @time_complexity O(V+E) - BFS traversal plus additional filtering operations. </td></tr>
   </table>
   </dd>
 </dl>
@@ -381,7 +381,7 @@ false If the airline does not exist. </dd></dl>
   <table class="params">
     <tr><td class="paramname">code</td><td>The code of the airport. </td></tr>
     <tr><td class="paramname">x</td><td>Maximum number of stops. </td></tr>
-    <tr><td class="paramname">option</td><td>Type of destination to find (airports, cities, countries). </td></tr>
+    <tr><td class="paramname">option</td><td>Type of destination to find (airports, cities, countries). @time_complexity O(V+E) - BFS traversal. </td></tr>
   </table>
   </dd>
 </dl>
@@ -406,7 +406,7 @@ false If the airline does not exist. </dd></dl>
 <p>Finds all destinations reachable from a specified airport. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">airportCode</td><td>The code of the airport. </td></tr>
+    <tr><td class="paramname">airportCode</td><td>The code of the airport. @time_complexity O(V+E) - BFS traversal where V is the number of vertices and E is the number of edges. </td></tr>
   </table>
   </dd>
 </dl>
@@ -492,7 +492,7 @@ false If the airline does not exist. </dd></dl>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>Number of flights. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>Number of flights. @time_complexity O(V) - Iterates over all vertices (V) in the graph. </dd></dl>
 
 </div>
 </div>
@@ -591,7 +591,10 @@ false If the airline does not exist. </dd></dl>
 </div><div class="memdoc">
 
 <p>Gets the total number of airports in the graph. </p>
-<dl class="section return"><dt>Returns</dt><dd>Total number of airports. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>Total number of airports.<ul>
+<li>@time_complexity O(1) - Direct access to the number of vertices. </li>
+</ul>
+</dd></dl>
 
 </div>
 </div>
@@ -617,7 +620,7 @@ false If the airline does not exist. </dd></dl>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>Number of outgoing flights. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>Number of outgoing flights. @time_complexity O(E) - Where E is the number of edges from the given vertex. </dd></dl>
 
 </div>
 </div>
@@ -708,7 +711,7 @@ false If the airline does not exist. </dd></dl>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>Number of unique countries. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>Number of unique countries. @time_complexity O(E) - Where E is the number of edges from the given vertex. </dd></dl>
 
 </div>
 </div>

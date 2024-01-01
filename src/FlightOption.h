@@ -36,6 +36,7 @@ public:
      * @param paths Set of all possible paths.
      * @param maxAirlines Maximum number of different airlines allowed in a path.
      * @return Set of paths that meet the airline number constraint.
+     * @time_complexity O(P) - Where P is the number of paths in 'paths'. Each path is processed individually.
      */
     std::set<std::vector<std::pair<Airport,std::string>>> flightsMaxAirlineNumber(const Graph<Airport> *g, std::set<std::vector<Airport>>& paths, int maxAirlines);
 
@@ -46,6 +47,7 @@ public:
      * @param src Pointer to the source airport vertex.
      * @param dest Pointer to the destination airport vertex.
      * @return Set of vectors containing all possible flight paths.
+     * @time_complexity O(V + E) - BFS traversal.
      */
     std::set<std::vector<Airport>> flights(const Graph<Airport> *g, Vertex<Airport>* src, Vertex<Airport>* dest);
 
@@ -70,6 +72,7 @@ public:
      * @param g Pointer to the original graph (Graph<Airport>).
      * @param airlines Set of strings containing airline codes to be removed from the graph.
      * @return Graph<Airport> A new graph with the specified airlines' edges removed.
+     * @time_complexity O(V * E) - Iterates over all vertices (V) and their edges (E).
      */
     Graph<Airport> removeEdgeGivenAirline(const Graph<Airport> *g, std::set<std::string>& airlines );
 

@@ -73,7 +73,7 @@ Finds all flight paths between two airports without filters.
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
-Set of vectors containing all possible flight paths. 
+Set of vectors containing all possible flight paths. @time\+\_\+complexity O(V + E) -\/ BFS traversal. 
 \end{DoxyReturn}
 \Hypertarget{class_flight_option_ab3ea8b7bfd2a98c96e0fc16e60876454}\label{class_flight_option_ab3ea8b7bfd2a98c96e0fc16e60876454} 
 \index{FlightOption@{FlightOption}!flightsMaxAirlineNumber@{flightsMaxAirlineNumber}}
@@ -95,7 +95,7 @@ Filters paths based on a maximum number of airlines.
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
-Set of paths that meet the airline number constraint. 
+Set of paths that meet the airline number constraint. @time\+\_\+complexity O(\+P) -\/ Where P is the number of paths in \textquotesingle{}paths\textquotesingle{}. Each path is processed individually. 
 \end{DoxyReturn}
 \Hypertarget{class_flight_option_a6e5a97366fa8d31480bd41657225af5c}\label{class_flight_option_a6e5a97366fa8d31480bd41657225af5c} 
 \index{FlightOption@{FlightOption}!removeEdgeGivenAirline@{removeEdgeGivenAirline}}
@@ -117,7 +117,7 @@ This function creates a new graph based on the input graph \textquotesingle{}g\t
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
-\doxylink{class_graph}{Graph$<$\+Airport$>$} A new graph with the specified airlines\textquotesingle{} edges removed. 
+\doxylink{class_graph}{Graph$<$\+Airport$>$} A new graph with the specified airlines\textquotesingle{} edges removed. @time\+\_\+complexity O(\+V \texorpdfstring{$\ast$}{*} E) -\/ Iterates over all vertices (V) and their edges (E). 
 \end{DoxyReturn}
 
 

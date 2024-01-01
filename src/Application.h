@@ -38,6 +38,7 @@ public:
     /**
      * @brief Gets the total number of airports in the graph.
      * @return Total number of airports.
+     * * @time_complexity O(1) - Direct access to the number of vertices.
      */
     int getNumAirports() const;
 
@@ -51,6 +52,7 @@ public:
      * @brief Gets the number of outgoing flights from a specified airport.
      * @param airportCode The code of the airport.
      * @return Number of outgoing flights.
+     * @time_complexity O(E) - Where E is the number of edges from the given vertex.
      */
     int getOutFlights(const std::string& airportCode) const;
 
@@ -65,6 +67,7 @@ public:
      * @brief Gets the number of flights departing from a specified city.
      * @param cityName The name of the city.
      * @return Number of flights.
+     * @time_complexity O(V) - Iterates over all vertices (V) in the graph.
      */
     int getFlightsByCity(const std::string& cityName);
 
@@ -79,6 +82,7 @@ public:
      * @brief Gets the number of unique countries directly reachable from a specified airport.
      * @param airportCode The code of the airport.
      * @return Number of unique countries.
+     * @time_complexity O(E) - Where E is the number of edges from the given vertex.
      */
     int getUniqueCountriesFromAirport(const std::string& airportCode);
 
@@ -92,6 +96,7 @@ public:
     /**
      * @brief Finds all destinations reachable from a specified airport.
      * @param airportCode The code of the airport.
+     * @time_complexity O(V+E) - BFS traversal where V is the number of vertices and E is the number of edges.
      */
     void findAllDestinations(const std::string& airportCode);
 
@@ -100,6 +105,7 @@ public:
      * @param code The code of the airport.
      * @param x Maximum number of stops.
      * @param option Type of destination to find (airports, cities, countries).
+     * @time_complexity O(V+E) - BFS traversal.
      */
     void findAirportMaxX(const std::string& code, int x, int option);
 
@@ -114,6 +120,7 @@ public:
 
     /**
      * @brief Plans a maximum trip, finding the longest path in the graph.
+     * @time_complexity O(V*(V+E)) - Iterates through each vertex and performs BFS for each.
      */
     void maximumTrip();
 
@@ -204,6 +211,7 @@ public:
      * @param maxAirlines The maximum number of airlines allowed in a flight path.
      * @param src Pointer to the source airport vertex.
      * @param dest Pointer to the destination airport vertex.
+     * @time_complexity O(V+E) - BFS traversal plus additional filtering operations.
      */
     void bestFlightOptMaxAirports(int maxAirlines, Vertex<Airport>* src, Vertex<Airport>* dest);
 

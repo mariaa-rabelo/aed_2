@@ -176,7 +176,7 @@ Public Member Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>Set of vectors containing all possible flight paths. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>Set of vectors containing all possible flight paths. @time_complexity O(V + E) - BFS traversal. </dd></dl>
 
 </div>
 </div>
@@ -213,7 +213,7 @@ Public Member Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>Set of paths that meet the airline number constraint. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>Set of paths that meet the airline number constraint. @time_complexity O(P) - Where P is the number of paths in 'paths'. Each path is processed individually. </dd></dl>
 
 </div>
 </div>
@@ -245,7 +245,7 @@ Public Member Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd><a class="el" href="class_graph.html">Graph&lt;Airport&gt;</a> A new graph with the specified airlines' edges removed. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="class_graph.html">Graph&lt;Airport&gt;</a> A new graph with the specified airlines' edges removed. @time_complexity O(V * E) - Iterates over all vertices (V) and their edges (E). </dd></dl>
 
 </div>
 </div>

@@ -40,7 +40,7 @@ void \mbox{\hyperlink{class_application_a105048007568bae473df8d1fb94915f7}{find\
 \begin{DoxyCompactList}\small\item\em Finds airports reachable within a maximum number of stops from a specified airport. \end{DoxyCompactList}\item 
 \Hypertarget{class_application_ae6b0b23d587485f7f369b9da5c8d0956}\label{class_application_ae6b0b23d587485f7f369b9da5c8d0956} 
 void {\bfseries maximum\+Trip} ()
-\begin{DoxyCompactList}\small\item\em Plans a maximum trip, finding the longest path in the graph. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Plans a maximum trip, finding the longest path in the graph. @time\+\_\+complexity O(V\texorpdfstring{$\ast$}{*}(V+E)) -\/ Iterates through each vertex and performs BFS for each. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{class_application_a0ab51575503a4ca1decc668b2f7b45af}{get\+KAirports\+Greatest\+Cap}} (int k)
 \begin{DoxyCompactList}\small\item\em Finds the top K airports with the greatest capacity. \end{DoxyCompactList}\item 
 std\+::set$<$ \mbox{\hyperlink{class_airport}{Airport}} $>$ \mbox{\hyperlink{class_application_a22eb1b019be1c2919856c572796a8820}{articulation\+Points}} (\mbox{\hyperlink{class_graph}{Graph}}$<$ \mbox{\hyperlink{class_airport}{Airport}} $>$ \texorpdfstring{$\ast$}{*}g)
@@ -132,7 +132,7 @@ Finds flight options from a source to a destination with a maximum number of air
 \hline
 {\em src} & Pointer to the source airport vertex. \\
 \hline
-{\em dest} & Pointer to the destination airport vertex. \\
+{\em dest} & Pointer to the destination airport vertex. @time\+\_\+complexity O(V+E) -\/ BFS traversal plus additional filtering operations. \\
 \hline
 \end{DoxyParams}
 \Hypertarget{class_application_a85e7309ba045f65803552696dcc5894f}\label{class_application_a85e7309ba045f65803552696dcc5894f} 
@@ -194,7 +194,7 @@ Finds airports reachable within a maximum number of stops from a specified airpo
 \hline
 {\em x} & Maximum number of stops. \\
 \hline
-{\em option} & Type of destination to find (airports, cities, countries). \\
+{\em option} & Type of destination to find (airports, cities, countries). @time\+\_\+complexity O(V+E) -\/ BFS traversal. \\
 \hline
 \end{DoxyParams}
 \Hypertarget{class_application_ac0c435e0b9f13678a945a5c0a7be2fd6}\label{class_application_ac0c435e0b9f13678a945a5c0a7be2fd6} 
@@ -209,7 +209,7 @@ Finds all destinations reachable from a specified airport.
 
 
 \begin{DoxyParams}{Parameters}
-{\em airport\+Code} & The code of the airport. \\
+{\em airport\+Code} & The code of the airport. @time\+\_\+complexity O(V+E) -\/ BFS traversal where V is the number of vertices and E is the number of edges. \\
 \hline
 \end{DoxyParams}
 \Hypertarget{class_application_aa64adce3d21a1bcb787374b860313668}\label{class_application_aa64adce3d21a1bcb787374b860313668} 
@@ -265,7 +265,7 @@ Gets the number of flights departing from a specified city.
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
-Number of flights. 
+Number of flights. @time\+\_\+complexity O(\+V) -\/ Iterates over all vertices (V) in the graph. 
 \end{DoxyReturn}
 \Hypertarget{class_application_ad56b2e853477f3509217918017983780}\label{class_application_ad56b2e853477f3509217918017983780} 
 \index{Application@{Application}!getGlobalNumFlights@{getGlobalNumFlights}}
@@ -324,7 +324,10 @@ Vector of pairs containing airports and their respective distances.
 Gets the total number of airports in the graph. 
 
 \begin{DoxyReturn}{Returns}
-Total number of airports. 
+Total number of airports.
+\begin{DoxyItemize}
+\item @time\+\_\+complexity O(1) -\/ Direct access to the number of vertices. 
+\end{DoxyItemize}
 \end{DoxyReturn}
 \Hypertarget{class_application_a1db0310eb1907e2e7edc33d6b365989c}\label{class_application_a1db0310eb1907e2e7edc33d6b365989c} 
 \index{Application@{Application}!getOutFlights@{getOutFlights}}
@@ -342,7 +345,7 @@ Gets the number of outgoing flights from a specified airport.
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
-Number of outgoing flights. 
+Number of outgoing flights. @time\+\_\+complexity O(\+E) -\/ Where E is the number of edges from the given vertex. 
 \end{DoxyReturn}
 \Hypertarget{class_application_a7c803a486587676732b08ce6f17f776b}\label{class_application_a7c803a486587676732b08ce6f17f776b} 
 \index{Application@{Application}!getTotalFlights@{getTotalFlights}}
@@ -398,7 +401,7 @@ Gets the number of unique countries directly reachable from a specified airport.
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
-Number of unique countries. 
+Number of unique countries. @time\+\_\+complexity O(\+E) -\/ Where E is the number of edges from the given vertex. 
 \end{DoxyReturn}
 \Hypertarget{class_application_a20158431690a39e735a1ed485f6853d7}\label{class_application_a20158431690a39e735a1ed485f6853d7} 
 \index{Application@{Application}!getUniqueCountriesFromCity@{getUniqueCountriesFromCity}}
