@@ -348,6 +348,7 @@ void Menu::handleAirlinesFLightOptions() {
     auto destination = selectOptions();
     if (destination.first == "cancel") return;
 
+
     app.bestFlightOptFilter(airlines, source,destination);
 }
 

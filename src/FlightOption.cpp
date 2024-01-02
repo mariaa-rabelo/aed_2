@@ -62,6 +62,77 @@ std::set<std::vector<Airport>> FlightOption::bfsFlightVisit(const Graph<Airport>
     return res;
 }
 
+std::vector<std::stack<std::pair<Airport, std::string>>> FlightOption::bfsFlightVisitFilter(const Graph<Airport> *g, Vertex<Airport> *source,Vertex<Airport> *dest ){
+    std::stack<std::pair<Airport, std::string>> stc = {};
+    std::vector<std::stack<std::pair<Airport, std::string>>> p = {stc};
+    auto verts = g->getVertexSet();
+    for (auto v : verts){
+        v->setVisited(false);
+    }
+    // não existe nenhum path entre src e dest
+   // std::cout << "helper"<<std::endl;
+    if (!helperDFS(g, source, dest)){
+        return p;
+    }
+    //std::cout<< "....."<<std::endl;
+
+    std::vector<std::stack<std::pair<Airport, std::string>>> res;
+    std::map<Airport, std::vector<std::stack<std::pair<Airport, std::string>>>> pred;
+    std::pair<Airport, std::string> srcPair = std::make_pair(source->getInfo(), "");
+
+    for (auto v : verts){
+        v->setVisited(false);
+        pred.emplace(v->getInfo(), p);
+    }
+    std::queue<Vertex<Airport>*> q;
+    std::queue<Vertex<Airport>*> aux;
+    q.push(source);
+    source->setVisited(true);
+    bool foundDest= false;
+    while (!q.empty()) {
+        while (!q.empty()) {
+            auto v = q.front();
+            q.pop();
+            v->setVisited(true);
+            for (auto e: v->getAdj()) {
+
+                auto neig = e.getDest();
+                if (!neig->isVisited()) {
+                    if (pred[neig->getInfo()].size() == 1 && pred[neig->getInfo()][0].empty()){
+                        pred[neig->getInfo()] = pred[v->getInfo()];
+                        std::pair<Airport, std::string> new_pair(v->getInfo(),e.getAirline()->getCode());
+                        pred[neig->getInfo()][0].push(new_pair);
+                    }
+                    else {
+                        for (const auto& previous_path : pred[v->getInfo()]){
+                            pred[neig->getInfo()].push_back(previous_path);
+                            std::pair<Airport, std::string> new_pair(v->getInfo(),e.getAirline()->getCode());
+                            pred[neig->getInfo()][pred[neig->getInfo()].size()-1].push(new_pair);
+
+                        }
+                    }
+                    aux.push(neig);
+                    if (neig == dest) {
+                        foundDest = true;
+                        neig->setVisited(false);
+                    }
+                }
+            }
+        }
+
+        if (foundDest ){
+            res = pred[dest->getInfo()];
+            return res;
+        }
+
+        q = aux;
+        aux = {};
+    }
+    res = pred[dest->getInfo()];
+    return res;
+
+}
+
 std::set<std::vector<std::pair<Airport,std::string>>> FlightOption::flightsMaxAirlineNumber(const Graph<Airport> *g, std::set<std::vector<Airport>>& paths, int maxAirlines){
     std::set<std::vector<std::pair<Airport,std::string>>> res;
     // numero de airlines
@@ -122,4 +193,20 @@ Graph<Airport>  FlightOption::removeEdgeGivenAirline(const Graph<Airport> *g, st
         }
     }
     return new_graph;
+}
+
+bool FlightOption::helperDFS( const Graph<Airport> *g, Vertex<Airport> *src,  Vertex<Airport> *dest){
+    if (src->getInfo().getCode() == dest->getInfo().getCode())
+        return true;
+    src->setVisited(true);
+    //std::cout << src->getInfo().getCode()<<std::endl;
+    for (auto e : src->getAdj()){
+        auto adj = e.getDest();
+        if (!adj->isVisited()){
+            if (helperDFS(g, adj, dest)){
+                return true;
+            }
+        }
+    }
+    return false;
 }

@@ -419,14 +419,6 @@ void Application::getBestFlightOption(std::pair<std::string, std::string> src, s
     //findAndDisplayBestPaths(g, srcVertices, destVertices);
 }
 
-void Application::bestFlightOptFilter(std::set<std::string>& airlines, std::pair<std::string, std::string> src, std::pair<std::string, std::string> dest){
-    auto new_g = flightOption.removeEdgeGivenAirline(&g_airport, airlines);
-
-    auto srcVertices = getVerticesBasedOnInput(&new_g, src);
-    auto destVertices = getVerticesBasedOnInput(&new_g,dest);
-
-    new_g.findAndDisplayBestPaths(srcVertices, destVertices);
-}
 
 std::set<Vertex<Airport>*> Application::getVerticesBasedOnInput(Graph<Airport>* g, const std::pair<std::string, std::string>& input) {
     std::set<Vertex<Airport>*> vertices;
@@ -498,6 +490,54 @@ void Application::bestFlightOptMaxAirports(  int maxAirlines, Vertex<Airport>* s
         }
     }
 
+}
+
+void Application:: bestFlightOptFilter(std::set<std::string>& airlines, std::pair<std::string, std::string> src, std::pair<std::string, std::string> dest){
+    auto new_g = flightOption.removeEdgeGivenAirline(&g_airport, airlines);
+    auto srcVertices = getVerticesBasedOnInput(&new_g, src);
+    auto destVertices = getVerticesBasedOnInput(&new_g, dest);
+    if (srcVertices.empty() || destVertices.empty()){
+        std::cout << "Valid airports must be given!"<<std::endl;
+    }
+    /*
+    std::cout << "src:"<<std::endl;
+    for (auto s : srcVertices){
+        std::cout << s->getInfo().getCode() << std::endl
+        << "edges:"<<std::endl;
+        for (auto e :s->getAdj()){
+            std::cout << e.getDest()->getInfo().getCode() << " - "<< e.getAirline()->getCode() <<std::endl;
+        }
+    }
+*/
+
+    /*std::cout << "dest:"<<std::endl;
+    for (auto s : destVertices){
+        std::cout << s->getInfo().getCode() << std::endl
+        << "edges:"<<std::endl;
+        for (auto e :s->getAdj()){
+            std::cout << e.getDest()->getInfo().getCode() << " - "<< e.getAirline()->getCode()<<std::endl;
+        }
+    }*/
+    for (auto srcVertex : srcVertices) {
+        for (auto destVertex : destVertices) {
+            auto paths = flightOption.bfsFlightVisitFilter(&new_g, srcVertex, destVertex);
+            std::cout << "All paths from " << srcVertex->getInfo().getCode() << " to " << destVertex->getInfo().getCode() << ":"<<std::endl;
+
+            for ( std::stack<std::pair<Airport, std::string>> path : paths){
+                std::cout << "path:"<<std::endl;
+                std::cout << destVertex->getInfo().getCode()<<std::endl;
+                while (!path.empty()){
+                    std::cout << " airport: "<< path.top().first.getCode() << " airline: "<< path.top().second << std::endl;
+                    path.pop();
+                }
+            }
+        }
+    }
+}
+
+
+Vertex<Airport>*Application::getVertex(std::string v, const Graph<Airport> *g) {
+    return g->findVertex(v);
 }
 
 Vertex<Airport>* Application::getVertex(std::string v){

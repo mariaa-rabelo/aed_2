@@ -62,19 +62,33 @@ public:
     std::set<std::vector<Airport>> bfsFlightVisit(const Graph<Airport> *g, Vertex<Airport> *source, Vertex<Airport> *dest);
 
     /**
-     * @brief Removes all edges associated with specified airlines from a graph.
+     * @brief Filters paths based on specified airlines using BFS.
      *
-     * This function creates a new graph based on the input graph 'g' and removes
-     * all edges (flights) that are associated with the airlines listed in the 'airlines' set.
-     * This can be used to filter out flights from specific airlines, creating a graph
-     * that only includes flights from other airlines.
+     * @param g Pointer to the graph.
+     * @param source Pointer to the source airport vertex.
+     * @param dest Pointer to the destination airport vertex.
+     * @param airlines Set of preferred airline codes.
+     * @return Vector of stacks containing all paths that meet the airline filter.
+     */
+    std::vector<std::stack<std::pair<Airport, std::string>>> bfsFlightVisitFilter(const Graph<Airport> *g, Vertex<Airport> *source,Vertex<Airport> *dest );
+
+
+    /**
+     * @brief Keeps all edges associated with specified airlines from a graph.
+     *
+     * This function creates a new graph based on the input graph 'g' and adds
+     * all edges (flights) that are associated with the airlines listed in the 'airlines' set
+     * and all vertexes that can be reached with said edges.
+     * This can be used to filter out flights from unwanted airlines, creating a graph
+     * that only includes flights from the selected airlines.
      *
      * @param g Pointer to the original graph (Graph<Airport>).
-     * @param airlines Set of strings containing airline codes to be removed from the graph.
-     * @return Graph<Airport> A new graph with the specified airlines' edges removed.
+     * @param airlines Set of strings containing airline codes to be kept.
+     * @return Graph<Airport> A new graph with the specified airlines' edges.
      * @time_complexity O(V * E) - Iterates over all vertices (V) and their edges (E).
      */
     Graph<Airport> removeEdgeGivenAirline(const Graph<Airport> *g, std::set<std::string>& airlines );
 
+    bool helperDFS( const Graph<Airport> *g, Vertex<Airport> *src,  Vertex<Airport> *dest);
 };
 #endif //AED_2_FLIGHTOPTION_H

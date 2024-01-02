@@ -205,6 +205,7 @@ public:
      */
     void bestFlightOptFilter(std::set<std::string>& airlines, std::pair<std::string, std::string> src, std::pair<std::string, std::string> dest);
 
+
     /**
      * @brief Finds flight options from a source to a destination with a maximum number of airline changes allowed.
      *
@@ -214,6 +215,16 @@ public:
      * @time_complexity O(V+E) - BFS traversal plus additional filtering operations.
      */
     void bestFlightOptMaxAirports(int maxAirlines, Vertex<Airport>* src, Vertex<Airport>* dest);
+
+
+    /**
+  * @brief Retrieves a vertex from the graph based on the given airport identifier.
+  *
+  * @param v The identifier of the airport.
+  * @param g Pointer to the graph containing the airport vertices.
+  * @return Vertex<Airport>* Pointer to the corresponding airport vertex, if found; otherwise, nullptr.
+  */
+    Vertex<Airport>* getVertex(std::string v, const Graph<Airport>* g);
 
     /**
      * @brief Retrieves a vertex from the graph based on the given airport identifier.
@@ -231,6 +242,7 @@ public:
      * @return false If the airline does not exist.
      */
     bool checkIfExists(const std::string& code);
+
 
 };
 #endif //AED_2_APPLICATION_H
