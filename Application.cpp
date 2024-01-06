@@ -162,6 +162,7 @@ void Application::findAirportMaxX( const std::string& code, int x, int option){
         for (const Airport& a: destinations){
             a.print();
         }
+        std::cout << "Total airports: " << destinations.size()<< std::endl;
     }
     //cities
     else if (option == 2){
@@ -172,6 +173,7 @@ void Application::findAirportMaxX( const std::string& code, int x, int option){
         for (const std::string& city : cities){
             std::cout << city<< std::endl;
         }
+        std::cout << "Total cities: " << cities.size()<< std::endl;
     }
     //countries
     else if (option == 3){
@@ -182,6 +184,7 @@ void Application::findAirportMaxX( const std::string& code, int x, int option){
         for (const std::string& country : countries){
             std::cout << country<< std::endl;
         }
+        std::cout << "Total countries: " << countries.size()<< std::endl;
     }
 }
 
@@ -494,17 +497,12 @@ void Application::bestFlightOptMaxAirports(  int maxAirlines, Vertex<Airport>* s
 
 void Application:: bestFlightOptFilter(std::set<std::string>& airlines, std::pair<std::string, std::string> src, std::pair<std::string, std::string> dest){
     auto new_g = flightOption.removeEdgeGivenAirline(&g_airport, airlines);
+
     auto srcVertices = getVerticesBasedOnInput(&new_g, src);
     auto destVertices = getVerticesBasedOnInput(&new_g, dest);
     if (srcVertices.empty() || destVertices.empty()){
-        std::cout << "Valid airports must be given!"<<std::endl;
-    }
-    std::cout <<  "verts:"<<std::endl;
-    for (auto v : new_g.getVertexSet()){
-        std::cout<< "vert:" << v->getInfo().getCode() <<std::endl;
-        for (auto e : v->getAdj()){
-            std::cout<<"airl: "<<e.getAirline()->getCode() << "dest: " <<e.getDest()->getInfo().getCode() <<std::endl;
-        }
+        std::cout << "No valid route!"<<std::endl;
+        return;
     }
     for (auto srcVertex : srcVertices) {
         for (auto destVertex : destVertices) {
@@ -515,7 +513,7 @@ void Application:: bestFlightOptFilter(std::set<std::string>& airlines, std::pai
                 std::cout << "path:"<<std::endl;
                 std::cout << destVertex->getInfo().getCode()<<std::endl;
                 while (!path.empty()){
-                    std::cout << " airport: "<< path.top().first.getCode() << " airline: "<< path.top().second << std::endl;
+                    std::cout << "^ airport: "<< path.top().first.getCode() << " airline: "<< path.top().second << std::endl;
                     path.pop();
                 }
             }

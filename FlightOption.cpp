@@ -90,23 +90,18 @@ std::vector<std::stack<std::pair<Airport, std::string>>> FlightOption::bfsFlight
     q.push(source);
     bool foundDest= false;
     while (!q.empty()) {
-        //std::set<Vertex<Airport>*> current_airports;
         while (!q.empty()) {
             auto v = q.front();
             q.pop();
-            //v->setVisited(true);
             for (auto e: v->getAdj()) {
                 auto neig = e.getDest();
                 if (!neig->isVisited()) {
-                    //neig->setVisited(true);
                     if (pred[neig->getInfo()].size() == 1 && pred[neig->getInfo()][0].empty()){
                         pred[neig->getInfo()] = pred[v->getInfo()];
                         std::pair<Airport, std::string> new_pair(v->getInfo(),e.getAirline()->getCode());
                         for (auto& prev_path : pred[neig->getInfo()]){
                             prev_path.push(new_pair);
-                            //pred[neig->getInfo()][pred[neig->getInfo()].size()-1].push(new_pair);
                         }
-                        //pred[neig->getInfo()][0].push(new_pair);
                     }
                     else {
                         for (const auto& previous_path : pred[v->getInfo()]){
@@ -118,17 +113,11 @@ std::vector<std::stack<std::pair<Airport, std::string>>> FlightOption::bfsFlight
                     }
                     aux.push(neig);
                     if (neig == dest) {
-                        std::cout <<"current: "<< v->getInfo().getCode()<<std::endl;
                         foundDest = true;
                         neig->setVisited(false);
                     }
                 }
             }
-            /*
-            for (auto e : v->getAdj()){
-               e.getDest()->setVisited(false);
-            }
-            */
         }
 
         if (foundDest ){
@@ -141,13 +130,7 @@ std::vector<std::stack<std::pair<Airport, std::string>>> FlightOption::bfsFlight
             q.push(vert);
             aux.pop();
         }
-        //q = aux;
-        /*current_airports = {};
-        while (!aux.empty()){
-            current_airports.insert(aux.front());
-            aux.pop();
-        }*/
-        //aux = {};
+
     }
     res = pred[dest->getInfo()];
     return res;
