@@ -1,0 +1,3 @@
+/home/micaela_albino/Desktop/AED2324_PRJ2_G71/code/cmake-build-debug/CMakeFiles/airports.dir
+/home/micaela_albino/Desktop/AED2324_PRJ2_G71/code/cmake-build-debug/CMakeFiles/edit_cache.dir
+/home/micaela_albino/Desktop/AED2324_PRJ2_G71/code/cmake-build-debug/CMakeFiles/rebuild_cache.dir
